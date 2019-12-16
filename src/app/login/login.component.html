@@ -1,0 +1,45 @@
+<div style="padding-left: 2.5%">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <table class="table table-striped" style="width: 25%">
+      <tr>
+        <td colspan="3">
+          <div class="form-group">
+            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+              name="username" id="username" placeholder="Username" style="width: 100%;">
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+              <div *ngIf="f.username.errors.required">User Name is required</div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <div class="form-group">
+            <input type="password" formControlName="custPass" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.custPass.errors }"
+              name="custPass" id="custPass" placeholder="Password" style="width: 100%;">
+            <div *ngIf="submitted && f.custPass.errors" class="invalid-feedback">
+              <div *ngIf="f.custPass.errors.required">Password is required</div>
+              <div *ngIf="f.custPass.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="submit" class="btn btn-primary" value="Login">
+        </td>
+        <td>
+          <input class="btn btn-primary" type="reset">
+        </td>
+        <td>
+          <a class="btn btn-success" routerLink="/register" value="Register">Register</a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <a class="btn btn-warning" routerLink="/restore" value="Forgot Password">Forgot Password</a>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>

@@ -1,0 +1,74 @@
+<table class="table table-bordered table-striped" style="width: 45%">
+  <tr>
+    <td><a class="btn btn-success" (click)="startCreateRoom()">Create Room</a></td>
+    <td><a class="btn btn-success" (click)="startCreateMultipleRooms()">Create Multiple Rooms</a></td>
+    <td><a class="btn btn-success" (click)="getAllRooms()">Query All Rooms</a></td>
+    <td><a class="btn btn-success" (click)="getFreeRooms()">Query Free Rooms</a></td>
+    <td><a class="btn btn-success" (click)="getBookedRooms()">Query Booked Rooms</a></td>
+    <td><a class="btn btn-success" (click)="getRoomsByFloor()">Query Rooms By Floor</a></td>
+  </tr>
+</table>
+<form [formGroup]="createRoomForm" (ngSubmit)="createRoom()">
+<table id="createRoom" class="table table-bordered table-striped" style="width: 45%;display: none;">
+  <thead>
+    <tr>
+      <th>Kind of Property</th> <th>Specification</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Type Of Room</th>
+      <td>
+          <select formControlName="typeOfRoom" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.typeOfRoom.errors }">
+              <option value="">--Select--</option>              
+              <option value="AC">Air Conditioned</option>
+              <option value="nonAC">Non AirConditioned</option>
+            </select>            
+      </td>
+    </tr>
+    <tr>
+      <th>Model Of Room</th>
+      <td>
+          <select formControlName="modelOfRoom" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.modelOfRoom.errors }">
+              <option value="">--Select--</option>              
+              <option value="deluxe">Deluxe</option>
+              <option value="suite">Suite</option>
+            </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Category Of Room</th>
+      <td><select formControlName="categoryOfRoom" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.categoryOfRoom.errors }">
+          <option value="">--Select--</option>              
+          <option value="single">Single</option>
+          <option value="double">Double</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Floor</th>
+      <td><select formControlName="floorNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.floorNumber.errors }">
+          <option value="">--Select--</option>              
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>          
+        </select>
+      </td>
+    </tr>    
+    <tr>
+        <td><input type="submit" class="btn-primary" value="Submit"></td>
+        <td><input type="reset" class="btn-primary" value="Reset"></td>
+    </tr>
+  </tbody>
+</table>
+</form>
+
+<table class="table table-bordered">
+  <tr>      
+    <td *ngFor="let room of roomsList" class="{{{'free':'success', 'booked':'error'}[room.roomStatus]}}">
+      
+      {{room.roomNumber}}
+    </td>    
+  </tr>
+</table>

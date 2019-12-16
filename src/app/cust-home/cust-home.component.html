@@ -1,0 +1,50 @@
+<div style="padding-left: 2.5%">
+  Hi {{custName}}, <br>
+  <table class="table table-bordered table-striped" style="width: 45%">
+    <tr>
+      <td><a class="btn btn-success" (click)="registerRoom();">Room Registration</a></td>
+      <td><button class="btn btn-primary" (click)="viewProfile();">View Your Profile</button></td>
+    </tr>
+  </table>
+  
+  
+  <div *ngIf="viewProf">
+    <table class="table table-bordered table-striped" style="width: 45%">
+      <tr>
+        <th>Name</th>
+        <td>{{customer.custName}}</td>
+      </tr>
+      <tr>
+        <th>Gender</th>
+        <td>{{customer.custGen}}</td>
+      </tr>
+      <tr>
+        <th>Customer Id</th>
+        <td>{{customer.custId}}</td>
+      </tr>
+      <tr>
+        <th>Mobile</th>
+        <td>{{customer.custMob}}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td>{{customer.custEmail}}</td>
+      </tr>
+      <tr>
+        <th>Date Of Birth</th>
+        <td>{{customer.custDob}}</td>
+      </tr>
+      <tr>
+        <th>Username</th>
+        <td>{{customer.userName}}</td>
+      </tr>
+      <tr>
+        <th>Password</th>
+        <td>{{customer.custPass}}</td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="viewRoomReq"></div>
+  <div *ngIf="viewLoyaltyPoints"></div>
+  <div *ngIf="viewTourRegistrations"></div>
+</div>
