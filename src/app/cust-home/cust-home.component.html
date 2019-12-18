@@ -1,13 +1,13 @@
 <div style="padding-left: 2.5%">
-  Hi {{custName}}, <br>
+  Hi {{custName}},{{userName}} <br>
   <table class="table table-bordered table-striped" style="width: 45%">
     <tr>
-      <td><a class="btn btn-success" (click)="registerRoom();">Room Registration</a></td>
+      <td><a class="btn btn-success" (click)="registerRoom(custName,userName);">Room Registration</a></td>
       <td><button class="btn btn-primary" (click)="viewProfile();">View Your Profile</button></td>
     </tr>
   </table>
-  
-  
+
+
   <div *ngIf="viewProf">
     <table class="table table-bordered table-striped" style="width: 45%">
       <tr>

@@ -11,38 +11,41 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 export class CustHomeComponent implements OnInit {
   custName: string;
   userName: string;
+  userId: number;
   customer: Customer;
   viewProf: boolean;
 
-  
-  constructor(private custService: CustomerService, private route: ActivatedRoute,private router: Router) {
+
+  constructor(private custService: CustomerService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
-    this.custName=params['custName'],
-    this.userName=params['userName']      
-  });
-}
+      this.custName = params['custName'],
+        this.userName = params['userName'],
+        this.userId = params['userId']
+    });
+  }
   ngOnInit() {
   }
-  viewProfile(){
-  let customer= new Customer();
-  customer.custName=this.custName;//'AshokBobby';
-  customer.userName=this.userName;//'ash_bobj';
+  viewProfile() {
+    let customer = new Customer();
+    customer.custName = this.custName;//'AshokBobby';
+    customer.userName = this.userName;//'ash_bobj';
     this.custService.getCustomerDetails(customer).subscribe(
-      resp=>{
-        this.viewProf=true;
-        this.customer=resp;
-        this.customer.custDob= new Date(resp['custDob'])
+      resp => {
+        this.viewProf = true;
+        this.customer = resp;
+        this.customer.custDob = new Date(resp['custDob'])
       },
-      error=> console.error(error)
+      error => console.error(error)
     );
   }
-  registerRoom(){
+  registerRoom() {
     let navigationExtras: NavigationExtras = {
       queryParams: {
         custName: this.custName,
-        userName: this.userName
+        userName: this.userName,
+        userId: this.userId
       }
-    }; 
-    this.router.navigate(['/roomReg'], navigationExtras);   
+    };
+    this.router.navigate(['/roomReg'], navigationExtras);
   }
 }

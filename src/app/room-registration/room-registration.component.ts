@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RoomRequest } from '../shared/model/room-request';
 import { RoomReqService } from './room-req.service';
 import { Constants } from '../shared/model/constants';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-room-registration',
@@ -18,7 +19,16 @@ export class RoomRegistrationComponent implements OnInit {
   loading = false;
   submitted = false;
   customer: Customer;
-  constructor(private formBuilder: FormBuilder, private toastrService: ToastrService, private roomReqService: RoomReqService) { }
+  custName: string;
+  userName: string;
+  userId: number;
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private toastrService: ToastrService, private roomReqService: RoomReqService) {
+    this.route.queryParams.subscribe(params => {
+      this.custName = params['custName'],
+        this.userName = params['userName'],
+        this.userId = params['userId']
+    });
+  }
 
   ngOnInit() {
     this.roomForm = this.formBuilder.group({
@@ -31,7 +41,6 @@ export class RoomRegistrationComponent implements OnInit {
       roomType: ['', Validators.required],
       roomModel: ['', Validators.required]
     });
-
   }
   get f() { return this.roomForm.controls; }
   requestRoom() {
@@ -40,8 +49,8 @@ export class RoomRegistrationComponent implements OnInit {
       return;
     }
     let roomRequest = new RoomRequest();
-    roomRequest.userId = this.roomForm.value.userId;
-    roomRequest.custName = this.roomForm.value.custName;
+    roomRequest.userId = this.userId;
+    roomRequest.custName = this.custName;
     roomRequest.guestName = this.roomForm.value.guestName;
     roomRequest.guestGen = this.roomForm.value.guestGen;
     roomRequest.checkInDate = this.roomForm.value.checkInDate;

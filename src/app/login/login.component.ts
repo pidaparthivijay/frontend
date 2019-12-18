@@ -38,31 +38,34 @@ export class LoginComponent implements OnInit {
         let navigationExtras: NavigationExtras = {
           queryParams: {
             custName: resp['custName'],
-            userName: resp['userName']
+            userName: resp['userName'],
+            userId: resp['userId']
           }
         };
         if (resp[Constants.STS_MSG] === Constants.CUST_SXS) {
           let navigationExtras: NavigationExtras = {
             queryParams: {
               custName: resp['custName'],
-              userName: resp['userName']
+              userName: resp['userName'],
+              userId: resp['userId']
             }
           };
           this.router.navigate(['/custWelcome'], navigationExtras);
-        }else{
+        } else {
           let navigationExtras: NavigationExtras = {
             queryParams: {
               empName: resp['empName'],
-              userName: resp['userName']
+              userName: resp['userName'],
+              userId: resp['userId']
             }
           };
-        if (resp[Constants.STS_MSG] === Constants.EMP_SXS) {
-          this.router.navigate(['/empWelcome'], navigationExtras);
+          if (resp[Constants.STS_MSG] === Constants.EMP_SXS) {
+            this.router.navigate(['/empWelcome'], navigationExtras);
+          }
+          if (resp[Constants.STS_MSG] === Constants.ADM_SXS) {
+            this.router.navigate(['/admWelcome'], navigationExtras);
+          }
         }
-        if (resp[Constants.STS_MSG] === Constants.ADM_SXS) {          
-          this.router.navigate(['/admWelcome'], navigationExtras);
-        }
-      }
       },
       error => console.error(error)
     );
