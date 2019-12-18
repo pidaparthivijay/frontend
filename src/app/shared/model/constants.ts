@@ -6,7 +6,8 @@ export class Constants {
     public static readonly ADM_SXS = 'Admin Login Success';
     public static readonly REG_SXS = 'Registration Success';
     public static readonly REG_FLR = 'Registration Failed';
-    public static readonly ROM_REG_SXS= 'Room Registration Success';
-    public static readonly ROM_REG_DLR= 'Room Registration Failed';
+    public static readonly ROM_REG_SXS = 'Room Registration Success';
+    public static readonly ROM_REG_DLR = 'Room Registration Failed';
+    public static readonly VACANT = 'vacant';
 
 }

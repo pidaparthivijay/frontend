@@ -4,8 +4,9 @@
       <tr>
         <td colspan="2">
           <div class="form-group">
-            <input type="text" formControlName="guestName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.guestName.errors }"
-              id="guestName" placeholder="Primary Guest Please.." style="width: 100%;">
+            <input type="text" formControlName="guestName" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.guestName.errors }" id="guestName"
+              placeholder="Primary Guest Please.." style="width: 100%;">
             <div *ngIf="submitted && f.guestName.errors" class="invalid-feedback">
               <div *ngIf="f.guestName.errors.required">Primary Guest Name is required</div>
             </div>
@@ -15,7 +16,8 @@
       <tr>
         <td>
           <div class="form-group">
-            <input type="date" title="Checking In Date" formControlName="checkInDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.checkInDate.errors }">
+            <input type="date" title="Checking In Date" formControlName="checkInDate" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.checkInDate.errors }">
             <div *ngIf="submitted && f.checkInDate.errors" class="invalid-feedback">
               <div *ngIf="f.checkInDate.errors.required">Check In Date is required</div>
             </div>
@@ -23,7 +25,8 @@
         </td>
         <td>
           <div class="form-group">
-            <select name="guestGen" formControlName="guestGen" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.guestGen.errors }">
+            <select name="guestGen" formControlName="guestGen" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.guestGen.errors }">
               <option value="">Gender</option>
               <option value="female">Female</option>
               <option value="Male">Male</option>
@@ -38,7 +41,8 @@
       <tr>
         <td>
           <div class="form-group">
-            <input type="date" title="Checking Out Date" formControlName="checkOutDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.checkOutDate.errors }">
+            <input type="date" title="Checking Out Date" formControlName="checkOutDate" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.checkOutDate.errors }">
             <div *ngIf="submitted && f.checkOutDate.errors" class="invalid-feedback">
               <div *ngIf="f.checkOutDate.errors.required">Check Out Date is required</div>
             </div>
@@ -46,7 +50,8 @@
         </td>
         <td>
           <div class="form-group">
-            <select name="guestCount" formControlName="guestCount" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.guestCount.errors }">
+            <select name="guestCount" formControlName="guestCount" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.guestCount.errors }">
               <option value="">Count</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -66,30 +71,45 @@
       <tr>
         <td>
           <div class="form-group">
-            <select formControlName="typeOfRooms" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.typeOfRooms.errors }">
-              <option value="">Type Of Rooms</option>
-              <option value="N">Normal</option>
-              <option value="S">Special</option>              
+            <select formControlName="roomModel" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.roomType.errors }">
+              <option value="">Model Of Rooms</option>
+              <option value="DLX">Deluxe</option>
+              <option value="STE">Suite</option>
             </select>
-            <div *ngIf="submitted && f.typeOfRooms.errors" class="invalid-feedback">
-              <div *ngIf="f.typeOfRooms.errors.required">Please select type of Rooms</div>
+            <div *ngIf="submitted && f.roomType.errors" class="invalid-feedback">
+              <div *ngIf="f.roomType.errors.required">Please select type of Rooms</div>
             </div>
           </div>
         </td>
         <td>
           <div class="form-group">
-            <select name="roomCount" formControlName="roomCount" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.roomCount.errors }">
-              <option value="">Rooms</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>              
+            <select name="roomCategory" formControlName="roomCategory" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.roomCategory.errors }">
+              <option value="">Category</option>
+              <option value="SNG">Single</option>
+              <option value="DBL">Double</option>
             </select>
-            <div *ngIf="submitted && f.roomCount.errors" class="invalid-feedback">
-              <div *ngIf="f.roomCount.errors.required">Room Count is required</div>
+            <div *ngIf="submitted && f.roomCategory.errors" class="invalid-feedback">
+              <div *ngIf="f.roomCategory.errors.required">Room Category is required</div>
             </div>
           </div>
-        </td>      
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="form-group">
+            <select name="roomType" formControlName="roomType" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.roomType.errors }">
+              <option value="">Type</option>
+              <option value="AC">AC</option>
+              <option value="NAC">NON-AC</option>
+            </select>
+            <div *ngIf="submitted && f.roomType.errors" class="invalid-feedback">
+              <div *ngIf="f.roomCategory.errors.required">Room Type is required</div>
+            </div>
+          </div>
+        </td>
       </tr>
       <tr>
         <td><input type="submit" class="btn-primary" value="Submit Request"></td>

@@ -1,3 +1,63 @@
-<p>
-  room-allocate works!
-</p>
+<br />
+<input type="submit" class="btn-primary" (click)="viewAllRequests()" value="View All Requests">
+<br />
+<br />
+<div *ngIf="roomRequestList.length">
+  <table class="table table-bordered" style="width: 85%; background-color:tan">
+    <thead>
+      <tr>
+        <th>Request Id</th>
+        <th>Customer Name</th>
+        <th>Guest Name</th>
+        <th>Check In Date</th>
+        <th>Check Out Date</th>
+        <th>Room Count</th>
+        <th>Guest Count</th>
+        <th>Guest Gender</th>
+        <th>Model Of Rooms</th>
+        <th>Type Of Rooms</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let roomRequest of roomRequestList">
+      <td>{{roomRequest.requestId}}</td>
+      <td>{{roomRequest.custName}}</td>
+      <td>{{roomRequest.guestName}}</td>
+      <td>{{roomRequest.checkInDate}}</td>
+      <td>{{roomRequest.checkOutDate}}</td>
+      <td>{{roomRequest.roomCount}}</td>
+      <td>{{roomRequest.guestCount}}</td>
+      <td>{{roomRequest.guestGen}}</td>
+      <td>{{roomRequest.modelOfRooms}}</td>
+      <td>{{roomRequest.typeOfRooms}}</td>
+      <td><input type="submit" class="btn-primary" (click)="viewFeasibleRooms(roomRequest.requestId)"
+          value="View Feasible Rooms"></td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="roomList.length">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Room Number</th>
+        <th>Floor Number</th>
+        <th>Room Type</th>
+        <th>Room Model</th>
+        <th>Room Category</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of roomList">
+        <td>{{room.roomNumber}}</td>
+        <td>{{room.floorNumber}}</td>
+        <td>{{room.roomType}}</td>
+        <td>{{room.roomModel}}</td>
+        <td>{{room.roomCategory}}</td>
+        <td><input type="submit" class="btn-primary" (click)="assignRoomToRequest(room.roomNumber)" value="Assign Room">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,7 +1,7 @@
 import { Room } from './room.model';
 
 export class RoomRequest {
-    requestId:number;
+    requestId: number;
     userId: number;
     custName: string;
     guestName: string;
@@ -9,25 +9,24 @@ export class RoomRequest {
     checkOutDate: Date;
     guestGen: string;
     guestCount: number;
-    modelOfRooms: string;
-    typeOfRooms: string;
-    roomCount: number;
+    roomModel: string;
+    roomType: string;
+    roomCategory: string;
     //roomsList: Array<any>;
     roomRequestStatus: string;
 
     constructor(obj?: any) {
-        this.requestId=obj ? obj.requestId : '';
+        this.requestId = obj ? obj.requestId : '';
         this.userId = obj ? obj.userId : '';
         this.custName = obj ? obj.custName : '';
         this.guestName = obj ? obj.guestName : '';
-        this.checkInDate = obj ? obj.checkInDate: '';
-        this.checkOutDate = obj ? obj.checkOutDate: '';
+        this.checkInDate = obj ? obj.checkInDate : '';
+        this.checkOutDate = obj ? obj.checkOutDate : '';
         this.guestGen = obj ? obj.guestGen : '';
-        this.roomCount = obj ? obj.roomCount : '';
-        this.typeOfRooms = obj ? obj.typeOfRooms : '';
-        this.modelOfRooms= obj ? obj.modelOfRooms : '';
-        this.roomCount=obj ? obj.roomCount : '';
-//        this.roomsList = obj ? obj.roomsList : '';
+        this.roomCategory = obj ? obj.roomCategory : '';
+        this.roomType = obj ? obj.roomType : '';
+        this.roomModel = obj ? obj.roomModel : '';
+        //        this.roomsList = obj ? obj.roomsList : '';
         this.roomRequestStatus = obj ? obj.roomRequestStatus : '';
 
     }
