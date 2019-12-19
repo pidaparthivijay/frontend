@@ -10,6 +10,7 @@ import { RoomRequest } from '../shared/model/room-request';
 export class RoomAllocateComponent implements OnInit {
   roomRequestList: any = [];
   roomList: any = [];
+  actingRequestId: number;
   constructor(private roomAllocateService: RoomAllocateService) { }
 
   ngOnInit() {
@@ -24,6 +25,17 @@ export class RoomAllocateComponent implements OnInit {
     });
   }
   viewFeasibleRooms(requestId) {
+    this.actingRequestId = requestId;
     this.roomAllocateService.viewFeasibleRooms(requestId).subscribe(resp => this.roomList = resp);
+  }
+  assignRoomToRequest(roomNumber, requestId) {
+    let roomReq = new RoomRequest();
+    roomReq.requestId = requestId;
+    roomReq.roomNumber = roomNumber;
+    this.roomAllocateService.assignRoomToRequest(roomReq).subscribe(resp => console.log(resp));
+  }
+
+  private newMethod() {
+    return this.roomList;
   }
 }

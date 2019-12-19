@@ -10,6 +10,7 @@ export class Customer {
     custDob: Date;
     actionStatus: boolean;
     statusMessage: string;
+    userId: number;
     constructor(obj?: any) {
         this.custId = obj ? obj.custId : '';
         this.custName = obj ? obj.custName : '';
@@ -22,5 +23,6 @@ export class Customer {
         this.custEmail = obj ? obj.custEmail : '';
         this.actionStatus = obj ? obj.actionStatus : '';
         this.statusMessage = obj ? obj.statusMessage : '';
+        this.userId = obj ? obj.userId : '';
     }
 }

@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { RoomRequest } from '../shared/model/room-request';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomAllocateService {
+  assignRoomToRequest(roomReq: RoomRequest) {
+    return this.httpClient.post('brw/assignRoomToRequest', roomReq);
+  }
   viewFeasibleRooms(requestId: number) {
     return this.httpClient.post('brw/viewFeasibleRooms', requestId);
   }

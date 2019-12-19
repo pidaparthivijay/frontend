@@ -3,7 +3,8 @@
   <table class="table table-bordered table-striped" style="width: 45%">
     <tr>
       <td><a class="btn btn-success" (click)="registerRoom(custName,userName);">Room Registration</a></td>
-      <td><button class="btn btn-primary" (click)="viewProfile();">View Your Profile</button></td>
+      <td><button class="btn btn-primary" (click)="viewProfile();">View My Profile</button></td>
+      <td><button class="btn btn-primary" (click)="viewRequests();">View My Requests</button></td>
     </tr>
   </table>
 
@@ -44,7 +45,39 @@
       </tr>
     </table>
   </div>
-  <div *ngIf="viewRoomReq"></div>
+  <div *ngIf="viewRoomReq">
+    <table>
+      <thead>
+        <tr>
+          <th>Request ID</th>
+          <th>Guest Name</th>
+          <th>Check In Date</th>
+          <th>Check Out Date</th>
+          <th>Guest Count</th>
+          <th>Room Type</th>
+          <th>Room Model</th>
+          <th>Room Category</th>
+          <th>Request Status</th>
+          <th>Cancel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let roomRequest of roomRequestList">
+          <td>{{roomRequest.requestId}}</td>
+          <td>{{roomRequest.guestName}}</td>
+          <td>{{roomRequest.checkInDate}}</td>
+          <td>{{roomRequest.checkOutDate}}</td>
+          <td>{{roomRequest.guestCount}}</td>
+          <td>{{roomRequest.roomType}}</td>
+          <td>{{roomRequest.roomModel}}</td>
+          <td>{{roomRequest.roomCategory}}</td>
+          <td>{{roomRequest.roomRequestStatus}}</td>
+          <td><input type="submit" class="btn-primary" (click)="cancelRequest(roomRequest.requestId)" value="Cancel">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <div *ngIf="viewLoyaltyPoints"></div>
   <div *ngIf="viewTourRegistrations"></div>
 </div>

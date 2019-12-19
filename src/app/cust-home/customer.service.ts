@@ -6,8 +6,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CustomerService {
+
+  getMyRequestsList(customer: Customer) {
+    return this.httpClient.post('/brw/getMyRequestsList', customer);
+  }
   getCustomerDetails(customer: Customer): any {
-    return this.httpClient.post('/brw/getCustomerDetails',customer);    
+    return this.httpClient.post('/brw/getCustomerDetails', customer);
   }
 
   constructor(private httpClient: HttpClient) { }

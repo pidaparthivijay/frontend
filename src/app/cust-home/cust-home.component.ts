@@ -14,7 +14,8 @@ export class CustHomeComponent implements OnInit {
   userId: number;
   customer: Customer;
   viewProf: boolean;
-
+  viewRoomReq: boolean;
+  roomRequestList: any = [];
 
   constructor(private custService: CustomerService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
@@ -34,6 +35,20 @@ export class CustHomeComponent implements OnInit {
         this.viewProf = true;
         this.customer = resp;
         this.customer.custDob = new Date(resp['custDob'])
+      },
+      error => console.error(error)
+    );
+  }
+  viewRequests() {
+    let customer = new Customer();
+    customer.custName = this.custName;
+    customer.userName = this.userName;
+    customer.userId = this.userId;
+
+    this.custService.getMyRequestsList(customer).subscribe(
+      resp => {
+        this.viewRoomReq = true;
+        this.roomRequestList = resp;
       },
       error => console.error(error)
     );

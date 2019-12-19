@@ -55,7 +55,8 @@
         <td>{{room.roomType}}</td>
         <td>{{room.roomModel}}</td>
         <td>{{room.roomCategory}}</td>
-        <td><input type="submit" class="btn-primary" (click)="assignRoomToRequest(room.roomNumber)" value="Assign Room">
+        <td><input type="submit" class="btn-primary" (click)="assignRoomToRequest(room.roomNumber,actingRequestId)"
+            value="Assign Room">
         </td>
       </tr>
     </tbody>

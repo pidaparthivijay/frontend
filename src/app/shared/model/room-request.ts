@@ -12,7 +12,7 @@ export class RoomRequest {
     roomModel: string;
     roomType: string;
     roomCategory: string;
-    //roomsList: Array<any>;
+    roomNumber: number;
     roomRequestStatus: string;
 
     constructor(obj?: any) {
@@ -26,7 +26,7 @@ export class RoomRequest {
         this.roomCategory = obj ? obj.roomCategory : '';
         this.roomType = obj ? obj.roomType : '';
         this.roomModel = obj ? obj.roomModel : '';
-        //        this.roomsList = obj ? obj.roomsList : '';
+        this.roomNumber = obj ? obj.roomNumber : '';
         this.roomRequestStatus = obj ? obj.roomRequestStatus : '';
 
     }
