@@ -1,83 +1,105 @@
-<div style="padding-left: 2.5%">
-  Hi {{custName}},{{userName}} <br>
+Hey {{custName}}!!! What would you like to do now? <br>
+<table class="table table-bordered table-striped" style="width: 45%">
+  <tr>
+    <td><button class="btn btn-primary" (click)="registerRoom(custName,userName);">Room Registration</button></td>
+    <td><button class="btn btn-primary" (click)="viewProfile();">View My Profile</button></td>
+    <td><button class="btn btn-primary" (click)="viewRequests();">View My Requests</button></td>
+    <td><button class="btn btn-primary" (click)="viewRewardPoints();">View My Reward Points</button></td>
+  </tr>
+</table>
+
+
+<div *ngIf="viewProf">
   <table class="table table-bordered table-striped" style="width: 45%">
     <tr>
-      <td><a class="btn btn-success" (click)="registerRoom(custName,userName);">Room Registration</a></td>
-      <td><button class="btn btn-primary" (click)="viewProfile();">View My Profile</button></td>
-      <td><button class="btn btn-primary" (click)="viewRequests();">View My Requests</button></td>
+      <th>Name</th>
+      <td>{{customer.custName}}</td>
+    </tr>
+    <tr>
+      <th>Gender</th>
+      <td>{{customer.custGen}}</td>
+    </tr>
+    <tr>
+      <th>Customer Id</th>
+      <td>{{customer.custId}}</td>
+    </tr>
+    <tr>
+      <th>Mobile</th>
+      <td>{{customer.custMob}}</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>{{customer.custEmail}}</td>
+    </tr>
+    <tr>
+      <th>Date Of Birth</th>
+      <td>{{customer.custDob}}</td>
+    </tr>
+    <tr>
+      <th>Username</th>
+      <td>{{customer.userName}}</td>
+    </tr>
+    <tr>
+      <th>Password</th>
+      <td>{{customer.custPass}}</td>
     </tr>
   </table>
-
-
-  <div *ngIf="viewProf">
-    <table class="table table-bordered table-striped" style="width: 45%">
-      <tr>
-        <th>Name</th>
-        <td>{{customer.custName}}</td>
-      </tr>
-      <tr>
-        <th>Gender</th>
-        <td>{{customer.custGen}}</td>
-      </tr>
-      <tr>
-        <th>Customer Id</th>
-        <td>{{customer.custId}}</td>
-      </tr>
-      <tr>
-        <th>Mobile</th>
-        <td>{{customer.custMob}}</td>
-      </tr>
-      <tr>
-        <th>Email</th>
-        <td>{{customer.custEmail}}</td>
-      </tr>
-      <tr>
-        <th>Date Of Birth</th>
-        <td>{{customer.custDob}}</td>
-      </tr>
-      <tr>
-        <th>Username</th>
-        <td>{{customer.userName}}</td>
-      </tr>
-      <tr>
-        <th>Password</th>
-        <td>{{customer.custPass}}</td>
-      </tr>
-    </table>
-  </div>
-  <div *ngIf="viewRoomReq">
-    <table>
-      <thead>
-        <tr>
-          <th>Request ID</th>
-          <th>Guest Name</th>
-          <th>Check In Date</th>
-          <th>Check Out Date</th>
-          <th>Guest Count</th>
-          <th>Room Type</th>
-          <th>Room Model</th>
-          <th>Room Category</th>
-          <th>Request Status</th>
-          <th>Cancel</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let roomRequest of roomRequestList">
-          <td>{{roomRequest.requestId}}</td>
-          <td>{{roomRequest.guestName}}</td>
-          <td>{{roomRequest.checkInDate}}</td>
-          <td>{{roomRequest.checkOutDate}}</td>
-          <td>{{roomRequest.guestCount}}</td>
-          <td>{{roomRequest.roomType}}</td>
-          <td>{{roomRequest.roomModel}}</td>
-          <td>{{roomRequest.roomCategory}}</td>
-          <td>{{roomRequest.roomRequestStatus}}</td>
-          <td><input type="submit" class="btn-primary" (click)="cancelRequest(roomRequest.requestId)" value="Cancel">
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div *ngIf="viewLoyaltyPoints"></div>
-  <div *ngIf="viewTourRegistrations"></div>
 </div>
+<div *ngIf="viewRoomReq">
+  <table class="table table-bordered" style="width: 85%; background:thistle;">
+    <thead>
+      <tr style="background-color: wheat;">
+        <th>Request ID</th>
+        <th>Guest Name</th>
+        <th>Check In Date</th>
+        <th>Check Out Date</th>
+        <th>Guest Count</th>
+        <th>Room Type</th>
+        <th>Room Model</th>
+        <th>Room Category</th>
+        <th>Request Status</th>
+        <th>Cancel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let roomRequest of roomRequestList">
+        <td>{{roomRequest.requestId}}</td>
+        <td>{{roomRequest.guestName}}</td>
+        <td>{{roomRequest.checkInDate}}</td>
+        <td>{{roomRequest.checkOutDate}}</td>
+        <td>{{roomRequest.guestCount}}</td>
+        <td>{{roomRequest.roomType}}</td>
+        <td>{{roomRequest.roomModel}}</td>
+        <td>{{roomRequest.roomCategory}}</td>
+        <td>{{roomRequest.roomRequestStatus}}</td>
+        <td>
+          <span *ngIf="roomRequest.roomRequestStatus == 'P'">
+            <input type="submit" class="btn-primary" (click)="cancelRequest(roomRequest.requestId)"
+              value="Cancel"></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="viewLoyaltyPoints">
+
+  <table class="table table-bordered" style="width: 85%; background:thistle;">
+    <thead>
+      <tr style="background-color: wheat;">
+        <th>Earned Through</th>
+        <th>Points Earned</th>
+        <th>Points Earned Date</th>
+        <th>Use By Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rewardPoints of rewardPointList">
+        <td>{{rewardPoints.pointsTransactionName}}</td>
+        <td>{{rewardPoints.pointsEarned}}</td>
+        <td>{{rewardPoints.pointsEarnedDate}}</td>
+        <td>{{rewardPoints.pointsExpiryDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="viewTourRegistrations"></div>

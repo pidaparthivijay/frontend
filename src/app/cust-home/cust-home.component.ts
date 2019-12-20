@@ -15,6 +15,8 @@ export class CustHomeComponent implements OnInit {
   customer: Customer;
   viewProf: boolean;
   viewRoomReq: boolean;
+  viewRewards: boolean;
+  rewardPointList: any = [];
   roomRequestList: any = [];
 
   constructor(private custService: CustomerService, private route: ActivatedRoute, private router: Router) {
@@ -62,5 +64,25 @@ export class CustHomeComponent implements OnInit {
       }
     };
     this.router.navigate(['/roomReg'], navigationExtras);
+  }
+
+  cancelRequest(roomRequestId) {
+    this.custService.cancelRequest(roomRequestId).subscribe(
+      resp => {
+        console.log(resp);
+        alert(resp);
+      },
+      error => console.error(error)
+    );
+  }
+  viewRewardPoints() {
+    alert(this.userId);
+    this.custService.viewRewardPoints(this.userId).subscribe(
+      resp => {
+        this.viewRewards = true;
+        this.rewardPointList = resp;
+      },
+      error => console.error(error)
+    );
   }
 }

@@ -6,6 +6,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CustomerService {
+  viewRewardPoints(userId: any) {
+    return this.httpClient.post('/brw/viewRewardPoints', userId);
+  }
+  cancelRequest(roomRequestId: any) {
+    return this.httpClient.post('/brw/cancelRequest', roomRequestId);
+  }
 
   getMyRequestsList(customer: Customer) {
     return this.httpClient.post('/brw/getMyRequestsList', customer);
