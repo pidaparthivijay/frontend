@@ -12,16 +12,16 @@ import { EmpHomeComponent } from './emp-home/emp-home.component';
 import { RoomManagementComponent } from './room-management/room-management.component';
 import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
 import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
-import { ServiceManagementComponent } from './adm-home/service-management/service-management.component';
 import { TourManagementComponent } from './adm-home/tour-management/tour-management.component';
+import { AmenityManagementComponent } from './adm-home/amenity-management/amenity-management.component';
 const routes: Routes = [
   {
     path: 'admWelcome',
     component: AdmHomeComponent,
     children: [
       {
-        path: 'service',
-        component: ServiceManagementComponent
+        path: 'amenity',
+        component: AmenityManagementComponent
       },
       {
         path: 'roomAllocate',

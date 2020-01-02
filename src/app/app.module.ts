@@ -22,14 +22,14 @@ import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { RoomManagementComponent } from './room-management/room-management.component';
 import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
 import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
-import { ServiceManagementComponent } from './adm-home/service-management/service-management.component';
 import { TourManagementComponent } from './adm-home/tour-management/tour-management.component';
+import { AmenityManagementComponent } from './adm-home/amenity-management/amenity-management.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SidebarComponent,
-    HomeComponent,    
+    HomeComponent,
     ContactComponent,
     LoginComponent,
     RegistrationComponent,
@@ -42,15 +42,15 @@ import { TourManagementComponent } from './adm-home/tour-management/tour-managem
     RoomManagementComponent,
     RoomAllocateComponent,
     EmployeeManagementComponent,
-    ServiceManagementComponent,
-    TourManagementComponent
+    TourManagementComponent,
+    AmenityManagementComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    ToastrModule.forRoot(), 
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule
   ],

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ServiceManagementComponent } from './service-management.component';
+import { AmenityManagementComponent } from './amenity-management.component';
 
-describe('ServiceManagementComponent', () => {
-  let component: ServiceManagementComponent;
-  let fixture: ComponentFixture<ServiceManagementComponent>;
+describe('AmenityManagementComponent', () => {
+  let component: AmenityManagementComponent;
+  let fixture: ComponentFixture<AmenityManagementComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ServiceManagementComponent ]
+      declarations: [ AmenityManagementComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ServiceManagementComponent);
+    fixture = TestBed.createComponent(AmenityManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
