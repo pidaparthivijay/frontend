@@ -75,6 +75,7 @@ export class CustHomeComponent implements OnInit {
       error => console.error(error)
     );
   }
+
   viewRewardPoints() {
     alert(this.userId);
     this.custService.viewRewardPoints(this.userId).subscribe(

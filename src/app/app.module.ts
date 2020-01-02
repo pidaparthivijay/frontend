@@ -21,6 +21,7 @@ import { EmpHomeComponent } from './emp-home/emp-home.component';
 import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { RoomManagementComponent } from './room-management/room-management.component';
 import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
+import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
     EmpHomeComponent,
     AdmHomeComponent,
     RoomManagementComponent,
-    RoomAllocateComponent
+    RoomAllocateComponent,
+    EmployeeManagementComponent
   ],
   imports: [
     BrowserModule,

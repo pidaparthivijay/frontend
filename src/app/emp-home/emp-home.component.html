@@ -1,3 +1,45 @@
-<p>
-  emp-home works!{{id}}
-</p>
+<table class="table table-bordered table-striped" style="width: 45%">
+  <tr>
+    <td><button class="btn btn-primary" (click)="generateBill();">Generate Bill</button></td>
+    <td><button class="btn btn-primary" (click)="viewProfile();">View My Profile</button></td>
+  </tr>
+</table>
+
+<div *ngIf="viewProf">
+  <table class="table table-bordered table-striped" style="width: 45%">
+    <tr>
+      <th>Name</th>
+      <td>{{employee.empName}}</td>
+    </tr>
+    <tr>
+      <th>Gender</th>
+      <td>{{employee.empGen}}</td>
+    </tr>
+    <tr>
+      <th>Employee Id</th>
+      <td>{{employee.empId}}</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>{{employee.email}}</td>
+    </tr>
+    <tr>
+      <th>Username</th>
+      <td>{{employee.userName}}</td>
+    </tr>
+    <tr>
+      <th>Password</th>
+      <td>{{employee.empPass}}</td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="viewCustBill">
+  <table class="table table-bordered table-striped" style="width: 45%">
+    <tr>
+      <th>Email</th>
+      <td><input type="text" name="custEmail" id="custEmail" #custEmail></td>
+      <td><button class="btn btn-primary" (click)="generateBillForMail();">Submit</button></td>
+    </tr>
+  </table>
+</div>

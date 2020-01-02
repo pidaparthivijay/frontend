@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
@@ -13,6 +11,7 @@ import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { EmpHomeComponent } from './emp-home/emp-home.component';
 import { RoomManagementComponent } from './room-management/room-management.component';
 import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
+import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
 const routes: Routes = [
   {
     path: 'admWelcome',
@@ -57,6 +56,10 @@ const routes: Routes = [
   {
     path: 'roomAllocate',
     component: RoomAllocateComponent
+  },
+  {
+    path: 'employeeManagement',
+    component: EmployeeManagementComponent
   }
 ]
 @NgModule({
