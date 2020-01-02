@@ -12,19 +12,43 @@ import { EmpHomeComponent } from './emp-home/emp-home.component';
 import { RoomManagementComponent } from './room-management/room-management.component';
 import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
 import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
+import { ServiceManagementComponent } from './adm-home/service-management/service-management.component';
+import { TourManagementComponent } from './adm-home/tour-management/tour-management.component';
 const routes: Routes = [
   {
     path: 'admWelcome',
-    component: AdmHomeComponent
+    component: AdmHomeComponent,
+    children: [
+      {
+        path: 'service',
+        component: ServiceManagementComponent
+      },
+      {
+        path: 'roomAllocate',
+        component: RoomAllocateComponent
+      },
+      {
+        path: 'employeeManagement',
+        component: EmployeeManagementComponent
+      },
+      {
+        path: 'roomManagement',
+        component: RoomManagementComponent
+      },
+      {
+        path: 'tourPackage',
+        component: TourManagementComponent
+      }
+    ]
+  }, {
+    path: 'empWelcome',
+    component: EmpHomeComponent
   },
   {
     path: 'custWelcome',
     component: CustHomeComponent
   },
-  {
-    path: 'empWelcome',
-    component: EmpHomeComponent
-  },
+
   {
     path: '',
     component: HomeComponent
@@ -48,18 +72,6 @@ const routes: Routes = [
   {
     path: 'restore',
     component: RestorePasswordComponent
-  },
-  {
-    path: 'roomManagement',
-    component: RoomManagementComponent
-  },
-  {
-    path: 'roomAllocate',
-    component: RoomAllocateComponent
-  },
-  {
-    path: 'employeeManagement',
-    component: EmployeeManagementComponent
   }
 ]
 @NgModule({

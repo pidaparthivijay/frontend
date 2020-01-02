@@ -12,7 +12,7 @@ export class EmpHomeComponent implements OnInit {
   private userId: number;
   private viewProf: boolean;
   private viewCustBill: boolean;
-  private roomRequestList: any = [];
+  private requestList: any = [];
   constructor(private route: ActivatedRoute, private router: Router, private employeeService: EmployeeService) {
     this.route.queryParams.subscribe(params => {
       this.userId = params['userId']
@@ -27,14 +27,10 @@ export class EmpHomeComponent implements OnInit {
   }
   generateBillForMail() {
     var custEmail = (<HTMLInputElement>document.getElementById('custEmail')).value;
-    // let navigationExtras: NavigationExtras = {
-    //   queryParams: {
-    //     custEmail: custEmail,
-    //   }
-    // };
     this.employeeService.getPendingBill(custEmail).subscribe(
       resp => {
-        this.roomRequestList = resp;
+        console.log(resp);
+        this.requestList = resp;
       },
       error => console.error(error)
     );

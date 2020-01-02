@@ -22,6 +22,8 @@ import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { RoomManagementComponent } from './room-management/room-management.component';
 import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
 import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
+import { ServiceManagementComponent } from './adm-home/service-management/service-management.component';
+import { TourManagementComponent } from './adm-home/tour-management/tour-management.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +41,9 @@ import { EmployeeManagementComponent } from './adm-home/employee-management/empl
     AdmHomeComponent,
     RoomManagementComponent,
     RoomAllocateComponent,
-    EmployeeManagementComponent
+    EmployeeManagementComponent,
+    ServiceManagementComponent,
+    TourManagementComponent
   ],
   imports: [
     BrowserModule,

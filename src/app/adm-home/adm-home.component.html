@@ -2,10 +2,11 @@
   Hi {{empName}}, <br>
   <table class="table table-bordered table-striped" style="width: 45%">
     <tr>
-      <td><a class="btn btn-success" routerLink="/roomAllocate">Room Allocate</a></td>
-      <td><a class="btn btn-success" routerLink="/employeeManagement">Manage Employees</a></td>
-      <td><a class="btn btn-success" routerLink="/service">Manage Services</a></td>
-      <td><a class="btn btn-success" routerLink="/tourPackage">Manage Tour Packages</a></td>
-      <td><a class="btn btn-success" routerLink="/roomManagement">Manage Rooms</a></td>
+      <td><a class="btn btn-success" routerLink="/admWelcome/roomAllocate">Room Allocate</a></td>
+      <td><a class="btn btn-success" routerLink="/admWelcome/employeeManagement">Manage Employees</a></td>
+      <td><a class="btn btn-success" routerLink="/admWelcome/service">Manage Services</a></td>
+      <td><a class="btn btn-success" routerLink="/admWelcome/tourPackage">Manage Tour Packages</a></td>
+      <td><a class="btn btn-success" routerLink="/admWelcome/roomManagement">Manage Rooms</a></td>
     </tr>
   </table>
+  <router-outlet></router-outlet>
