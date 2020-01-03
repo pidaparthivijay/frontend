@@ -65,7 +65,26 @@ export class CustHomeComponent implements OnInit {
     };
     this.router.navigate(['/roomReg'], navigationExtras);
   }
-
+  requestAmenities() {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        custName: this.custName,
+        userName: this.userName,
+        userId: this.userId
+      }
+    };
+    this.router.navigate(['/custWelcome/requestAmenities'], navigationExtras);
+  }
+  tourBooking() {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        custName: this.custName,
+        userName: this.userName,
+        userId: this.userId
+      }
+    };
+    this.router.navigate(['/custWelcome/tourBooking'], navigationExtras);
+  }
   cancelRequest(roomRequestId) {
     this.custService.cancelRequest(roomRequestId).subscribe(
       resp => {

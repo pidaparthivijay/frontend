@@ -5,6 +5,8 @@ Hey {{custName}}!!! What would you like to do now? <br>
     <td><button class="btn btn-primary" (click)="viewProfile();">View My Profile</button></td>
     <td><button class="btn btn-primary" (click)="viewRequests();">View My Requests</button></td>
     <td><button class="btn btn-primary" (click)="viewRewardPoints();">View My Reward Points</button></td>
+    <td><button class="btn btn-primary" (click)="requestAmenities()">Request Amenities</button></td>
+    <td><button class="btn btn-primary" (click)="tourBooking()">Book Tour Packages</button></td>
   </tr>
 </table>
 
@@ -103,3 +105,4 @@ Hey {{custName}}!!! What would you like to do now? <br>
   </table>
 </div>
 <div *ngIf="viewTourRegistrations"></div>
+<router-outlet></router-outlet>

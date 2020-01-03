@@ -1,0 +1,26 @@
+<table class="table table-striped table-bordered" style="width: 55%; background:yellowgreen">
+    <thead>
+        <tr>
+            <th>
+                Amenity Name
+            </th>
+            <th>
+                Amenity Price
+            </th>
+            <th>
+                No Of Days
+            </th>
+            <th>
+                Request
+            </th>
+        </tr>
+    </thead>
+    <tbody *ngIf="amenitiesList.length >0">
+        <tr *ngFor="let amenity of amenitiesList">
+            <td>{{amenity.amenityName}}</td>
+            <td>{{amenity.price}}</td>
+            <td><input type="text" name="noOfDays" id="noOfDays{{amenity.amenityId}}"></td>
+            <td><button class="btn btn-primary" (click)="requestAmenity(amenity.amenityId);">Request</button></td>
+        </tr>
+    </tbody>
+</table>
