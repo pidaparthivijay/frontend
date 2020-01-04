@@ -16,6 +16,7 @@ import { TourManagementComponent } from './adm-home/tour-management/tour-managem
 import { AmenityManagementComponent } from './adm-home/amenity-management/amenity-management.component';
 import { TourBookingComponent } from './cust-home/tour-booking/tour-booking.component';
 import { RequestAmenitiesComponent } from './cust-home/request-amenities/request-amenities.component';
+import { LookupManagementComponent } from './adm-home/lookup-management/lookup-management.component';
 const routes: Routes = [
   {
     path: 'admWelcome',
@@ -40,6 +41,10 @@ const routes: Routes = [
       {
         path: 'tourPackage',
         component: TourManagementComponent
+      },
+      {
+        path: 'lookupManagement',
+        component: LookupManagementComponent
       }
     ]
   }, {

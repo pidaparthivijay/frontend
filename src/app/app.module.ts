@@ -26,6 +26,7 @@ import { TourManagementComponent } from './adm-home/tour-management/tour-managem
 import { AmenityManagementComponent } from './adm-home/amenity-management/amenity-management.component';
 import { RequestAmenitiesComponent } from './cust-home/request-amenities/request-amenities.component';
 import { TourBookingComponent } from './cust-home/tour-booking/tour-booking.component';
+import { LookupManagementComponent } from './adm-home/lookup-management/lookup-management.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { TourBookingComponent } from './cust-home/tour-booking/tour-booking.comp
     TourManagementComponent,
     AmenityManagementComponent,
     RequestAmenitiesComponent,
-    TourBookingComponent
+    TourBookingComponent,
+    LookupManagementComponent
   ],
   imports: [
     BrowserModule,

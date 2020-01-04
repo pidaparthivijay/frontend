@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TourPackage } from 'src/app/shared/model/tour-package.model';
+import { TourPackageRequest } from 'src/app/shared/model/tour-package-request';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TourService {
+  bookTourPackage(tourPackageRequest: TourPackageRequest) {
+    return this.httpClient.post('brw/bookTourPackage', tourPackageRequest);
+  }
   toggleDelete(packageName: any) {
     return this.httpClient.post('brw/toggleDeleteTourPackage', packageName);
   }

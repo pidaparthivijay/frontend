@@ -3,6 +3,8 @@ import { TourService } from 'src/app/adm-home/tour-management/tour.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TourPackageRequest } from 'src/app/shared/model/tour-package-request';
+import { Constants } from 'src/app/shared/model/constants';
 
 @Component({
   selector: 'app-tour-booking',
@@ -11,10 +13,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class TourBookingComponent implements OnInit {
 
-  tourPackages: any = []
+  tourPackagesList: any = []
   custName: any;
   userName: any;
   userId: any;
+  actionStatus: boolean;
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private toastrService: ToastrService, private tourService: TourService) {
     this.route.queryParams.subscribe(params => {
       this.custName = params['custName'],
@@ -24,7 +27,22 @@ export class TourBookingComponent implements OnInit {
   }
   ngOnInit() {
     this.tourService.getAllTourPackages().subscribe(resp =>
-      this.tourPackages = resp);
+      this.tourPackagesList = resp);
   }
+  bookTour(tourPackageName) {
+    var guestCount = (<HTMLInputElement>document.getElementById('guestCount' + tourPackageName)).value;
+    var startDate = (<HTMLInputElement>document.getElementById('startDate' + tourPackageName)).value;
+    let tourPackageRequest = new TourPackageRequest();
+    tourPackageRequest.userId = this.userId;
+    tourPackageRequest.guestCount = +guestCount;
+    tourPackageRequest.tourPackageName = tourPackageName;
+    tourPackageRequest.startDate = new Date(startDate);
+    this.tourService.bookTourPackage(tourPackageRequest).subscribe(resp => {
+      if (resp[Constants.ACT_STS]) {
+        this.actionStatus = true;
+        this.toastrService.success(Constants.TOUR_BOOK_SXS);
+      }
+    });
 
+  }
 }

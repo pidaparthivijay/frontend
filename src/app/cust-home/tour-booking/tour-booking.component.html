@@ -1,1 +1,32 @@
-<p>tour-booking works!</p>
+<table class="table table-bordered" style="width: 65%; background: greenyellow">
+    <thead>
+        <tr>
+            <th>Tour Package Name</th>
+            <th>Location</th>
+            <th>Duration</th>
+            <th>Price Per Head</th>
+            <th>No Of Tourists</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tourPackage of tourPackagesList">
+            <td>{{tourPackage.tourPackageName}}</td>
+            <td>{{tourPackage.location}}</td>
+            <td>{{tourPackage.duration}}</td>
+            <td>{{tourPackage.pricePerHead}}</td>
+            <td>
+                <input type="number" min="2500" name="guestCount" id="guestCount{{tourPackage.tourPackageName}}"
+                    value="2">
+            </td>
+            <td>
+                <input type="date" title="Tour Start Date" name="startDate" class="form-control"
+                    id="startDate{{tourPackage.tourPackageName}}">
+
+            </td>
+            <td><button class="btn-primary" (click)="bookTour(tourPackage.tourPackageName)">
+                    Book Tour</button></td>
+        </tr>
+    </tbody>
+
+</table>
