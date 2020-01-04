@@ -1,1 +1,70 @@
-<p>amenity-management works!</p>
+<button class="btn-primary" (click)="viewAmenitiesList()">List All Amenities</button> &nbsp;&nbsp;&nbsp;&nbsp;
+<button class="btn-primary" (click)="createNewAmenity()">New Amenity</button>
+<br>
+<br>
+<div *ngIf="!newAmenity && viewAmenities" class="center">
+    <table class="table table-striped table-bordered" style="width: 50%; background:#ff54">
+        <thead>
+            <tr>
+                <th>Amenity Id</th>
+                <th>Amenity Name</th>
+                <th>Price Per Day</th>
+                <th>Deleted</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let amenity of amenitiesList">
+                <td>{{amenity.amenityId}}</td>
+                <td>{{amenity.amenityName}}</td>
+                <td>
+                    <input type="number" min="100" name="price" id="price{{amenity.amenityName}}"
+                        value={{amenity.price}}>
+                </td>
+                <td>
+                    <button class="btn-primary" (click)="toggleDelete(amenity.amenityName)">
+                        <div *ngIf="amenity.deleted != 'Y'">Delete</div>
+                        <div *ngIf="amenity.deleted === 'Y'">Undelete</div>
+                    </button>
+                </td>
+                <td><button class="btn-primary" (click)="updatePrice(amenity.amenityName)">
+                        Update Price</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="center" *ngIf="newAmenity && !viewAmenities">
+    <form [formGroup]="amenityRegistrationForm" (ngSubmit)="createAmenity()">
+        <table class="table table-striped table-hover" style="width: 25rem;">
+            <tr>
+                <td colspan="2">
+                    <div class="form-group">
+                        <input type="text" formControlName="amenityName" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.amenityName.errors }" name="amenityName"
+                            id="amenityName" placeholder="Name of the Amenity" style="width: 100%;">
+                        <div *ngIf="submitted && f.amenityName.errors" class="invalid-feedback">
+                            <div *ngIf="f.amenityName.errors.required">Name is required</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="form-group">
+                        <input type="price" class="form-control" title="Price of Amenity being provided"
+                            [ngClass]="{ 'is-invalid': submitted && f.price.errors }" formControlName="price" id="price"
+                            placeholder="Price" style="width: 100%;">
+                        <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                            <div *ngIf="f.price.errors.required">Price is required</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" class="btn-primary" value="Create Amenity"></td>
+                <td><input type="reset" class="btn-primary" value="Reset"></td>
+            </tr>
+        </table>
+    </form>
+</div>

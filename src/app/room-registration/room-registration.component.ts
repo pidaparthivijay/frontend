@@ -61,7 +61,6 @@ export class RoomRegistrationComponent implements OnInit {
     roomRequest.roomType = this.roomForm.value.roomType;
     this.roomReqService.requestRoom(roomRequest).subscribe(
       resp => {
-        console.log(resp[Constants.ACT_STS]);
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
           this.customer = resp;

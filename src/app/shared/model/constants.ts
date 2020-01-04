@@ -9,5 +9,7 @@ export class Constants {
     public static readonly ROM_REG_SXS = 'Room Registration Success';
     public static readonly ROM_REG_DLR = 'Room Registration Failed';
     public static readonly VACANT = 'vacant';
+    public static readonly AMENITY_REQ_SXS = 'Amenity Request Success';
+    public static readonly TUR_PACK_SXS = 'Tour Package Creation Success';
 
 }

@@ -14,6 +14,8 @@ import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
 import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
 import { TourManagementComponent } from './adm-home/tour-management/tour-management.component';
 import { AmenityManagementComponent } from './adm-home/amenity-management/amenity-management.component';
+import { TourBookingComponent } from './cust-home/tour-booking/tour-booking.component';
+import { RequestAmenitiesComponent } from './cust-home/request-amenities/request-amenities.component';
 const routes: Routes = [
   {
     path: 'admWelcome',
@@ -46,7 +48,16 @@ const routes: Routes = [
   },
   {
     path: 'custWelcome',
-    component: CustHomeComponent
+    component: CustHomeComponent,
+    children: [
+      {
+        path: 'requestAmenities',
+        component: RequestAmenitiesComponent
+      },
+      {
+        path: 'tourBooking',
+        component: TourBookingComponent
+      }]
   },
 
   {

@@ -24,6 +24,8 @@ import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
 import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
 import { TourManagementComponent } from './adm-home/tour-management/tour-management.component';
 import { AmenityManagementComponent } from './adm-home/amenity-management/amenity-management.component';
+import { RequestAmenitiesComponent } from './cust-home/request-amenities/request-amenities.component';
+import { TourBookingComponent } from './cust-home/tour-booking/tour-booking.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,9 @@ import { AmenityManagementComponent } from './adm-home/amenity-management/amenit
     RoomAllocateComponent,
     EmployeeManagementComponent,
     TourManagementComponent,
-    AmenityManagementComponent
+    AmenityManagementComponent,
+    RequestAmenitiesComponent,
+    TourBookingComponent
   ],
   imports: [
     BrowserModule,
