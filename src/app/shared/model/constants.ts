@@ -13,5 +13,12 @@ export class Constants {
     public static readonly AMENITY_REQ_SXS = 'Amenity Request Success';
     public static readonly TUR_PACK_SXS = 'Tour Package Creation Success';
     public static readonly TOUR_BOOK_SXS = 'Tour Package Booking Success';
+    public static readonly ROOM_TYPE = 'ROOM_TYPE';
+    public static readonly LOCATION = 'LOCATION';
+    public static readonly GUEST_COUNT = 'GUEST_COUNT';
+    public static readonly ROOM_CATEGORY = 'ROOM_CATEGORY';
+    public static readonly TOUR_DURATION = 'TOUR_DURATION';
+    public static readonly GENDER = 'GENDER';
+    public static readonly ROOM_MODEL = 'ROOM_MODEL';
 
 }

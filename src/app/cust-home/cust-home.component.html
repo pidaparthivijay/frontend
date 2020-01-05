@@ -35,7 +35,7 @@ Hey {{custName}}!!! What would you like to do now? <br>
     </tr>
     <tr>
       <th>Date Of Birth</th>
-      <td>{{customer.custDob}}</td>
+      <td>{{customer.custDob === null ? "" : customer.custDob| date:'dd MMM, yyyy'}}</td>
     </tr>
     <tr>
       <th>Username</th>
@@ -67,8 +67,8 @@ Hey {{custName}}!!! What would you like to do now? <br>
       <tr *ngFor="let roomRequest of roomRequestList">
         <td>{{roomRequest.requestId}}</td>
         <td>{{roomRequest.guestName}}</td>
-        <td>{{roomRequest.checkInDate}}</td>
-        <td>{{roomRequest.checkOutDate}}</td>
+        <td>{{roomRequest.checkInDate === null ? "" : roomRequest.checkInDate| date:'dd MMM, yyyy'}}</td>
+        <td>{{roomRequest.checkOutDate === null ? "" : roomRequest.checkOutDate| date:'dd MMM, yyyy'}}</td>
         <td>{{roomRequest.guestCount}}</td>
         <td>{{roomRequest.roomType}}</td>
         <td>{{roomRequest.roomModel}}</td>
@@ -98,8 +98,8 @@ Hey {{custName}}!!! What would you like to do now? <br>
       <tr *ngFor="let rewardPoints of rewardPointList">
         <td>{{rewardPoints.pointsTransactionName}}</td>
         <td>{{rewardPoints.pointsEarned}}</td>
-        <td>{{rewardPoints.pointsEarnedDate}}</td>
-        <td>{{rewardPoints.pointsExpiryDate}}</td>
+        <td>{{rewardPoints.pointsEarnedDate === null ? "" : rewardPoints.pointsEarnedDate| date:'dd MMM, yyyy'}}</td>
+        <td>{{rewardPoints.pointsExpiryDate === null ? "" : rewardPoints.pointsExpiryDate| date:'dd MMM, yyyy'}}</td>
       </tr>
     </tbody>
   </table>

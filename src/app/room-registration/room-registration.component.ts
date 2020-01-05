@@ -6,6 +6,7 @@ import { RoomRequest } from '../shared/model/room-request';
 import { RoomReqService } from './room-req.service';
 import { Constants } from '../shared/model/constants';
 import { ActivatedRoute } from '@angular/router';
+import { LookupService } from '../adm-home/lookup-management/lookup.service';
 
 @Component({
   selector: 'app-room-registration',
@@ -22,7 +23,9 @@ export class RoomRegistrationComponent implements OnInit {
   custName: string;
   userName: string;
   userId: number;
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private toastrService: ToastrService, private roomReqService: RoomReqService) {
+  roomTypes: any = [];
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private toastrService: ToastrService, private roomReqService: RoomReqService,
+    private lookupService: LookupService) {
     this.route.queryParams.subscribe(params => {
       this.custName = params['custName'],
         this.userName = params['userName'],
@@ -41,6 +44,13 @@ export class RoomRegistrationComponent implements OnInit {
       roomType: ['', Validators.required],
       roomModel: ['', Validators.required]
     });
+    this.lookupService.getLookupListByDefinition(Constants.ROOM_TYPE).subscribe(
+      resp => {
+        console.log(resp);
+        this.roomTypes = resp;
+      }
+    );
+
   }
   get f() { return this.roomForm.controls; }
   requestRoom() {
