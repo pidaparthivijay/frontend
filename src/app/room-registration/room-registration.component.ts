@@ -24,6 +24,10 @@ export class RoomRegistrationComponent implements OnInit {
   userName: string;
   userId: number;
   roomTypes: any = [];
+  guestCounts: any = [];
+  genders: any = [];
+  roomModels: any = [];
+  roomCategoryList: any = [];
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private toastrService: ToastrService, private roomReqService: RoomReqService,
     private lookupService: LookupService) {
     this.route.queryParams.subscribe(params => {
@@ -46,10 +50,30 @@ export class RoomRegistrationComponent implements OnInit {
     });
     this.lookupService.getLookupListByDefinition(Constants.ROOM_TYPE).subscribe(
       resp => {
-        console.log(resp);
         this.roomTypes = resp;
       }
     );
+    this.lookupService.getLookupListByDefinition(Constants.GENDER).subscribe(
+      resp => {
+        this.genders = resp;
+      }
+    );
+    this.lookupService.getLookupListByDefinition(Constants.ROOM_CATEGORY).subscribe(
+      resp => {
+        this.roomCategoryList = resp;
+      }
+    );
+    this.lookupService.getLookupListByDefinition(Constants.ROOM_MODEL).subscribe(
+      resp => {
+        this.roomModels = resp;
+      }
+    );
+    this.lookupService.getLookupListByDefinition(Constants.GUEST_COUNT).subscribe(
+      resp => {
+        this.guestCounts = resp;
+      }
+    );
+
 
   }
   get f() { return this.roomForm.controls; }
@@ -65,7 +89,7 @@ export class RoomRegistrationComponent implements OnInit {
     roomRequest.guestGen = this.roomForm.value.guestGen;
     roomRequest.checkInDate = this.roomForm.value.checkInDate;
     roomRequest.checkOutDate = this.roomForm.value.checkOutDate;
-    roomRequest.guestCount = this.roomForm.value.guestCount;
+    roomRequest.guestCount = +this.roomForm.value.guestCount;
     roomRequest.roomCategory = this.roomForm.value.roomCategory;
     roomRequest.roomModel = this.roomForm.value.roomModel;
     roomRequest.roomType = this.roomForm.value.roomType;

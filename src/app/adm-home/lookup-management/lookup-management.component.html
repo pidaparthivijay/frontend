@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <select name="lookupDefName" formControlName="lookupDefName" class="form-control"
                                 [ngClass]="{ 'is-invalid': submitted && f.lookupDefName.errors }">
-                                <option *ngFor="let lookupName of lookupDefNames; let i = index;" [selected]="i==1">
+                                <option *ngFor="let lookupName of lookupDefNames; let i = index;" [selected]="i==0">
                                     {{lookupName}}</option>
                             </select>
                             <div *ngIf="submitted && f.lookupDefName.errors" class="invalid-feedback">

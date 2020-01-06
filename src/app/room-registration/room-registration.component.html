@@ -28,9 +28,8 @@
             <select name="guestGen" formControlName="guestGen" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.guestGen.errors }">
               <option value="">Gender</option>
-              <option value="female">Female</option>
-              <option value="Male">Male</option>
-              <option value="trans">Trans</option>
+              <option *ngFor="let gender of genders; let i = index;" value="{{gender.lookupValue}}" [selected]="i==0">
+                {{gender.displayName}}</option>
             </select>
             <div *ngIf="submitted && f.guestGen.errors" class="invalid-feedback">
               <div *ngIf="f.guestGen.errors.required">Gender is required</div>
@@ -53,14 +52,9 @@
             <select name="guestCount" formControlName="guestCount" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.guestCount.errors }">
               <option value="">Count</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
+              <option *ngFor="let guestCount of guestCounts; let i = index;" value="{{guestCount.lookupValue|number}}"
+                [selected]="i==0">
+                {{guestCount.displayName}}</option>
             </select>
             <div *ngIf="submitted && f.guestCount.errors" class="invalid-feedback">
               <div *ngIf="f.guestCount.errors.required">Guest Count is required</div>
@@ -74,8 +68,9 @@
             <select formControlName="roomModel" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.roomType.errors }">
               <option value="">Model Of Rooms</option>
-              <option value="DLX">Deluxe</option>
-              <option value="STE">Suite</option>
+              <option *ngFor="let roomModel of roomModels; let i = index;" value="{{roomModel.lookupValue}}"
+                [selected]="i==0">
+                {{roomModel.displayName}}</option>
             </select>
             <div *ngIf="submitted && f.roomType.errors" class="invalid-feedback">
               <div *ngIf="f.roomType.errors.required">Please select type of Rooms</div>
@@ -87,8 +82,9 @@
             <select name="roomCategory" formControlName="roomCategory" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.roomCategory.errors }">
               <option value="">Category</option>
-              <option value="SNG">Single</option>
-              <option value="DBL">Double</option>
+              <option *ngFor="let roomCategory of roomCategoryList; let i = index;" value="{{roomCategory.lookupValue}}"
+                [selected]="i==0">
+                {{roomCategory.displayName}}</option>
             </select>
             <div *ngIf="submitted && f.roomCategory.errors" class="invalid-feedback">
               <div *ngIf="f.roomCategory.errors.required">Room Category is required</div>
@@ -102,8 +98,9 @@
             <select name="roomType" formControlName="roomType" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.roomType.errors }">
               <option value="">Type</option>
-              <option value="AC">AC</option>
-              <option value="NAC">NON-AC</option>
+              <option *ngFor="let roomType of roomTypes; let i = index;" value="{{roomType.lookupValue}}"
+                [selected]="i==0">
+                {{roomType.displayName}}</option>
             </select>
             <div *ngIf="submitted && f.roomType.errors" class="invalid-feedback">
               <div *ngIf="f.roomCategory.errors.required">Room Type is required</div>
