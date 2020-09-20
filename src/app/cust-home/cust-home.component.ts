@@ -96,8 +96,8 @@ export class CustHomeComponent implements OnInit {
   }
 
   viewRewardPoints() {
-    alert(this.userId);
-    this.custService.viewRewardPoints(this.userId).subscribe(
+
+    this.custService.viewRewardPoints(+this.userId).subscribe(
       resp => {
         this.viewRewards = true;
         this.rewardPointList = resp;

@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
+import { TableModule } from 'primeng';
 import { RegistrationComponent } from './registration/registration.component';
 import { RegSerService } from './registration/reg-ser.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -55,7 +56,7 @@ import { LookupManagementComponent } from './adm-home/lookup-management/lookup-m
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    FormsModule,
+    FormsModule, TableModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule
