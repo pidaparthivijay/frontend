@@ -4,8 +4,9 @@
       <tr>
         <td colspan="3">
           <div class="form-group">
-            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-              name="username" id="username" placeholder="Username" style="width: 100%;">
+            <input type="text" formControlName="username" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.username.errors }" name="username" id="username"
+              placeholder="Username" style="width: 100%;">
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
               <div *ngIf="f.username.errors.required">User Name is required</div>
             </div>
@@ -15,8 +16,9 @@
       <tr>
         <td colspan="3">
           <div class="form-group">
-            <input type="password" formControlName="custPass" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.custPass.errors }"
-              name="custPass" id="custPass" placeholder="Password" style="width: 100%;">
+            <input type="password" formControlName="custPass" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.custPass.errors }" name="custPass" id="custPass"
+              placeholder="Password" style="width: 100%;">
             <div *ngIf="submitted && f.custPass.errors" class="invalid-feedback">
               <div *ngIf="f.custPass.errors.required">Password is required</div>
               <div *ngIf="f.custPass.errors.minlength">Password must be at least 6 characters</div>
@@ -26,18 +28,19 @@
       </tr>
       <tr>
         <td>
-          <input type="submit" class="btn btn-primary" value="Login">
+          <button type="submit" class="btn btn-primary">Login</button>
         </td>
         <td>
-          <input class="btn btn-primary" type="reset">
+          <button class="btn btn-primary" type="reset">Reset</button>
         </td>
         <td>
-          <a class="btn btn-success" routerLink="/register" value="Register">Register</a>
+          <button class="btn btn-primary" routerLink="/register">
+            Register</button>
         </td>
       </tr>
       <tr>
         <td colspan="3">
-          <a class="btn btn-warning" routerLink="/restore" value="Forgot Password">Forgot Password</a>
+          <button class="btn btn-warning" routerLink="/restore" value="Forgot Password">Forgot Password</button>
         </td>
       </tr>
     </table>

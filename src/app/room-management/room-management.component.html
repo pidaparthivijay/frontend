@@ -1,11 +1,11 @@
 <table class="table table-bordered table-striped" style="width: 45%">
   <tr>
-    <td><a class="btn btn-success" (click)="startCreateRoom()">Create Room</a></td>
-    <td><a class="btn btn-success" (click)="startCreateMultipleRooms()">Create Multiple Rooms</a></td>
-    <td><a class="btn btn-success" (click)="getAllRooms()">Query All Rooms</a></td>
-    <td><a class="btn btn-success" (click)="getFreeRooms()">Query Free Rooms</a></td>
-    <td><a class="btn btn-success" (click)="getBookedRooms()">Query Booked Rooms</a></td>
-    <td><a class="btn btn-success" (click)="getRoomsByFloor()">Query Rooms By Floor</a></td>
+    <td><button class="btn btn-success" (click)="startCreateRoom()">Create Room</button></td>
+    <td><button class="btn btn-success" (click)="startCreateMultipleRooms()">Create Multiple Rooms</button></td>
+    <td><button class="btn btn-success" (click)="getAllRooms()">Query All Rooms</button></td>
+    <td><button class="btn btn-success" (click)="getFreeRooms()">Query Free Rooms</button></td>
+    <td><button class="btn btn-success" (click)="getBookedRooms()">Query Booked Rooms</button></td>
+    <td><button class="btn btn-success" (click)="getRoomsByFloor()">Query Rooms By Floor</button></td>
   </tr>
 </table>
 <form [formGroup]="createRoomForm" (ngSubmit)="createRoom()">
