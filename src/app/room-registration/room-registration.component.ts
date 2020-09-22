@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Customer } from '../shared/model/customer.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { LookupService } from '../adm-home/lookup-management/lookup.service';
+import { Constants } from '../shared/model/constants';
+import { Customer } from '../shared/model/customer.model';
 import { RoomRequest } from '../shared/model/room-request';
 import { RoomReqService } from './room-req.service';
-import { Constants } from '../shared/model/constants';
-import { ActivatedRoute } from '@angular/router';
-import { LookupService } from '../adm-home/lookup-management/lookup.service';
 
 @Component({
   selector: 'app-room-registration',

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { TourService } from 'src/app/adm-home/tour-management/tour.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { TourPackageRequest } from 'src/app/shared/model/tour-package-request';
+import { TourService } from 'src/app/adm-home/tour-management/tour.service';
 import { Constants } from 'src/app/shared/model/constants';
+import { TourPackageRequest } from 'src/app/shared/model/tour-package-request';
 
 @Component({
   selector: 'app-tour-booking',

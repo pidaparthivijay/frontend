@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from './customer.service';
-import { Customer } from '../shared/model/customer.model';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Customer } from '../shared/model/customer.model';
+import { CustomerService } from './customer.service';
 
 @Component({
   selector: 'app-cust-home',

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Amenity } from 'src/app/shared/model/amenity.model';
 import { AmenityRequest } from 'src/app/shared/model/amenityRequest.model';
 

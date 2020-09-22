@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RoomAllocateService } from './room-allocate.service';
 import { RoomRequest } from '../shared/model/room-request';
+import { RoomAllocateService } from './room-allocate.service';
 
 @Component({
   selector: 'app-room-allocate',

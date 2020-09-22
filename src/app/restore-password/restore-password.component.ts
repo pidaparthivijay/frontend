@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { RestorePwdService } from './restore-pwd.service';
-import { User } from '../shared/model/user.model';
-import { OneTimePassword } from '../shared/model/one-time-password.model';
 import { Constants } from '../shared/model/constants';
+import { OneTimePassword } from '../shared/model/one-time-password.model';
+import { User } from '../shared/model/user.model';
+import { RestorePwdService } from './restore-pwd.service';
 
 @Component({
   selector: 'app-restore-password',
@@ -18,7 +18,7 @@ export class RestorePasswordComponent implements OnInit {
 
   actionStatus: boolean;
   rstPwdSuccess: boolean;
-  submitReq: boolean=true;
+  submitReq: boolean = true;
   otpSubmit: boolean;
   rstPwd: boolean;
 
@@ -63,14 +63,14 @@ export class RestorePasswordComponent implements OnInit {
     user.userId = this.restorePwdForm.value.userId;
     user.userMail = this.restorePwdForm.value.userMail;
     this.restorePwdService.requestOTP(user).subscribe(
-      resp => {        
+      resp => {
         if (resp) {
           this.actionStatus = true;
-          this.submitReq =false;
+          this.submitReq = false;
           this.otpSubmit = true;
-          setTimeout(()=>
-          this.actionStatus=false
-        ,4000)
+          setTimeout(() =>
+            this.actionStatus = false
+            , 4000)
         }
       }
     );
@@ -88,10 +88,10 @@ export class RestorePasswordComponent implements OnInit {
         if (resp[Constants.ACT_STS]) {
           this.rstPwd = true;
           this.otpSubmit = false;
-          this.otpValid=true;
-          setTimeout(()=>
-            this.otpValid=false
-          ,4000)
+          this.otpValid = true;
+          setTimeout(() =>
+            this.otpValid = false
+            , 4000)
         }
       }
     );

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LookupService } from './lookup.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Lookup } from 'src/app/shared/model/lookup.model';
+import { LookupService } from './lookup.service';
 
 @Component({
   selector: 'app-lookup-management',
@@ -12,10 +12,21 @@ export class LookupManagementComponent implements OnInit {
   lookupExcel: any = File;
   lookupList: any = [];
   lookupDefNames: any = [];
+  lookupDefinitions: any[] = [
+    [{ 'label': 'Location', 'value': 'LOCATION' }],
+    [{ 'label': 'Tour Duration', 'value': 'TOUR_DURATION' }],
+    [{ 'label': 'Gender', 'value': 'GENDER' }],
+    [{ 'label': 'Guest Count', 'value': 'GUEST_COUNT' }],
+    [{ 'label': 'Room Category', 'value': 'ROOM_CATEGORY' }],
+    [{ 'label': 'Room Type', 'value': 'ROOM_TYPE' }],
+    [{ 'label': 'Room Model', 'value': 'ROOM_MODEL' }],
+  ];
   viewAll: boolean;
   upload: boolean;
   createNew: boolean;
   loookupCreationForm: FormGroup;
+  clonedLookups: { [s: string]: Lookup; } = {};
+  messageService: any;
   constructor(private formBuilder: FormBuilder, private lookupService: LookupService) { }
 
   ngOnInit() {
@@ -71,6 +82,21 @@ export class LookupManagementComponent implements OnInit {
       this.lookupList = resp
     },
       error => console.error(error));
+  }
+  onRowEditInit(lookup: Lookup) {
+    this.clonedLookups[lookup.lookupId] = { ...lookup };
+  }
+
+  onRowEditSave(lookup: Lookup) {
+    if (lookup.createdDate !== null)
+      delete this.clonedLookups[lookup.lookupId];
+    else
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Year is required' });
+  }
+
+  onRowEditCancel(lookup: Lookup, index: number) {
+    this.lookupList[index] = this.clonedLookups[lookup.lookupId];
+    delete this.clonedLookups[lookup.lookupId];
   }
 
   createLookup() {

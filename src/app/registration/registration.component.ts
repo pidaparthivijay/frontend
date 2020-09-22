@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Customer } from '../shared/model/customer.model';
-import { RegSerService } from './reg-ser.service';
 import { ToastrService } from 'ngx-toastr';
 import { Constants } from '../shared/model/constants';
+import { Customer } from '../shared/model/customer.model';
+import { RegSerService } from './reg-ser.service';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',

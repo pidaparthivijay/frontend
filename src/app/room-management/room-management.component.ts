@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RoomService } from './room.service';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { Room } from '../shared/model/room.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Constants } from '../shared/model/constants';
+import { Room } from '../shared/model/room.model';
+import { RoomService } from './room.service';
 
 @Component({
   selector: 'app-room-management',

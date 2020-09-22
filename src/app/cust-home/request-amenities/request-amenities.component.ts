@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../customer.service';
-import { AmenityService } from 'src/app/adm-home/amenity-management/amenity.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AmenityService } from 'src/app/adm-home/amenity-management/amenity.service';
 import { AmenityRequest } from 'src/app/shared/model/amenityRequest.model';
 import { Constants } from 'src/app/shared/model/constants';
 

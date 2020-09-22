@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Employee } from 'src/app/shared/model/employee.model';
 import { Constants } from 'src/app/shared/model/constants';
+import { Employee } from 'src/app/shared/model/employee.model';
 import { EmpManageService } from './emp-manage.service';
 
 @Component({

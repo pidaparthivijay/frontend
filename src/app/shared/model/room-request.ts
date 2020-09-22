@@ -1,5 +1,3 @@
-import { Room } from './room.model';
-
 export class RoomRequest {
     requestId: number;
     userId: number;

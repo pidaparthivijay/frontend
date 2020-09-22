@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AmenityService } from './amenity.service';
 import { Amenity } from 'src/app/shared/model/amenity.model';
 import { Constants } from 'src/app/shared/model/constants';
+import { AmenityService } from './amenity.service';
 
 @Component({
   selector: 'app-amenity-management',

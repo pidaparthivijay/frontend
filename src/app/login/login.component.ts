@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoginService } from './login.service';
-import { User } from '../shared/model/user.model';
-import { Router, NavigationExtras } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavigationExtras, Router } from '@angular/router';
 import { Constants } from '../shared/model/constants';
+import { User } from '../shared/model/user.model';
+import { LoginService } from './login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

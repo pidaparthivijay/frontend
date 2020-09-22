@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { RouterModule, Routes } from '@angular/router';
+import { AdmHomeComponent } from './adm-home/adm-home.component';
+import { AmenityManagementComponent } from './adm-home/amenity-management/amenity-management.component';
+import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
+import { LookupManagementComponent } from './adm-home/lookup-management/lookup-management.component';
+import { TourManagementComponent } from './adm-home/tour-management/tour-management.component';
 import { ContactComponent } from './contact/contact.component';
+import { CustHomeComponent } from './cust-home/cust-home.component';
+import { RequestAmenitiesComponent } from './cust-home/request-amenities/request-amenities.component';
+import { TourBookingComponent } from './cust-home/tour-booking/tour-booking.component';
+import { EmpHomeComponent } from './emp-home/emp-home.component';
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
-import { RoomRegistrationComponent } from './room-registration/room-registration.component';
-import { CustHomeComponent } from './cust-home/cust-home.component';
-import { AdmHomeComponent } from './adm-home/adm-home.component';
-import { EmpHomeComponent } from './emp-home/emp-home.component';
-import { RoomManagementComponent } from './room-management/room-management.component';
 import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
-import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
-import { TourManagementComponent } from './adm-home/tour-management/tour-management.component';
-import { AmenityManagementComponent } from './adm-home/amenity-management/amenity-management.component';
-import { TourBookingComponent } from './cust-home/tour-booking/tour-booking.component';
-import { RequestAmenitiesComponent } from './cust-home/request-amenities/request-amenities.component';
-import { LookupManagementComponent } from './adm-home/lookup-management/lookup-management.component';
+import { RoomManagementComponent } from './room-management/room-management.component';
+import { RoomRegistrationComponent } from './room-registration/room-registration.component';
 const routes: Routes = [
   {
     path: 'admWelcome',

@@ -1,5 +1,4 @@
 export class Room {
-
     roomNumber: number;
     floorNumber: number;
     roomModel: string;
@@ -10,4 +9,3 @@ export class Room {
     checkOutDate: Date;
     countOfRooms: number;
 }
-

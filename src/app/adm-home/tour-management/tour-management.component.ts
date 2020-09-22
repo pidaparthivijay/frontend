@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TourService } from './tour.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { TourPackage } from 'src/app/shared/model/tour-package.model';
 import { Constants } from 'src/app/shared/model/constants';
+import { TourPackage } from 'src/app/shared/model/tour-package.model';
+import { TourService } from './tour.service';
 
 @Component({
   selector: 'app-tour-management',

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { TourPackage } from 'src/app/shared/model/tour-package.model';
+import { Injectable } from '@angular/core';
 import { TourPackageRequest } from 'src/app/shared/model/tour-package-request';
+import { TourPackage } from 'src/app/shared/model/tour-package.model';
 
 @Injectable({
   providedIn: 'root'
