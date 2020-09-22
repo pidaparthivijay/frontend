@@ -106,11 +106,12 @@
                     <div *ngIf="lookup.deleted === 'Y'">Undelete</div>
                 </button>
                 <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
-                    class="ui-button-info" (click)="onRowEditInit(lookup)"></button>
+                    class="ui-button-info btn-primary" (click)="onRowEditInit(lookup)">Edit</button>
                 <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
-                    class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(lookup)"></button>
+                    class="ui-button-success btn-primary" style="margin-right: .5em"
+                    (click)="onRowEditSave(lookup)">Save</button>
                 <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
-                    class="ui-button-danger" (click)="onRowEditCancel(lookup, ri)"></button>
+                    class="ui-button-danger btn-primary" (click)="onRowEditCancel(lookup, ri)">Cancel</button>
             </td>
             <td><button class="btn-primary" (click)="updateRecord(lookup.lookupId)">Update</button></td>
         </tr>

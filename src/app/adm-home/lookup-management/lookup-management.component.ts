@@ -13,13 +13,13 @@ export class LookupManagementComponent implements OnInit {
   lookupList: any = [];
   lookupDefNames: any = [];
   lookupDefinitions: any[] = [
-    [{ 'label': 'Location', 'value': 'LOCATION' }],
-    [{ 'label': 'Tour Duration', 'value': 'TOUR_DURATION' }],
-    [{ 'label': 'Gender', 'value': 'GENDER' }],
-    [{ 'label': 'Guest Count', 'value': 'GUEST_COUNT' }],
-    [{ 'label': 'Room Category', 'value': 'ROOM_CATEGORY' }],
-    [{ 'label': 'Room Type', 'value': 'ROOM_TYPE' }],
-    [{ 'label': 'Room Model', 'value': 'ROOM_MODEL' }],
+    { label: 'Location', value: 'LOCATION' },
+    { label: 'Tour Duration', value: 'TOUR_DURATION' },
+    { label: 'Gender', value: 'GENDER' },
+    { label: 'Guest Count', value: 'GUEST_COUNT' },
+    { label: 'Room Category', value: 'ROOM_CATEGORY' },
+    { label: 'Room Type', value: 'ROOM_TYPE' },
+    { label: 'Room Model', value: 'ROOM_MODEL' },
   ];
   viewAll: boolean;
   upload: boolean;
