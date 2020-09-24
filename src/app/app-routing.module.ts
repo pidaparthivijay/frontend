@@ -5,18 +5,20 @@ import { AmenityManagementComponent } from './adm-home/amenity-management/amenit
 import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
 import { LookupManagementComponent } from './adm-home/lookup-management/lookup-management.component';
 import { TourManagementComponent } from './adm-home/tour-management/tour-management.component';
+import { HomeComponent } from './common/home/home.component';
+import { LoginComponent } from './common/login/login.component';
+import { LogoutComponent } from './common/logout/logout.component';
 import { ContactComponent } from './contact/contact.component';
 import { CustHomeComponent } from './cust-home/cust-home.component';
 import { RequestAmenitiesComponent } from './cust-home/request-amenities/request-amenities.component';
 import { TourBookingComponent } from './cust-home/tour-booking/tour-booking.component';
 import { EmpHomeComponent } from './emp-home/emp-home.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
 import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
 import { RoomManagementComponent } from './room-management/room-management.component';
 import { RoomRegistrationComponent } from './room-registration/room-registration.component';
+
 const routes: Routes = [
   {
     path: 'admWelcome',
@@ -80,6 +82,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent,
   },
   {
     path: 'register',
