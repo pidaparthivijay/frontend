@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AmenityService } from 'src/app/adm-home/amenity-management/amenity.service';
 import { AmenityRequest } from 'src/app/shared/model/amenityRequest.model';
 import { Constants } from 'src/app/shared/model/constants';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 
 @Component({
   selector: 'app-request-amenities',
@@ -36,7 +37,9 @@ export class RequestAmenitiesComponent implements OnInit {
     amenityRequest.userId = this.userId;
     amenityRequest.userName = this.userName;
     amenityRequest.noOfDays = +noOfDays;
-    this.amenityService.requestAmenity(amenityRequest).subscribe(resp => {
+    let requestDTO = new RequestDTO()
+    requestDTO.amenityRequest = amenityRequest;
+    this.amenityService.requestAmenity(requestDTO).subscribe(resp => {
       if (resp[Constants.ACT_STS]) {
         this.actionStatus = true;
         this.toastrService.success(Constants.AMENITY_REQ_SXS);

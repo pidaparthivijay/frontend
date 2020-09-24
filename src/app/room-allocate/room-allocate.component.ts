@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestDTO } from '../shared/model/request-dto.model';
 import { RoomRequest } from '../shared/model/room-request';
 import { RoomAllocateService } from './room-allocate.service';
 
@@ -24,15 +25,23 @@ export class RoomAllocateComponent implements OnInit {
         element.checkOutDate = new Date(element.checkOutDate)
     });
   }
+
   viewFeasibleRooms(requestId) {
+    let requestDTO = new RequestDTO();
+    let roomRequest = new RoomRequest();
+    roomRequest.requestId = requestId
+    requestDTO.roomRequest = roomRequest;
     this.actingRequestId = requestId;
-    this.roomAllocateService.viewFeasibleRooms(requestId).subscribe(resp => this.roomList = resp);
+    this.roomAllocateService.viewFeasibleRooms(requestDTO).subscribe(resp => this.roomList = resp);
   }
+
   assignRoomToRequest(roomNumber, requestId) {
     let roomReq = new RoomRequest();
     roomReq.requestId = requestId;
     roomReq.roomNumber = roomNumber;
-    this.roomAllocateService.assignRoomToRequest(roomReq).subscribe(resp => console.log(resp));
+    let requestDTO = new RequestDTO();
+    requestDTO.roomRequest = roomReq;
+    this.roomAllocateService.assignRoomToRequest(requestDTO).subscribe(resp => console.log(resp));
   }
 
   private newMethod() {

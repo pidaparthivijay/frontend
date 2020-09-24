@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { LookupService } from '../adm-home/lookup-management/lookup.service';
 import { Constants } from '../shared/model/constants';
 import { Customer } from '../shared/model/customer.model';
+import { Lookup } from '../shared/model/lookup.model';
+import { RequestDTO } from '../shared/model/request-dto.model';
 import { RoomRequest } from '../shared/model/room-request';
 import { RoomReqService } from './room-req.service';
 
@@ -48,33 +50,43 @@ export class RoomRegistrationComponent implements OnInit {
       roomType: ['', Validators.required],
       roomModel: ['', Validators.required]
     });
-    this.lookupService.getLookupListByDefinition(Constants.ROOM_TYPE).subscribe(
+    let requestDTO = new RequestDTO();
+    let lookup = new Lookup();
+    lookup.lookupDefName = Constants.ROOM_TYPE;
+    requestDTO.lookup = lookup;
+    this.lookupService.getLookupListByDefinition(requestDTO).subscribe(
       resp => {
         this.roomTypes = resp;
       }
     );
-    this.lookupService.getLookupListByDefinition(Constants.GENDER).subscribe(
+    lookup.lookupDefName = Constants.GENDER;
+    requestDTO.lookup = lookup;
+    this.lookupService.getLookupListByDefinition(requestDTO).subscribe(
       resp => {
         this.genders = resp;
       }
     );
-    this.lookupService.getLookupListByDefinition(Constants.ROOM_CATEGORY).subscribe(
+    lookup.lookupDefName = Constants.ROOM_CATEGORY;
+    requestDTO.lookup = lookup;
+    this.lookupService.getLookupListByDefinition(requestDTO).subscribe(
       resp => {
         this.roomCategoryList = resp;
       }
     );
-    this.lookupService.getLookupListByDefinition(Constants.ROOM_MODEL).subscribe(
+    lookup.lookupDefName = Constants.ROOM_MODEL;
+    requestDTO.lookup = lookup;
+    this.lookupService.getLookupListByDefinition(requestDTO).subscribe(
       resp => {
         this.roomModels = resp;
       }
     );
-    this.lookupService.getLookupListByDefinition(Constants.GUEST_COUNT).subscribe(
+    lookup.lookupDefName = Constants.GUEST_COUNT;
+    requestDTO.lookup = lookup;
+    this.lookupService.getLookupListByDefinition(requestDTO).subscribe(
       resp => {
         this.guestCounts = resp;
       }
     );
-
-
   }
   get f() { return this.roomForm.controls; }
   requestRoom() {
@@ -93,7 +105,9 @@ export class RoomRegistrationComponent implements OnInit {
     roomRequest.roomCategory = this.roomForm.value.roomCategory;
     roomRequest.roomModel = this.roomForm.value.roomModel;
     roomRequest.roomType = this.roomForm.value.roomType;
-    this.roomReqService.requestRoom(roomRequest).subscribe(
+    let requestDto = new RequestDTO();
+    requestDto.roomRequest = roomRequest;
+    this.roomReqService.requestRoom(requestDto).subscribe(
       resp => {
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;

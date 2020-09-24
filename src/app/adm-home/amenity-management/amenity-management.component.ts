@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Amenity } from 'src/app/shared/model/amenity.model';
 import { Constants } from 'src/app/shared/model/constants';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 import { AmenityService } from './amenity.service';
 
 @Component({
@@ -11,15 +12,16 @@ import { AmenityService } from './amenity.service';
   styleUrls: ['./amenity-management.component.scss']
 })
 export class AmenityManagementComponent implements OnInit {
-  amenityRegistrationForm: FormGroup;
-  submitted: boolean;
-  loading: boolean;
   actionStatus: boolean;
-  amenity: any;
-  statusMessage: any;
-  newAmenity: boolean;
-  viewAmenities: boolean;
   amenitiesList: Object;
+  amenity: any;
+  amenityRegistrationForm: FormGroup;
+  loading: boolean;
+  newAmenity: boolean;
+  statusMessage: any;
+  submitted: boolean;
+  viewAmenities: boolean;
+
   constructor(private formBuilder: FormBuilder, private amenityService: AmenityService, private toastrService: ToastrService) { }
 
   ngOnInit() {
@@ -28,6 +30,7 @@ export class AmenityManagementComponent implements OnInit {
       price: ['', Validators.required]
     });
   }
+
   get f() { return this.amenityRegistrationForm.controls; }
 
   createAmenity() {
@@ -39,7 +42,9 @@ export class AmenityManagementComponent implements OnInit {
     let amenity = new Amenity();
     amenity.amenityName = this.amenityRegistrationForm.get('amenityName').value;
     amenity.price = this.amenityRegistrationForm.get('price').value;
-    this.amenityService.createAmenity(amenity).subscribe(
+    let requestDTO = new RequestDTO();
+    requestDTO.amenity = amenity;
+    this.amenityService.createAmenity(requestDTO).subscribe(
       resp => {
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
@@ -62,14 +67,16 @@ export class AmenityManagementComponent implements OnInit {
     this.viewAmenities = true;
     this.amenityService.getAllAmenities().subscribe(
       resp => {
-        this.amenitiesList = resp;
+        this.amenitiesList = resp['amenityList'];
       },
       error => console.error(error)
     );
   }
 
-  toggleDelete(packageName) {
-    this.amenityService.toggleDelete(packageName).subscribe(
+  toggleDelete(amenityName) {
+    let requestDTO = new RequestDTO();
+    requestDTO.amenity.amenityName = amenityName;
+    this.amenityService.toggleDelete(requestDTO).subscribe(
       resp => {
         this.amenitiesList = resp;
       },
@@ -86,13 +93,16 @@ export class AmenityManagementComponent implements OnInit {
     let amenity = new Amenity();
     amenity.price = +price;
     amenity.amenityName = amenityName;
-    this.amenityService.updatePrice(amenity).subscribe(
+    let requestDTO = new RequestDTO();
+    requestDTO.amenity = amenity;
+    this.amenityService.updatePrice(requestDTO).subscribe(
       resp => {
         this.amenitiesList = resp;
       },
       error => console.error(error)
     );
   }
+
   createNewAmenity() {
     this.newAmenity = true;
     this.viewAmenities = false;

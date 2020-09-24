@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 import { TourPackageRequest } from 'src/app/shared/model/tour-package-request';
 import { TourPackage } from 'src/app/shared/model/tour-package.model';
 
@@ -7,18 +8,23 @@ import { TourPackage } from 'src/app/shared/model/tour-package.model';
   providedIn: 'root'
 })
 export class TourService {
-  bookTourPackage(tourPackageRequest: TourPackageRequest) {
-    return this.httpClient.post('brw/bookTourPackage', tourPackageRequest);
+
+  bookTourPackage(requestDTO: RequestDTO) {
+    return this.httpClient.post('brw/bookTourPackage', requestDTO);
   }
-  toggleDelete(packageName: any) {
-    return this.httpClient.post('brw/toggleDeleteTourPackage', packageName);
+
+  toggleDelete(requestDTO: RequestDTO) {
+    return this.httpClient.post('brw/toggleDeleteTourPackage', requestDTO);
   }
-  updatePrice(tourPackage: TourPackage) {
-    return this.httpClient.post('brw/updatePriceTourPackage', tourPackage);
+
+  updatePrice(requestDTO: RequestDTO) {
+    return this.httpClient.post('brw/updatePriceTourPackage', requestDTO);
   }
-  createTourPackage(tourPackage: TourPackage) {
-    return this.httpClient.post('brw/createTourPackage', tourPackage);
+
+  createTourPackage(requestDTO: RequestDTO) {
+    return this.httpClient.post('brw/createTourPackage', requestDTO);
   }
+
   getAllTourPackages() {
     return this.httpClient.get('brw/viewAllTourPackages');
   }

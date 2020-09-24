@@ -78,33 +78,27 @@ export class RoomManagementComponent implements OnInit {
     );
     this.roomService.getAllRooms();
   }
-  getFreeRooms() {
-    this.roomService.getFreeRooms().subscribe(resp => this.roomsList = resp);
+
+  getRoomsByStatus(roomStatus: string) {
+    let requestDto = new RequestDTO();
+    requestDto.roomStatus = roomStatus;
+    this.roomService.getRoomsByStatus(requestDto).subscribe(resp => this.roomsList = resp);
   }
-  getBookedRooms() {
-    this.roomService.getBookedRooms().subscribe(resp => this.roomsList = resp);
-  }
+
   getRoomsByFloor(floorNumber: number) {
-    this.roomService.getRoomsByFloor(floorNumber).subscribe(resp => console.log(resp));
-    this.roomService.getRoomsByFloor(floorNumber);
+    let requestDto = new RequestDTO();
+    requestDto.floorNumber = floorNumber;
+    this.roomService.getRoomsByFloor(requestDto).subscribe(resp => console.log(resp));
   }
+
   startCreateRoom() {
     this.createRoomMultipleFlag = false;
     document.getElementById("createRoom").style.display = "block";
   }
+
   startCreateMultipleRooms() {
     this.createRoomMultipleFlag = true;
     document.getElementById("createRoom").style.display = "block";
   }
-  createMultipleRooms() {
-    this.submitted = true;
-    if (this.createRoomForm.invalid) {
-      return;
-    }
-    let room = new Room();
-    room.roomType = this.createRoomForm.value.typeOfRoom;
-    room.roomModel = this.createRoomForm.value.modelOfRoom;
-    room.roomCategory = this.createRoomForm.value.categoryOfRoom;
-    room.floorNumber = this.createRoomForm.value.floorNumber;
-  }
+
 }

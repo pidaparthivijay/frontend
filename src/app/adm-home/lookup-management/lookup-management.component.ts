@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Lookup } from 'src/app/shared/model/lookup.model';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 import { LookupService } from './lookup.service';
 
 @Component({
@@ -9,9 +10,9 @@ import { LookupService } from './lookup.service';
   styleUrls: ['./lookup-management.component.scss']
 })
 export class LookupManagementComponent implements OnInit {
+  lookupDefNames: any = [];
   lookupExcel: any = File;
   lookupList: any = [];
-  lookupDefNames: any = [];
   lookupDefinitions: any[] = [
     { label: 'Location', value: 'LOCATION' },
     { label: 'Tour Duration', value: 'TOUR_DURATION' },
@@ -21,12 +22,13 @@ export class LookupManagementComponent implements OnInit {
     { label: 'Room Type', value: 'ROOM_TYPE' },
     { label: 'Room Model', value: 'ROOM_MODEL' },
   ];
-  viewAll: boolean;
-  upload: boolean;
+  clonedLookups: { [s: string]: Lookup; } = {};
   createNew: boolean;
   loookupCreationForm: FormGroup;
-  clonedLookups: { [s: string]: Lookup; } = {};
   messageService: any;
+  upload: boolean;
+  viewAll: boolean;
+
   constructor(private formBuilder: FormBuilder, private lookupService: LookupService) { }
 
   ngOnInit() {
@@ -63,17 +65,29 @@ export class LookupManagementComponent implements OnInit {
   uploadLookupExcel() {
     const formData = new FormData();
     formData.append('lookupExcel', this.lookupExcel);
-    this.lookupService.uploadLookupExcel(formData).subscribe(resp => console.log(resp),
+    let requestDTO = new RequestDTO();
+    requestDTO.lookupExcel = formData;
+    this.lookupService.uploadLookupExcel(requestDTO).subscribe(resp => console.log(resp),
       error => console.error(error));
   }
   toggleDelete(lookupId) {
-    this.lookupService.toggleDelete(lookupId).subscribe(resp => console.log(resp),
+    let lookup = new Lookup();
+    let requestDTO = new RequestDTO();
+    lookup.lookupId = lookupId;
+    requestDTO.lookup = lookup;
+    this.lookupService.toggleDelete(requestDTO).subscribe(resp => console.log(resp),
       error => console.error(error));
   }
+
   updateLookup(lookupId) {
-    this.lookupService.updateLookup(lookupId).subscribe(resp => console.log(resp),
+    let lookup = new Lookup();
+    let requestDTO = new RequestDTO();
+    lookup.lookupId = lookupId;
+    requestDTO.lookup = lookup;
+    this.lookupService.updateLookup(requestDTO).subscribe(resp => console.log(resp),
       error => console.error(error));
   }
+
   viewAllLookups() {
     this.viewAll = true;
     this.createNew = false;
@@ -83,6 +97,7 @@ export class LookupManagementComponent implements OnInit {
     },
       error => console.error(error));
   }
+
   onRowEditInit(lookup: Lookup) {
     this.clonedLookups[lookup.lookupId] = { ...lookup };
   }
@@ -104,11 +119,14 @@ export class LookupManagementComponent implements OnInit {
     lookup.lookupDefName = this.loookupCreationForm.get('lookupDefName').value;
     lookup.displayName = this.loookupCreationForm.get('displayName').value;
     lookup.lookupValue = this.loookupCreationForm.get('lookupValue').value;
-    this.lookupService.createLookup(lookup).subscribe(resp => {
+    let requestDTO = new RequestDTO();
+    requestDTO.lookup = lookup;
+    this.lookupService.createLookup(requestDTO).subscribe(resp => {
       console.log(resp);
     },
       error => console.error(error));
   }
+
   onSelectFile(event) {
     const file = event.target.files[0];
     this.lookupExcel = file;

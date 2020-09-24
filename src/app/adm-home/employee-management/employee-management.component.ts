@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Constants } from 'src/app/shared/model/constants';
 import { Employee } from 'src/app/shared/model/employee.model';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 import { EmpManageService } from './emp-manage.service';
 
 @Component({
@@ -40,7 +41,9 @@ export class EmployeeManagementComponent implements OnInit {
     employee.userName = this.employeeRegistrationForm.get('userName').value;
     employee.empGen = this.employeeRegistrationForm.get('empGen').value;
     employee.email = this.employeeRegistrationForm.get('email').value;
-    this.empManageService.createEmployee(employee).subscribe(
+    let requestDTO = new RequestDTO();
+    requestDTO.employee = employee;
+    this.empManageService.createEmployee(requestDTO).subscribe(
       resp => {
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;

@@ -1,28 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Lookup } from 'src/app/shared/model/lookup.model';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LookupService {
-  getLookupListByDefinition(definitionName: string) {
-    return this.httpClient.post("brw/getLookupListByDefinition", definitionName);
+  getLookupListByDefinition(requestDTO: RequestDTO) {
+    return this.httpClient.post("brw/getLookupListByDefinition", requestDTO);
   }
-  createLookup(lookup: Lookup) {
-    return this.httpClient.post("brw/createLookup", lookup);
+
+  createLookup(requestDTO: RequestDTO) {
+    return this.httpClient.post("brw/createLookup", requestDTO);
   }
+
   getLookupDefs() {
     return this.httpClient.get("brw/getLookupDefs");
   }
-  toggleDelete(lookupId: any) {
-    return this.httpClient.post("brw/toggleDelete", lookupId);
+
+  toggleDelete(requestDTO: RequestDTO) {
+    return this.httpClient.post("brw/toggleDelete", requestDTO);
   }
-  updateLookup(lookupId: any) {
-    return this.httpClient.post("brw/updateLookup", lookupId);
+
+  updateLookup(requestDTO: RequestDTO) {
+    return this.httpClient.post("brw/updateLookup", requestDTO);
   }
-  uploadLookupExcel(formData: FormData) {
-    return this.httpClient.post("brw/uploadLookupExcel", formData);
+
+  uploadLookupExcel(requestDTO: RequestDTO) {
+    return this.httpClient.post("brw/uploadLookupExcel", requestDTO);
   }
 
   viewAllLookups() {

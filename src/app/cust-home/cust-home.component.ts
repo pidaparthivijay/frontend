@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Customer } from '../shared/model/customer.model';
+import { RequestDTO } from '../shared/model/request-dto.model';
+import { RoomRequest } from '../shared/model/room-request';
+import { User } from '../shared/model/user.model';
 import { CustomerService } from './customer.service';
 
 @Component({
@@ -31,8 +34,10 @@ export class CustHomeComponent implements OnInit {
   viewProfile() {
     let customer = new Customer();
     customer.custName = this.custName;//'AshokBobby';
-    customer.userName = this.userName;//'ash_bobj';
-    this.custService.getCustomerDetails(customer).subscribe(
+    customer.userName = this.userName;//'ash_bobj'
+    let requestDTO = new RequestDTO();
+    requestDTO.customer = customer;
+    this.custService.getCustomerDetails(requestDTO).subscribe(
       resp => {
         this.viewProf = true;
         this.customer = resp;
@@ -46,8 +51,9 @@ export class CustHomeComponent implements OnInit {
     customer.custName = this.custName;
     customer.userName = this.userName;
     customer.userId = this.userId;
-
-    this.custService.getMyRequestsList(customer).subscribe(
+    let requestDTO = new RequestDTO();
+    requestDTO.customer = customer;
+    this.custService.getMyRequestsList(requestDTO).subscribe(
       resp => {
         this.viewRoomReq = true;
         this.roomRequestList = resp;
@@ -86,7 +92,11 @@ export class CustHomeComponent implements OnInit {
     this.router.navigate(['/custWelcome/tourBooking'], navigationExtras);
   }
   cancelRequest(roomRequestId) {
-    this.custService.cancelRequest(roomRequestId).subscribe(
+    let roomRequest = new RoomRequest();
+    roomRequest.requestId = roomRequestId;
+    let requestDTO = new RequestDTO();
+    requestDTO.roomRequest = roomRequest;
+    this.custService.cancelRequest(requestDTO).subscribe(
       resp => {
         console.log(resp);
         alert(resp);
@@ -96,8 +106,11 @@ export class CustHomeComponent implements OnInit {
   }
 
   viewRewardPoints() {
-
-    this.custService.viewRewardPoints(+this.userId).subscribe(
+    let user = new User();
+    user.userId = this.userId;
+    let requestDTO = new RequestDTO();
+    requestDTO.user = user;
+    this.custService.viewRewardPoints(requestDTO).subscribe(
       resp => {
         this.viewRewards = true;
         this.rewardPointList = resp;

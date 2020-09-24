@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Constants } from 'src/app/shared/model/constants';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 import { TourPackage } from 'src/app/shared/model/tour-package.model';
 import { TourService } from './tour.service';
 
@@ -39,7 +40,9 @@ export class TourManagementComponent implements OnInit {
     tourPackage.location = this.tourPackageForm.get('location').value;
     tourPackage.pricePerHead = this.tourPackageForm.get('pricePerHead').value;
     tourPackage.duration = this.tourPackageForm.get('duration').value;
-    this.tourService.createTourPackage(tourPackage).subscribe(
+    let requestDTO = new RequestDTO();
+    requestDTO.tourPackage = tourPackage;
+    this.tourService.createTourPackage(requestDTO).subscribe(
       resp => {
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
@@ -68,7 +71,11 @@ export class TourManagementComponent implements OnInit {
   }
 
   toggleDelete(packageName) {
-    this.tourService.toggleDelete(packageName).subscribe(
+    let requestDTO = new RequestDTO();
+    let tourPackage = new TourPackage();
+    tourPackage.tourPackageName = packageName;
+    requestDTO.tourPackage = tourPackage;
+    this.tourService.toggleDelete(requestDTO).subscribe(
       resp => {
         this.tourPackagesList = resp;
       },
@@ -85,13 +92,16 @@ export class TourManagementComponent implements OnInit {
     let tourPackage = new TourPackage();
     tourPackage.pricePerHead = +pricePerHead;
     tourPackage.tourPackageName = packageName;
-    this.tourService.updatePrice(tourPackage).subscribe(
+    let requestDTO = new RequestDTO();
+    requestDTO.tourPackage = tourPackage;
+    this.tourService.updatePrice(requestDTO).subscribe(
       resp => {
         this.tourPackagesList = resp;
       },
       error => console.error(error)
     );
   }
+
   newTourPackage() {
     this.newPackage = true;
     this.viewPackages = false;

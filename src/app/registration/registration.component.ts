@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Constants } from '../shared/model/constants';
 import { Customer } from '../shared/model/customer.model';
+import { RequestDTO } from '../shared/model/request-dto.model';
 import { RegSerService } from './reg-ser.service';
 @Component({
   selector: 'app-registration',
@@ -47,7 +48,9 @@ export class RegistrationComponent implements OnInit {
     customer.custPass = this.registerForm.get('custPass').value;
     customer.custEmail = this.registerForm.get('custMail').value;
     customer.custDob = this.registerForm.get('custDob').value;
-    this.regSer.regCust(customer).subscribe(
+    let requestDTO = new RequestDTO();
+    requestDTO.customer = customer;
+    this.regSer.regCust(requestDTO).subscribe(
       resp => {
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;

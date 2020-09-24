@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Customer } from '../shared/model/customer.model';
+import { RequestDTO } from '../shared/model/request-dto.model';
 @Injectable({
   providedIn: 'root'
 })
 export class RegSerService {
-  regCust(customer: Customer) {
-    return this.httpClient.post('/brw/registerCustomer', customer);
+  regCust(requestDTO: RequestDTO) {
+    return this.httpClient.post('/brw/registerCustomer', requestDTO);
   }
 
   constructor(private httpClient: HttpClient) { }

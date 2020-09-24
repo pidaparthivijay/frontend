@@ -1,24 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Amenity } from 'src/app/shared/model/amenity.model';
-import { AmenityRequest } from 'src/app/shared/model/amenityRequest.model';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AmenityService {
-  toggleDelete(amenityName: string) {
-    return this.httpClient.post('brw/toggleDeleteAmenity', amenityName);
+
+  createAmenity(requestDTO: RequestDTO) {
+    return this.httpClient.post('brw/createAmenity', requestDTO);
   }
-  updatePrice(amenity: Amenity) {
-    return this.httpClient.post('brw/updatePriceAmenity', amenity);
+
+  toggleDelete(requestDTO: RequestDTO) {
+    return this.httpClient.post('brw/toggleDeleteAmenity', requestDTO);
   }
-  requestAmenity(amenityRequest: AmenityRequest) {
-    return this.httpClient.post('brw/requestAmenity', amenityRequest);
+
+  updatePrice(requestDTO: RequestDTO) {
+    return this.httpClient.post('brw/updatePriceAmenity', requestDTO);
   }
-  createAmenity(amenity: Amenity) {
-    return this.httpClient.post('brw/createAmenity', amenity);
+
+  requestAmenity(requestDTO: RequestDTO) {
+    return this.httpClient.post('brw/requestAmenity', requestDTO);
   }
+
   getAllAmenities() {
     return this.httpClient.get('brw/viewAllAmenities');
   }

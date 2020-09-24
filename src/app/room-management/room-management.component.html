@@ -3,8 +3,8 @@
     <td><button class="btn btn-success" (click)="startCreateRoom()">Create Room</button></td>
     <td><button class="btn btn-success" (click)="startCreateMultipleRooms()">Create Multiple Rooms</button></td>
     <td><button class="btn btn-success" (click)="getAllRooms()">Query All Rooms</button></td>
-    <td><button class="btn btn-success" (click)="getFreeRooms()">Query Free Rooms</button></td>
-    <td><button class="btn btn-success" (click)="getBookedRooms()">Query Booked Rooms</button></td>
+    <td><button class="btn btn-success" (click)="getRoomsByStatus(constants.VACANT)">Query Free Rooms</button></td>
+    <td><button class="btn btn-success" (click)="getRoomsByStatus(constants.OCCUPIED)">Query Booked Rooms</button></td>
     <td><button class="btn btn-success" (click)="getRoomsByFloor()">Query Rooms By Floor</button></td>
   </tr>
 </table>

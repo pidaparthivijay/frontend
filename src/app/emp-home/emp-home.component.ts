@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Customer } from '../shared/model/customer.model';
+import { RequestDTO } from '../shared/model/request-dto.model';
 import { EmployeeService } from './employee.service';
 
 @Component({
@@ -21,13 +23,19 @@ export class EmpHomeComponent implements OnInit {
 
   ngOnInit() {
   }
+
   generateBill() {
     this.viewCustBill = true;
     this.viewProf = false;
   }
+
   generateBillForMail() {
     var custEmail = (<HTMLInputElement>document.getElementById('custEmail')).value;
-    this.employeeService.getPendingBill(custEmail).subscribe(
+    let requestDTO = new RequestDTO();
+    let customer = new Customer();
+    customer.custEmail = custEmail;
+    requestDTO.customer = customer;
+    this.employeeService.getPendingBill(requestDTO).subscribe(
       resp => {
         console.log(resp);
         this.requestList = resp;

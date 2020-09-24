@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TourService } from 'src/app/adm-home/tour-management/tour.service';
 import { Constants } from 'src/app/shared/model/constants';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 import { TourPackageRequest } from 'src/app/shared/model/tour-package-request';
 
 @Component({
@@ -37,7 +38,9 @@ export class TourBookingComponent implements OnInit {
     tourPackageRequest.guestCount = +guestCount;
     tourPackageRequest.tourPackageName = tourPackageName;
     tourPackageRequest.startDate = new Date(startDate);
-    this.tourService.bookTourPackage(tourPackageRequest).subscribe(resp => {
+    let requestDTO = new RequestDTO();
+    requestDTO.tourPackageRequest = tourPackageRequest;
+    this.tourService.bookTourPackage(requestDTO).subscribe(resp => {
       if (resp[Constants.ACT_STS]) {
         this.actionStatus = true;
         this.toastrService.success(Constants.TOUR_BOOK_SXS);

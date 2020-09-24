@@ -1,24 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Customer } from '../shared/model/customer.model';
+import { RequestDTO } from '../shared/model/request-dto.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
-  viewRewardPoints(userId: any) {
-    return this.httpClient.post('/brw/viewRewardPoints', userId);
-  }
-  cancelRequest(roomRequestId: any) {
-    return this.httpClient.post('/brw/cancelRequest', roomRequestId);
+  viewRewardPoints(requestDTO: RequestDTO) {
+    return this.httpClient.post('/brw/viewRewardPoints', requestDTO);
   }
 
-  getMyRequestsList(customer: Customer) {
-    return this.httpClient.post('/brw/getMyRequestsList', customer);
+  cancelRequest(requestDTO: RequestDTO) {
+    return this.httpClient.post('/brw/cancelRequest', requestDTO);
   }
-  getCustomerDetails(customer: Customer): any {
-    return this.httpClient.post('/brw/getCustomerDetails', customer);
+
+  getMyRequestsList(requestDTO: RequestDTO) {
+    return this.httpClient.post('/brw/getMyRequestsList', requestDTO);
+  }
+
+  getCustomerDetails(requestDTO: RequestDTO): any {
+    return this.httpClient.post('/brw/getCustomerDetails', requestDTO);
   }
 
   constructor(private httpClient: HttpClient) { }
