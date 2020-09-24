@@ -1,15 +1,15 @@
 export class RoomRequest {
-    requestId: number;
-    userId: number;
-    custName: string;
-    guestName: string;
     checkInDate: Date;
     checkOutDate: Date;
-    guestGen: string;
+    custName: string;
     guestCount: number;
-    roomModel: string;
-    roomType: string;
+    guestGen: string;
+    guestName: string;
+    requestId: number;
     roomCategory: string;
+    roomModel: string;
     roomNumber: number;
     roomRequestStatus: string;
+    roomType: string;
+    userId: number;
 }

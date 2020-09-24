@@ -1,11 +1,11 @@
 export class Employee {
-    userId: number;
+    actionStatus: string;
+    email: string;
+    empGen: string;
     empId: number;
     empName: string;
-    userName: string;
-    empGen: string;
     empPass: string;
-    actionStatus: string;
     statusMessage: string;
-    email: string;
+    userId: number;
+    userName: string;
 }

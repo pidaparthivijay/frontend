@@ -1,7 +1,7 @@
 export class OneTimePassword {
+    createdDate: Date;
     otpId: number;
     otpValue: string;
-    createdDate: Date;
     userName: string;
     valid: boolean;
 }

@@ -1,10 +1,10 @@
 export class RewardPoints {
-    id: number;
-    userId: number;
     custId: number;
+    id: number;
     pointsEarned: number;
     pointsEarnedDate: Date;
     pointsExpiryDate: Date;
     pointsStatus: string;
     pointsTransactionName: string;
+    userId: number;
 }

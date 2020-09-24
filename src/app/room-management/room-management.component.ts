@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Constants } from '../shared/model/constants';
+import { RequestDTO } from '../shared/model/request-dto.model';
 import { Room } from '../shared/model/room.model';
 import { RoomService } from './room.service';
 
@@ -33,6 +34,7 @@ export class RoomManagementComponent implements OnInit {
     if (this.createRoomForm.invalid) {
       return;
     }
+    let requestDto = new RequestDTO();
     let room = new Room();
     room.roomType = this.createRoomForm.value.typeOfRoom;
     room.roomModel = this.createRoomForm.value.modelOfRoom;
@@ -45,25 +47,31 @@ export class RoomManagementComponent implements OnInit {
         return;
       }
       room.countOfRooms = this.createRoomForm.value.countOfRooms;
-      this.roomService.createRoomMultiple(room).subscribe(
+      requestDto.room = room;
+      this.roomService.createRoomMultiple(requestDto).subscribe(
         resp => {
-          console.log(resp),
+          if (resp['actionStatus'] === Constants.RM_CRT_SXS) {
             this.getAllRooms();
+          } else {
+            //showerror
+          }
         }
       );
 
     } else {
-      this.roomService.createRoom(room).subscribe(
+      requestDto.room = room;
+      this.roomService.createRoom(requestDto).subscribe(
         resp => {
-          console.log(resp),
+          if (resp['actionStatus'] === Constants.RM_CRT_SXS) {
             this.getAllRooms();
+          } else {
+            //showerror
+          }
         }
       );
-
     }
-
-
   }
+
   getAllRooms() {
     this.roomService.getAllRooms().subscribe(
       resp => this.roomsList = resp,

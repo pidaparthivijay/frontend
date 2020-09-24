@@ -1,24 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Room } from '../shared/model/room.model';
+import { Constants } from '../shared/model/constants';
+import { RequestDTO } from '../shared/model/request-dto.model';
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
-  createRoomMultiple(room: Room) {
-    return this.httpClient.post('brw/createRoomMultiple', room);
+  createRoomMultiple(requestDto: RequestDTO) {
+    return this.httpClient.post('brw/createRoomMultiple', requestDto);
   }
-  createRoom(room: Room) {
-    return this.httpClient.post('brw/createRoom', room);
+  createRoom(requestDto: RequestDTO) {
+    return this.httpClient.post('brw/createRoom', requestDto);
   }
   getAllRooms() {
     return this.httpClient.get('brw/getAllRooms');
   }
   getFreeRooms() {
-    return this.httpClient.post('brw/getRoomsByStatus', 'free');
+    return this.httpClient.post('brw/getRoomsByStatus', Constants.VACANT);
   }
   getBookedRooms() {
-    return this.httpClient.post('brw/getRoomsByStatus', 'booked');
+    return this.httpClient.post('brw/getRoomsByStatus', Constants.OCCUPIED);
   }
   getRoomsByFloor(floorNumber: number) {
     return this.httpClient.post('brw/getRoomsByFloor', floorNumber);

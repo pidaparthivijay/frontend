@@ -1,7 +1,7 @@
 export class Amenity {
+    amenity: boolean;
     amenityId: number;
     amenityName: string;
-    price: number;
     deleted: string;
-    amenity: boolean;
+    price: number;
 }
