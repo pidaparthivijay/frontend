@@ -1,0 +1,17 @@
+tr {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+td {
+  padding: 0;
+  flex: calc(100% / 10);
+  
+
+}
+td.free{
+   background-color: #2df76d; 
+}
+td.filled{
+    background-color: indianred;
+}

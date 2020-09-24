@@ -15,7 +15,7 @@ export class RoomManagementComponent implements OnInit {
   createRoomMultipleFlag: boolean;
   roomsList: any = [];
   constructor(private formBuilder: FormBuilder, private roomService: RoomService) { }
-
+  constants = Constants;
   ngOnInit() {
 
     this.createRoomForm = this.formBuilder.group({
@@ -46,12 +46,18 @@ export class RoomManagementComponent implements OnInit {
       }
       room.countOfRooms = this.createRoomForm.value.countOfRooms;
       this.roomService.createRoomMultiple(room).subscribe(
-        resp => console.log(resp),
+        resp => {
+          console.log(resp),
+            this.getAllRooms();
+        }
       );
 
     } else {
       this.roomService.createRoom(room).subscribe(
-        resp => console.log(resp),
+        resp => {
+          console.log(resp),
+            this.getAllRooms();
+        }
       );
 
     }

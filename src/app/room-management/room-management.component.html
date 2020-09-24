@@ -78,9 +78,8 @@
 </form>
 <table class="table table-bordered">
   <tr>
-    <td *ngFor="let room of roomsList" class="{{{'free':'success', 'booked':'error'}[room.roomStatus]}}">
-      
+    <td *ngFor="let room of roomsList" class="{{room.roomStatus===constants.VACANT?'free':'filled'}}">
       {{room.roomNumber}}
-    </td>    
+    </td>
   </tr>
 </table>
