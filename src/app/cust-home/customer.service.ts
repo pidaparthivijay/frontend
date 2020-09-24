@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RequestDTO } from '../shared/model/request-dto.model';
+import { RequestMappings } from '../shared/model/RequestMappings';
 
 @Injectable({
   providedIn: 'root'
@@ -8,19 +9,19 @@ import { RequestDTO } from '../shared/model/request-dto.model';
 export class CustomerService {
 
   viewRewardPoints(requestDTO: RequestDTO) {
-    return this.httpClient.post('/brw/viewRewardPoints', requestDTO);
+    return this.httpClient.post(RequestMappings.CUSTOMER_VIEW_RWD_POINTS, requestDTO);
   }
 
   cancelRequest(requestDTO: RequestDTO) {
-    return this.httpClient.post('/brw/cancelRequest', requestDTO);
+    return this.httpClient.post(RequestMappings.CUSTOMER_CANCEL_ROOM, requestDTO);
   }
 
   getMyRequestsList(requestDTO: RequestDTO) {
-    return this.httpClient.post('/brw/getMyRequestsList', requestDTO);
+    return this.httpClient.post(RequestMappings.CUSTOMER_GET_ALL_REQUESTS, requestDTO);
   }
 
   getCustomerDetails(requestDTO: RequestDTO): any {
-    return this.httpClient.post('/brw/getCustomerDetails', requestDTO);
+    return this.httpClient.post(RequestMappings.CUSTOMER_DETAILS, requestDTO);
   }
 
   constructor(private httpClient: HttpClient) { }

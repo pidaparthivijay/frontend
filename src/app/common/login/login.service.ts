@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { RequestMappings } from 'src/app/shared/model/RequestMappings';
 import { User } from 'src/app/shared/model/user.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,7 @@ export class LoginService {
   }
 
   loginServ(user: User): any {
-    return this.httpClient.post('/brw/login', user);
+    return this.httpClient.post(RequestMappings.LOGIN, user);
   }
   constructor(private httpClient: HttpClient) { }
 }
