@@ -54,7 +54,7 @@ export class RegistrationComponent implements OnInit {
       resp => {
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
-          this.customer = resp;
+          this.customer = resp['customer'];
           this.toastrService.success(Constants.REG_SXS, 'Your customer id is: ' + this.customer.custId);
           this.registerForm.reset();
         } else {

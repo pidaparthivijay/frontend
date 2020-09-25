@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { LoginService } from '../common/login/login.service';
 import { Customer } from '../shared/model/customer.model';
 import { RequestDTO } from '../shared/model/request-dto.model';
 import { RoomRequest } from '../shared/model/room-request';
@@ -13,39 +14,41 @@ import { CustomerService } from './customer.service';
 })
 export class CustHomeComponent implements OnInit {
   custName: string;
-  userName: string;
-  userId: number;
   customer: Customer;
-  viewProf: boolean;
-  viewRoomReq: boolean;
-  viewRewards: boolean;
   rewardPointList: any = [];
   roomRequestList: any = [];
+  userId: number;
+  userName: string;
+  viewProf: boolean;
+  viewRewards: boolean;
+  viewRoomReq: boolean;
 
-  constructor(private custService: CustomerService, private route: ActivatedRoute, private router: Router) {
-    this.route.queryParams.subscribe(params => {
-      this.custName = params['custName'],
-        this.userName = params['userName'],
-        this.userId = params['userId']
-    });
+  constructor(private custService: CustomerService, private loginService: LoginService, private router: Router) {
   }
+
   ngOnInit() {
+    this.custName = sessionStorage.getItem('name')
+    this.userName = sessionStorage.getItem('userName');
+    this.userId = +sessionStorage.getItem('userId');
   }
+
   viewProfile() {
     let customer = new Customer();
-    customer.custName = this.custName;//'AshokBobby';
-    customer.userName = this.userName;//'ash_bobj'
+    customer.custName = this.custName;
+    customer.userName = this.userName;
     let requestDTO = new RequestDTO();
     requestDTO.customer = customer;
+    console.log(customer);
     this.custService.getCustomerDetails(requestDTO).subscribe(
       resp => {
         this.viewProf = true;
-        this.customer = resp;
-        this.customer.custDob = new Date(resp['custDob'])
+        this.customer = resp['customer'];
+        this.customer.custDob = new Date(resp['customer']['custDob'])
       },
       error => console.error(error)
     );
   }
+
   viewRequests() {
     let customer = new Customer();
     customer.custName = this.custName;
@@ -56,41 +59,12 @@ export class CustHomeComponent implements OnInit {
     this.custService.getMyRequestsList(requestDTO).subscribe(
       resp => {
         this.viewRoomReq = true;
-        this.roomRequestList = resp;
+        this.roomRequestList = resp['roomRequestList'];
       },
       error => console.error(error)
     );
   }
-  registerRoom() {
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        custName: this.custName,
-        userName: this.userName,
-        userId: this.userId
-      }
-    };
-    this.router.navigate(['/roomReg'], navigationExtras);
-  }
-  requestAmenities() {
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        custName: this.custName,
-        userName: this.userName,
-        userId: this.userId
-      }
-    };
-    this.router.navigate(['/custWelcome/requestAmenities'], navigationExtras);
-  }
-  tourBooking() {
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        custName: this.custName,
-        userName: this.userName,
-        userId: this.userId
-      }
-    };
-    this.router.navigate(['/custWelcome/tourBooking'], navigationExtras);
-  }
+
   cancelRequest(roomRequestId) {
     let roomRequest = new RoomRequest();
     roomRequest.requestId = roomRequestId;
@@ -113,7 +87,7 @@ export class CustHomeComponent implements OnInit {
     this.custService.viewRewardPoints(requestDTO).subscribe(
       resp => {
         this.viewRewards = true;
-        this.rewardPointList = resp;
+        this.rewardPointList = resp['rewardPointsList'];
       },
       error => console.error(error)
     );

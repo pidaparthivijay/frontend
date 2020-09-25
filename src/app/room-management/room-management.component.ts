@@ -74,7 +74,8 @@ export class RoomManagementComponent implements OnInit {
 
   getAllRooms() {
     this.roomService.getAllRooms().subscribe(
-      resp => this.roomsList = resp,
+      resp => this.roomsList = resp['roomsList'],
+      error => console.error(error)
     );
     this.roomService.getAllRooms();
   }
@@ -82,13 +83,13 @@ export class RoomManagementComponent implements OnInit {
   getRoomsByStatus(roomStatus: string) {
     let requestDto = new RequestDTO();
     requestDto.roomStatus = roomStatus;
-    this.roomService.getRoomsByStatus(requestDto).subscribe(resp => this.roomsList = resp);
+    this.roomService.getRoomsByStatus(requestDto).subscribe(resp => this.roomsList = resp['roomsList'], error => console.error(error));
   }
 
   getRoomsByFloor(floorNumber: number) {
     let requestDto = new RequestDTO();
     requestDto.floorNumber = floorNumber;
-    this.roomService.getRoomsByFloor(requestDto).subscribe(resp => console.log(resp));
+    this.roomService.getRoomsByFloor(requestDto).subscribe(resp => this.roomsList = resp['roomsList'], error => console.error(error));
   }
 
   startCreateRoom() {

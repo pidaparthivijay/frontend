@@ -38,7 +38,7 @@ export class EmpHomeComponent implements OnInit {
     this.employeeService.getPendingBill(requestDTO).subscribe(
       resp => {
         console.log(resp);
-        this.requestList = resp;
+        this.requestList = resp['pendingBillRequests'];
       },
       error => console.error(error)
     );

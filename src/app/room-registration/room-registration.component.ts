@@ -51,44 +51,42 @@ export class RoomRegistrationComponent implements OnInit {
       roomModel: ['', Validators.required]
     });
     let requestDTO = new RequestDTO();
-    let lookup = new Lookup();
-    lookup.lookupDefName = Constants.ROOM_TYPE;
-    requestDTO.lookup = lookup;
+    requestDTO.lookupDefinitionName = Constants.ROOM_TYPE;
     this.lookupService.getLookupListByDefinition(requestDTO).subscribe(
       resp => {
-        this.roomTypes = resp;
+        this.roomTypes = resp['lookupList'];
       }
     );
-    lookup.lookupDefName = Constants.GENDER;
-    requestDTO.lookup = lookup;
+    requestDTO.lookupDefinitionName = Constants.GENDER;
     this.lookupService.getLookupListByDefinition(requestDTO).subscribe(
       resp => {
-        this.genders = resp;
+        this.genders = resp['lookupList'];
       }
     );
-    lookup.lookupDefName = Constants.ROOM_CATEGORY;
-    requestDTO.lookup = lookup;
+    requestDTO.lookupDefinitionName = Constants.ROOM_CATEGORY;
     this.lookupService.getLookupListByDefinition(requestDTO).subscribe(
       resp => {
-        this.roomCategoryList = resp;
+        this.roomCategoryList = resp['lookupList'];
       }
     );
-    lookup.lookupDefName = Constants.ROOM_MODEL;
-    requestDTO.lookup = lookup;
+    requestDTO.lookupDefinitionName = Constants.ROOM_MODEL;
     this.lookupService.getLookupListByDefinition(requestDTO).subscribe(
       resp => {
-        this.roomModels = resp;
+
+        this.roomModels = resp['lookupList'];
       }
     );
-    lookup.lookupDefName = Constants.GUEST_COUNT;
-    requestDTO.lookup = lookup;
+    requestDTO.lookupDefinitionName = Constants.GUEST_COUNT;
+
     this.lookupService.getLookupListByDefinition(requestDTO).subscribe(
       resp => {
-        this.guestCounts = resp;
+        this.guestCounts = resp['lookupList'];
       }
     );
   }
+
   get f() { return this.roomForm.controls; }
+
   requestRoom() {
     this.submitted = true;
     if (this.roomForm.invalid) {
@@ -111,15 +109,13 @@ export class RoomRegistrationComponent implements OnInit {
       resp => {
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
-          this.customer = resp;
+          this.customer = resp['customer'];
           this.toastrService.success(Constants.ROM_REG_SXS, 'Your request id is: ' + this.roomRequest.requestId);
           this.roomForm.reset();
           this.submitted = false;
         }
       }
     );
-
   }
-
 
 }

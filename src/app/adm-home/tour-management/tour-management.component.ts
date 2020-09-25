@@ -46,7 +46,7 @@ export class TourManagementComponent implements OnInit {
       resp => {
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
-          this.tourPackage = resp;
+          this.tourPackage = resp['tourPackage'];
           this.toastrService.success(Constants.TUR_PACK_SXS);
           this.tourPackageForm.reset();
         } else {
@@ -64,7 +64,7 @@ export class TourManagementComponent implements OnInit {
     this.viewPackages = true;
     this.tourService.getAllTourPackages().subscribe(
       resp => {
-        this.tourPackagesList = resp;
+        this.tourPackagesList = resp['tourPackageList'];
       },
       error => console.error(error)
     );
@@ -77,7 +77,7 @@ export class TourManagementComponent implements OnInit {
     requestDTO.tourPackage = tourPackage;
     this.tourService.toggleDelete(requestDTO).subscribe(
       resp => {
-        this.tourPackagesList = resp;
+        this.tourPackagesList = resp['tourPackageList'];
       },
       error => console.error(error)
     );
@@ -96,7 +96,7 @@ export class TourManagementComponent implements OnInit {
     requestDTO.tourPackage = tourPackage;
     this.tourService.updatePrice(requestDTO).subscribe(
       resp => {
-        this.tourPackagesList = resp;
+        this.tourPackagesList = resp['tourPackageList'];
       },
       error => console.error(error)
     );

@@ -18,8 +18,7 @@ export class RoomAllocateComponent implements OnInit {
   }
 
   viewAllRequests() {
-    //this.customer.custDob = new Date(resp['custDob'])
-    this.roomAllocateService.getAllRoomRequests().subscribe(resp => this.roomRequestList = resp);
+    this.roomAllocateService.getAllRoomRequests().subscribe(resp => this.roomRequestList = resp['roomRequestList']);
     this.roomRequestList.forEach(element => {
       element.checkInDate = new Date(element.checkInDate),
         element.checkOutDate = new Date(element.checkOutDate)
@@ -32,7 +31,7 @@ export class RoomAllocateComponent implements OnInit {
     roomRequest.requestId = requestId
     requestDTO.roomRequest = roomRequest;
     this.actingRequestId = requestId;
-    this.roomAllocateService.viewFeasibleRooms(requestDTO).subscribe(resp => this.roomList = resp);
+    this.roomAllocateService.viewFeasibleRooms(requestDTO).subscribe(resp => this.roomList = resp['roomsList'], error => console.error(error));
   }
 
   assignRoomToRequest(roomNumber, requestId) {

@@ -47,7 +47,7 @@ export class EmployeeManagementComponent implements OnInit {
       resp => {
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
-          this.employee = resp;
+          this.employee = resp['employee'];
           this.toastrService.success(Constants.REG_SXS, 'Your employee id is: ' + this.employee.empId);
           this.employeeRegistrationForm.reset();
         } else {

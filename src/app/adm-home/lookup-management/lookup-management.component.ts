@@ -38,7 +38,7 @@ export class LookupManagementComponent implements OnInit {
       displayName: ['', Validators.required]
     });
     this.lookupService.getLookupDefs().subscribe(resp => {
-      this.lookupDefNames = resp;
+      this.lookupDefNames = resp['lookupDefsList'];
     },
       error => console.error(error));
   }
@@ -84,7 +84,10 @@ export class LookupManagementComponent implements OnInit {
     let requestDTO = new RequestDTO();
     lookup.lookupId = lookupId;
     requestDTO.lookup = lookup;
-    this.lookupService.updateLookup(requestDTO).subscribe(resp => console.log(resp),
+    this.lookupService.updateLookup(requestDTO).subscribe(resp => {
+      console.log(resp),
+        this.lookupList = resp['lookupList'];
+    },
       error => console.error(error));
   }
 
@@ -93,7 +96,7 @@ export class LookupManagementComponent implements OnInit {
     this.createNew = false;
     this.upload = false;
     this.lookupService.viewAllLookups().subscribe(resp => {
-      this.lookupList = resp
+      this.lookupList = resp['lookupList'];
     },
       error => console.error(error));
   }

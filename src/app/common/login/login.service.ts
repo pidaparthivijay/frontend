@@ -16,12 +16,18 @@ export class LoginService {
   setLoggedIn(login) {
     this.loggedIn = login;
   }
+
   private userDetails = new Subject<User>();
-  getUserDetails(): Observable<any> {
+
+  getUserDetails(): Observable<User> {
     return this.userDetails.asObservable();
   }
+
   setUserDetails(user: User) {
     this.userDetails.next(user);
+    sessionStorage.setItem('userName', user.userName);
+    sessionStorage.setItem('name', user.name);
+    sessionStorage.setItem('userId', JSON.stringify(user.userId));
   }
 
   loginServ(user: User): any {

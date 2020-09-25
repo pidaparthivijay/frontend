@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RequestDTO } from '../shared/model/request-dto.model';
 import { RequestMappings } from '../shared/model/RequestMappings';
-import { RoomRequest } from '../shared/model/room-request';
 
 @Injectable({
   providedIn: 'root'

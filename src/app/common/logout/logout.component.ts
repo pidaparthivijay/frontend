@@ -13,6 +13,9 @@ export class LogoutComponent implements OnInit {
   ngOnInit() {
     this.loginService.setLoggedIn(false);
     this.loginService.setUserDetails(null);
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('userName');
   }
 
 }

@@ -1,18 +1,17 @@
 Hey {{custName}}!!! What would you like to do now? <br>
-<i class="pi pi-sign-out"></i>
 <table class="table table-bordered table-striped" style="width: 45%">
   <tr>
-    <td><button class="btn btn-primary" (click)="registerRoom(custName,userName);">Room Registration</button></td>
+    <td><button class="btn btn-primary" routerLink="/roomReg">Room Registration</button></td>
     <td><button class="btn btn-primary" (click)="viewProfile();">View My Profile</button></td>
     <td><button class="btn btn-primary" (click)="viewRequests();">View My Requests</button></td>
     <td><button class="btn btn-primary" (click)="viewRewardPoints();">View My Reward Points</button></td>
-    <td><button class="btn btn-primary" (click)="requestAmenities()">Request Amenities</button></td>
-    <td><button class="btn btn-primary" (click)="tourBooking()">Book Tour Packages</button></td>
+    <td><button class="btn btn-primary" routerLink="/custWelcome/requestAmenities">Request Amenities</button></td>
+    <td><button class="btn btn-primary" routerLink="/custWelcome/tourBooking">Book Tour Packages</button></td>
   </tr>
 </table>
 
 
-<div *ngIf="viewProf">
+<div *ngIf=" viewProf">
   <table class="table table-bordered" style="width: 45%; background:thistle;">
     <tr>
       <th>Name</th>
@@ -105,8 +104,10 @@ Hey {{custName}}!!! What would you like to do now? <br>
         <td><span *ngIf="isLast" style="font-weight:bold">{{rewardPoints.pointsEarned}}</span>
           <span *ngIf="!isLast">{{rewardPoints.pointsEarned}}</span>
         </td>
-        <td>{{rewardPoints.pointsEarnedDate === null ? "" : rewardPoints.pointsEarnedDate| date:'dd MMM, yyyy'}}</td>
-        <td>{{rewardPoints.pointsExpiryDate === null ? "" : rewardPoints.pointsExpiryDate| date:'dd MMM, yyyy'}}</td>
+        <td>{{rewardPoints.pointsEarnedDate === null ? "" : rewardPoints.pointsEarnedDate| date:'dd MMM, yyyy'}}
+        </td>
+        <td>{{rewardPoints.pointsExpiryDate === null ? "" : rewardPoints.pointsExpiryDate| date:'dd MMM, yyyy'}}
+        </td>
 
       </tr>
     </tbody>

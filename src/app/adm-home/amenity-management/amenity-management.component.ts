@@ -48,8 +48,8 @@ export class AmenityManagementComponent implements OnInit {
       resp => {
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
-          this.amenity = resp;
-          this.toastrService.success(Constants.REG_SXS, 'Your amenity id is: ' + this.amenity.empId);
+          this.amenity = resp['amenity'];
+          this.toastrService.success(Constants.REG_SXS, 'Your amenity id is: ' + this.amenity.amenityId);
           this.amenityRegistrationForm.reset();
         } else {
           this.actionStatus = false;
@@ -75,10 +75,12 @@ export class AmenityManagementComponent implements OnInit {
 
   toggleDelete(amenityName) {
     let requestDTO = new RequestDTO();
-    requestDTO.amenity.amenityName = amenityName;
+    let amenity = new Amenity();
+    amenity.amenityName = amenityName;
+    requestDTO.amenity = amenity;
     this.amenityService.toggleDelete(requestDTO).subscribe(
       resp => {
-        this.amenitiesList = resp;
+        this.amenitiesList = resp['amenityList'];
       },
       error => console.error(error)
     );
@@ -97,7 +99,7 @@ export class AmenityManagementComponent implements OnInit {
     requestDTO.amenity = amenity;
     this.amenityService.updatePrice(requestDTO).subscribe(
       resp => {
-        this.amenitiesList = resp;
+        this.amenitiesList = resp['amenityList'];
       },
       error => console.error(error)
     );
