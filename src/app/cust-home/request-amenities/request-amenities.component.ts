@@ -28,7 +28,7 @@ export class RequestAmenitiesComponent implements OnInit {
   }
   ngOnInit() {
     this.amenityService.getAllAmenities().subscribe(resp =>
-      this.amenitiesList = resp);
+      this.amenitiesList = resp['amenityList']);
   }
   requestAmenity(amenityId) {
     var noOfDays = (<HTMLInputElement>document.getElementById('noOfDays' + amenityId)).value;

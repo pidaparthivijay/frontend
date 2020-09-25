@@ -22,6 +22,7 @@ export class LookupManagementComponent implements OnInit {
     { label: 'Room Type', value: 'ROOM_TYPE' },
     { label: 'Room Model', value: 'ROOM_MODEL' },
   ];
+  columns: ['Lookup Definition Name', 'Lookup Value', 'Lookup Display Name', 'Created Date', 'Update Date'];
   clonedLookups: { [s: string]: Lookup; } = {};
   createNew: boolean;
   loookupCreationForm: FormGroup;
@@ -67,22 +68,21 @@ export class LookupManagementComponent implements OnInit {
     formData.append('lookupExcel', this.lookupExcel);
     let requestDTO = new RequestDTO();
     requestDTO.lookupExcel = formData;
-    this.lookupService.uploadLookupExcel(requestDTO).subscribe(resp => console.log(resp),
+    this.lookupService.uploadLookupExcel(requestDTO).subscribe(resp => this.lookupList = resp['lookupList'],
       error => console.error(error));
   }
+
   toggleDelete(lookupId) {
     let lookup = new Lookup();
     let requestDTO = new RequestDTO();
     lookup.lookupId = lookupId;
     requestDTO.lookup = lookup;
-    this.lookupService.toggleDelete(requestDTO).subscribe(resp => console.log(resp),
+    this.lookupService.toggleDelete(requestDTO).subscribe(resp => this.lookupList = resp['lookupList'],
       error => console.error(error));
   }
 
-  updateLookup(lookupId) {
-    let lookup = new Lookup();
+  updateLookup(lookup: Lookup) {
     let requestDTO = new RequestDTO();
-    lookup.lookupId = lookupId;
     requestDTO.lookup = lookup;
     this.lookupService.updateLookup(requestDTO).subscribe(resp => {
       console.log(resp),

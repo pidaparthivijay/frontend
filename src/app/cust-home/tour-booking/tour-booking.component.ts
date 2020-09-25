@@ -28,7 +28,7 @@ export class TourBookingComponent implements OnInit {
   }
   ngOnInit() {
     this.tourService.getAllTourPackages().subscribe(resp =>
-      this.tourPackagesList = resp);
+      this.tourPackagesList = resp['tourPackageList']);
   }
   bookTour(tourPackageName) {
     var guestCount = (<HTMLInputElement>document.getElementById('guestCount' + tourPackageName)).value;
