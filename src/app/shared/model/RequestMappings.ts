@@ -4,7 +4,7 @@ export class RequestMappings {
 
     public static readonly AMENITY_CREATE = environment.baseURL + '/createAmenity';
     public static readonly AMENITY_DELETE_TOGGLE = environment.baseURL + '/toggleDeleteAmenity';
-    public static readonly AMENITY_PRICE_UPDATE = environment.baseURL + '/updatePriceAmenity';
+    public static readonly AMENITY_UPDATE = environment.baseURL + '/updateAmenity';
     public static readonly AMENITY_REQUEST = environment.baseURL + '/requestAmenity';
     public static readonly AMENITY_VIEW_ALL = environment.baseURL + '/viewAllAmenities';
     public static readonly CUSTOMER_CANCEL_ROOM = environment.baseURL + '/cancelRequest';
@@ -37,6 +37,6 @@ export class RequestMappings {
     public static readonly TOUR_PKG_BOOK = environment.baseURL + '/bookTourPackage';
     public static readonly TOUR_PKG_CREATE = environment.baseURL + '/createTourPackage';
     public static readonly TOUR_PKG_DELETE_TOGGLE = environment.baseURL + '/toggleDeleteTourPackage';
-    public static readonly TOUR_PKG_PRICE_UPDATE = environment.baseURL + '/updatePriceTourPackage';
+    public static readonly TOUR_PKG_UPDATE = environment.baseURL + '/updateTourPackage';
     public static readonly TOUR_PKG_VIEW_ALL = environment.baseURL + '/viewAllTourPackages';
 }

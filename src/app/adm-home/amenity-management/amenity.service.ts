@@ -16,8 +16,8 @@ export class AmenityService {
     return this.httpClient.post(RequestMappings.AMENITY_DELETE_TOGGLE, requestDTO);
   }
 
-  updatePrice(requestDTO: RequestDTO) {
-    return this.httpClient.post(RequestMappings.AMENITY_PRICE_UPDATE, requestDTO);
+  updateAmenity(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.AMENITY_UPDATE, requestDTO);
   }
 
   requestAmenity(requestDTO: RequestDTO) {

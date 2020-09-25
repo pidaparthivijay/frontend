@@ -83,18 +83,10 @@ export class TourManagementComponent implements OnInit {
     );
   }
 
-  updatePrice(packageName) {
-    var pricePerHead = (<HTMLInputElement>document.getElementById('pricePerHead' + packageName)).value;
-    if (+pricePerHead <= 2499) {
-      alert("Price cannot be less than 2500");
-      return;
-    }
-    let tourPackage = new TourPackage();
-    tourPackage.pricePerHead = +pricePerHead;
-    tourPackage.tourPackageName = packageName;
+  updateTourPackage(tourPackage) {
     let requestDTO = new RequestDTO();
     requestDTO.tourPackage = tourPackage;
-    this.tourService.updatePrice(requestDTO).subscribe(
+    this.tourService.updateTourPackage(requestDTO).subscribe(
       resp => {
         this.tourPackagesList = resp['tourPackageList'];
       },

@@ -14,8 +14,8 @@ export class TourService {
     return this.httpClient.post(RequestMappings.TOUR_PKG_CREATE, requestDTO);
   }
 
-  updatePrice(requestDTO: RequestDTO) {
-    return this.httpClient.post(RequestMappings.TOUR_PKG_PRICE_UPDATE, requestDTO);
+  updateTourPackage(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.TOUR_PKG_UPDATE, requestDTO);
   }
 
   toggleDelete(requestDTO: RequestDTO) {

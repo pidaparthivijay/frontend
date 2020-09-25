@@ -21,6 +21,7 @@ export class AmenityManagementComponent implements OnInit {
   statusMessage: any;
   submitted: boolean;
   viewAmenities: boolean;
+  columns = ['Amenity Id', 'Amenity Name', 'Amenity Price'];
 
   constructor(private formBuilder: FormBuilder, private amenityService: AmenityService, private toastrService: ToastrService) { }
 
@@ -67,6 +68,7 @@ export class AmenityManagementComponent implements OnInit {
     this.viewAmenities = true;
     this.amenityService.getAllAmenities().subscribe(
       resp => {
+        console.log(resp);
         this.amenitiesList = resp['amenityList'];
       },
       error => console.error(error)
@@ -86,18 +88,12 @@ export class AmenityManagementComponent implements OnInit {
     );
   }
 
-  updatePrice(amenityName) {
-    var price = (<HTMLInputElement>document.getElementById('price' + amenityName)).value;
-    if (+price <= 99) {
-      alert("Price cannot be less than 100");
-      return;
-    }
+  updateAmenity(amenityData) {
     let amenity = new Amenity();
-    amenity.price = +price;
-    amenity.amenityName = amenityName;
+    amenity = amenityData;
     let requestDTO = new RequestDTO();
     requestDTO.amenity = amenity;
-    this.amenityService.updatePrice(requestDTO).subscribe(
+    this.amenityService.updateAmenity(requestDTO).subscribe(
       resp => {
         this.amenitiesList = resp['amenityList'];
       },
