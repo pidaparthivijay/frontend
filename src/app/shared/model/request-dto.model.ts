@@ -17,6 +17,7 @@ export class RequestDTO {
     countOfRooms: number;
     customer: Customer;
     employee: Employee;
+    employeesList: any;
     floorNumber: number;
     lookup: any;
     lookupDefinitionName: string;

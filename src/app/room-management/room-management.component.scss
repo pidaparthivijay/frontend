@@ -1,17 +1,7 @@
-tr {
-  display: flex;
-  flex-wrap: wrap;
+.free{
+   background-color: #2df76d !important; 
 }
 
-td {
-  padding: 0;
-  flex: calc(100% / 10);
-  
-
-}
-td.free{
-   background-color: #2df76d; 
-}
-td.filled{
-    background-color: indianred;
+.filled{
+    background-color: indianred !important;
 }

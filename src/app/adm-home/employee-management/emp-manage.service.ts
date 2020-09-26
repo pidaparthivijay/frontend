@@ -11,5 +11,9 @@ export class EmpManageService {
     return this.httpClient.post(RequestMappings.EMP_CREATE, requestDTO);
   }
 
+  getAllEmployees() {
+    return this.httpClient.get(RequestMappings.EMP_VIEW_ALL);
+  }
+
   constructor(private httpClient: HttpClient) { }
 }

@@ -74,22 +74,27 @@ export class RoomManagementComponent implements OnInit {
 
   getAllRooms() {
     this.roomService.getAllRooms().subscribe(
-      resp => this.roomsList = resp['roomsList'],
+      resp => {
+        this.roomsList = resp['roomsList']
+      },
       error => console.error(error)
     );
-    this.roomService.getAllRooms();
+  }
+
+  updateRoom(room: Room) {
+    let requestDto = new RequestDTO();
+    requestDto.room = room;
+    this.roomService.updateRoom(requestDto).subscribe(resp => {
+      this.roomsList = resp['roomsList']
+    },
+      error => console.error(error)
+    );
   }
 
   getRoomsByStatus(roomStatus: string) {
     let requestDto = new RequestDTO();
     requestDto.roomStatus = roomStatus;
     this.roomService.getRoomsByStatus(requestDto).subscribe(resp => this.roomsList = resp['roomsList'], error => console.error(error));
-  }
-
-  getRoomsByFloor(floorNumber: number) {
-    let requestDto = new RequestDTO();
-    requestDto.floorNumber = floorNumber;
-    this.roomService.getRoomsByFloor(requestDto).subscribe(resp => this.roomsList = resp['roomsList'], error => console.error(error));
   }
 
   startCreateRoom() {

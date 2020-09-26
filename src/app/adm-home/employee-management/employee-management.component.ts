@@ -18,6 +18,7 @@ export class EmployeeManagementComponent implements OnInit {
   actionStatus = false;
   statusMessage: string;
   employee: any;
+  employeesList: any;
   constructor(private formBuilder: FormBuilder, private empManageService: EmpManageService, private toastrService: ToastrService) { }
 
   ngOnInit() {
@@ -27,8 +28,20 @@ export class EmployeeManagementComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       empGen: ['', Validators.required]
     });
+    this.getAllEmployees();
   }
   get f() { return this.employeeRegistrationForm.controls; }
+
+  getAllEmployees() {
+    this.empManageService.getAllEmployees().subscribe(
+      resp => {
+        console.log(resp['employeesList']);
+        this.employeesList = resp['employeesList'];
+      }, error => {
+        console.error(error);
+      }
+    );
+  }
 
   createEmployee() {
     this.submitted = true;
@@ -59,6 +72,7 @@ export class EmployeeManagementComponent implements OnInit {
       error => console.error(error)
     );
   }
+
   public findInvalidControls() {
     const invalid = [];
     const controls = this.f.controls;

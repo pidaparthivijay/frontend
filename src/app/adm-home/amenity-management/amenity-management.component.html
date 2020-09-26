@@ -3,7 +3,9 @@
 <br>
 <br>
 <p-table #amenityTable *ngIf="!newAmenity && viewAmenities" [style]="{'width':'50%','margin-top':'8px'}"
-    [value]="amenitiesList" [globalFilterFields]="[columns]" [paginator]=" true" [rows]="10">
+    [value]="amenitiesList" [globalFilterFields]="['amenityId','amenityName','price']" [paginator]="true"
+    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
     <ng-template pTemplate="caption">
         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
         <input type="text" pInputText size="50" placeholder="Global Filter"

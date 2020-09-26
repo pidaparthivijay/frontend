@@ -7,6 +7,9 @@ import { RequestMappings } from '../shared/model/RequestMappings';
   providedIn: 'root'
 })
 export class RoomService {
+  updateRoom(requestDto: RequestDTO) {
+    return this.httpClient.post(RequestMappings.ROOM_UPDATE, requestDto);
+  }
   createRoomMultiple(requestDto: RequestDTO) {
     return this.httpClient.post(RequestMappings.ROOM_CREATE_MULTIPLE, requestDto);
   }
@@ -21,10 +24,6 @@ export class RoomService {
 
   getRoomsByStatus(requestDto: RequestDTO) {
     return this.httpClient.post(RequestMappings.ROOM_VIEW_BY_STATUS, requestDto);
-  }
-
-  getRoomsByFloor(requestDto: RequestDTO) {
-    return this.httpClient.post(RequestMappings.ROOM_VIEW_BY_FLOOR, requestDto);
   }
 
   constructor(private httpClient: HttpClient) { }

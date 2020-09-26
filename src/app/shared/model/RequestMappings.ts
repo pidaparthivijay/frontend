@@ -13,6 +13,7 @@ export class RequestMappings {
     public static readonly CUSTOMER_REGISTER = environment.baseURL + '/registerCustomer';
     public static readonly CUSTOMER_VIEW_RWD_POINTS = environment.baseURL + '/viewRewardPoints';
     public static readonly EMP_CREATE = environment.baseURL + '/createEmployee';
+    public static readonly EMP_VIEW_ALL = environment.baseURL + '/getAllEmployees';
     public static readonly LOGIN = environment.baseURL + '/login';
     public static readonly LOOKUP_CREATE = environment.baseURL + '/createLookup';
     public static readonly LOOKUP_DELETE_TOGGLE = environment.baseURL + '/toggleDelete';
@@ -31,8 +32,8 @@ export class RequestMappings {
     public static readonly ROOM_REQUEST_CREATE = environment.baseURL + '/requestRoom';
     public static readonly ROOM_REQUEST_FEASIBLE = environment.baseURL + '/viewFeasibleRooms';
     public static readonly ROOM_REQUEST_VIEW_ALL = environment.baseURL + '/getAllRoomRequests';
+    public static readonly ROOM_UPDATE = environment.baseURL + '/updateRoom';
     public static readonly ROOM_VIEW_ALL = environment.baseURL + '/getAllRooms';
-    public static readonly ROOM_VIEW_BY_FLOOR = environment.baseURL + '/getRoomsByFloor';
     public static readonly ROOM_VIEW_BY_STATUS = environment.baseURL + '/getRoomsByStatus';
     public static readonly TOUR_PKG_BOOK = environment.baseURL + '/bookTourPackage';
     public static readonly TOUR_PKG_CREATE = environment.baseURL + '/createTourPackage';

@@ -22,7 +22,7 @@ export class LookupManagementComponent implements OnInit {
     { label: 'Room Type', value: 'ROOM_TYPE' },
     { label: 'Room Model', value: 'ROOM_MODEL' },
   ];
-  columns: ['Lookup Definition Name', 'Lookup Value', 'Lookup Display Name', 'Created Date', 'Update Date'];
+  columns: ['lookupDefName', 'lookupValue', 'displayName', 'createdDate', 'updateDate'];
   clonedLookups: { [s: string]: Lookup; } = {};
   createNew: boolean;
   loookupCreationForm: FormGroup;
