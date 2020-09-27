@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Table } from 'primeng/table';
 import { Lookup } from 'src/app/shared/model/lookup.model';
 import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 import { LookupService } from './lookup.service';
@@ -10,6 +11,7 @@ import { LookupService } from './lookup.service';
   styleUrls: ['./lookup-management.component.scss']
 })
 export class LookupManagementComponent implements OnInit {
+  @ViewChild('lookupTable', null) table: Table;
   lookupDefNames: any = [];
   lookupExcel: any = File;
   lookupList: any = [];
@@ -134,5 +136,22 @@ export class LookupManagementComponent implements OnInit {
     const file = event.target.files[0];
     this.lookupExcel = file;
     console.log(file);
+  }
+
+  onDateSelect(value) {
+    this.table.filter(value, 'date', 'equals')
+  }
+
+  formatDate(date) {
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    if (month < 10) {
+      month = '0' + month;
+    }
+    if (day < 10) {
+      day = '0' + day;
+    }
+    console.log(day + '-' + month + '-' + date.getYear());
+    return day + '-' + month + '-' + date.getYear();
   }
 }

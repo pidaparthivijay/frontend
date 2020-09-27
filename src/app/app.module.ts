@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { DropdownModule, MultiSelectModule, SliderModule, TableModule } from 'primeng';
+import { CalendarModule, DropdownModule, MultiSelectModule, SliderModule, TableModule } from 'primeng';
 import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { AmenityManagementComponent } from './adm-home/amenity-management/amenity-management.component';
 import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
@@ -57,9 +57,14 @@ import { WelcomeCustomerComponent } from './welcome-customer/welcome-customer.co
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule, DropdownModule, MultiSelectModule,
-    AppRoutingModule, SliderModule,
-    FormsModule, TableModule,
+    BrowserAnimationsModule,
+    DropdownModule,
+    MultiSelectModule,
+    AppRoutingModule,
+    SliderModule,
+    FormsModule,
+    TableModule,
+    CalendarModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule

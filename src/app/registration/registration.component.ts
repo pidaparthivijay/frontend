@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { LookupService } from '../adm-home/lookup-management/lookup.service';
 import { Constants } from '../shared/model/constants';
 import { Customer } from '../shared/model/customer.model';
 import { RequestDTO } from '../shared/model/request-dto.model';
@@ -17,7 +18,8 @@ export class RegistrationComponent implements OnInit {
   actionStatus = false;
   statusMessage: string;
   customer: any;
-  constructor(private formBuilder: FormBuilder, private regSer: RegSerService, private toastrService: ToastrService) { }
+  genderLookup: any[];
+  constructor(private formBuilder: FormBuilder, private lookupService: LookupService, private regSer: RegSerService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -30,12 +32,24 @@ export class RegistrationComponent implements OnInit {
       custRepass: ['', [Validators.required, Validators.minLength(6)]],
       custGen: ['', Validators.required]
     });
+    this.getLookups();
   }
+  getLookups() {
+    let requestDTO = new RequestDTO();
+    requestDTO.lookupDefinitionName = Constants.GENDER;
+    this.lookupService.getLookupListByDefinition(requestDTO).subscribe(
+      resp => {
+        console.log(resp['lookupList']);
+        this.genderLookup = resp['lookupList'];
+      }
+    );
+  }
+
+
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-
     if (this.registerForm.invalid) {
       return;
     }
@@ -49,7 +63,9 @@ export class RegistrationComponent implements OnInit {
     customer.custEmail = this.registerForm.get('custMail').value;
     customer.custDob = this.registerForm.get('custDob').value;
     let requestDTO = new RequestDTO();
+    console.log(customer);
     requestDTO.customer = customer;
+    return;
     this.regSer.regCust(requestDTO).subscribe(
       resp => {
         if (resp[Constants.ACT_STS]) {
@@ -66,6 +82,7 @@ export class RegistrationComponent implements OnInit {
       error => console.error(error)
     );
   }
+
   public findInvalidControls() {
     const invalid = [];
     const controls = this.f.controls;
