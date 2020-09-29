@@ -7,6 +7,18 @@ import { RequestMappings } from '../shared/model/RequestMappings';
   providedIn: 'root'
 })
 export class EmployeeService {
+  getEmployeeDetails(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.EMPLOYEE_VIEW_DETAILS, requestDTO);
+  }
+
+  updateEmployee(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.EMPLOYEE_UPDATE, requestDTO);
+  }
+
+  generatePDF(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.PENDING_BILL_PDF, requestDTO,
+      { responseType: 'blob' });
+  }
   getPendingBill(requestDTO: RequestDTO) {
     return this.httpClient.post(RequestMappings.PENDING_BILL_VIEW, requestDTO);
   }

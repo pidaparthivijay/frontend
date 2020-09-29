@@ -5,7 +5,7 @@
       <tr>
         <td colspan="2">
           <div class="form-group">
-            <input type="text" formControlName="custName" class="form-control"
+            <input type="text" formControlName="custName" class="form-control" pTooltip="Name of the Customer"
               [ngClass]="{ 'is-invalid': submitted && f.custName.errors }" name="custName" id="custName"
               placeholder="Your Good Name Please.." style="width: 100%;">
             <div *ngIf="submitted && f.custName.errors" class="invalid-feedback">
@@ -17,7 +17,7 @@
       <tr>
         <td colspan="2">
           <div class="form-group">
-            <input type="text" formControlName="userName" class="form-control"
+            <input type="text" formControlName="userName" class="form-control" pTooltip="Username to login"
               [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" id="userName" placeholder="Pick a username.."
               style="width: 100%;">
             <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
@@ -29,8 +29,10 @@
       <tr>
         <td>
           <div class="form-group">
-            <input type="date" title="Date of Birth" formControlName="custDob" class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.custDob.errors }" id="custDob">
+            <p-calendar class="form-control" dateFormat="yy-mm-dd" [showIcon]="true" [touchUI]="true"
+              [ngClass]="{ 'is-invalid': submitted && f.custDob.errors }" id="custDob" [showButtonBar]="true"
+              pTooltip="Date of Birth" formControlName="custDob" placeholder="Date of Birth" [readonlyInput]="true">
+            </p-calendar>
             <div *ngIf="submitted && f.custDob.errors" class="invalid-feedback">
               <div *ngIf="f.custDob.errors.required">Date Of Birth is required</div>
             </div>
@@ -38,9 +40,9 @@
         </td>
         <td>
           <div class="form-group">
-            <p-dropdown [options]="genderLookup" [ngClass]="{ 'is-invalid': submitted && f.custGen.errors }"
-              formControlName="custGen" optionLabel="displayName" optionValue="lookupValue"
-              [style]="{'width':'auto', 'height':'auto'}">
+            <p-dropdown [options]="genderLookup" class="form-control" (onChange)="onGender($event)" pTooltip="Gender"
+              [ngClass]="{ 'is-invalid': submitted && f.custGen.errors }" formControlName="custGen"
+              optionLabel="displayName" optionValue="lookupValue" [style]="{'width':'auto', 'height':'auto'}">
             </p-dropdown>
             <div *ngIf="submitted && f.custGen.errors" class="invalid-feedback">
               <div *ngIf="f.custGen.errors.required">Gender is required</div>
@@ -52,7 +54,7 @@
         <td colspan="2">
           <div class="form-group">
             <input type="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.custMail.errors }"
-              formControlName="custMail" id="custMail" placeholder="email" style="width: 100%;">
+              pTooltip="Email Id" formControlName="custMail" id="custMail" placeholder="email" style="width: 100%;">
             <div *ngIf="submitted && f.custMail.errors" class="invalid-feedback">
               <div *ngIf="f.custMail.errors.required">Mail Id is required</div>
             </div>
@@ -63,7 +65,8 @@
         <td colspan="2">
           <div class="form-group">
             <input type="tel" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.custMob.errors }"
-              id="custMob" formControlName="custMob" placeholder="MobileNumber" style="width: 100%;">
+              pTooltip="Mobile number" id="custMob" formControlName="custMob" placeholder="Mobile Number"
+              style="width: 100%;">
             <div *ngIf="submitted && f.custMob.errors" class="invalid-feedback">
               <div *ngIf="f.custMob.errors.required">Mobile Number is required</div>
             </div>
@@ -74,8 +77,8 @@
         <td colspan="2">
           <div class="form-group">
             <input type="password" formControlName="custPass" class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.custPass.errors }" name="custPass" id="custPass"
-              placeholder="Password" style="width: 100%;">
+              pTooltip="Password should be atleast 6 characters" placeholder="Password" style="width: 100%;"
+              [ngClass]="{ 'is-invalid': submitted && f.custPass.errors }" name="custPass" id="custPass">
             <div *ngIf="submitted && f.custPass.errors" class="invalid-feedback">
               <div *ngIf="f.custPass.errors.required">Password is required</div>
               <div *ngIf="f.custPass.errors.minlength">Password must be at least 6 characters</div>
@@ -87,8 +90,8 @@
         <td colspan="2">
           <div class="form-group">
             <input type="password" formControlName="custRepass" class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.custRepass.errors }" id="custRepass"
-              placeholder="Re-Type Password" style="width: 100%;">
+              pTooltip="Password should be same as above" [ngClass]="{ 'is-invalid': submitted && f.custRepass.errors }"
+              id="custRepass" placeholder="Re-Type Password" style="width: 100%;">
             <div *ngIf="submitted && f.custRepass.errors" class="invalid-feedback">
               <div *ngIf="f.custRepass.errors.required">Password is required</div>
               <div *ngIf="f.custRepass.errors.minlength">Password must be at least 6 characters</div>

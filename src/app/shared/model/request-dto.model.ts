@@ -26,6 +26,7 @@ export class RequestDTO {
     lookupList: any;
     name: string;
     formData: any;
+    pdfStream: any;
     pendingBillRequests: any;
     requestId: number;
     rewardPointsList: any;

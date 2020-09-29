@@ -93,4 +93,9 @@ export class RegistrationComponent implements OnInit {
     }
     return invalid;
   }
+
+  onGender(event) {
+    this.registerForm.controls['custGen'].setValue(event.value.lookupValue);
+    console.log(event.value.lookupValue);
+  }
 }

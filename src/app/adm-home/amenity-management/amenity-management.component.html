@@ -1,5 +1,6 @@
-<button class="btn-primary" (click)="viewAmenitiesList()">List All Amenities</button> &nbsp;&nbsp;&nbsp;&nbsp;
-<button class="btn-primary" (click)="createNewAmenity()">New Amenity</button>
+<button class="btn-primary" pTooltip="Click to view all the Amenities" (click)="viewAmenitiesList()">List All
+    Amenities</button> &nbsp;&nbsp;&nbsp;&nbsp;
+<button class="btn-primary" pTooltip="Click to create a new Amenity" (click)="createNewAmenity()">New Amenity</button>
 <br>
 <br>
 <p-table #amenityTable *ngIf="!newAmenity && viewAmenities" [style]="{'width':'50%','margin-top':'8px'}"
@@ -8,7 +9,7 @@
     [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
     <ng-template pTemplate="caption">
         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Global Filter"
+        <input type="text" pInputText size="50" placeholder="Global Filter" pToolTip="Use this to filter globally"
             (input)="amenityTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
     </ng-template>
     <ng-template pTemplate="header">
@@ -24,18 +25,17 @@
         </tr>
         <tr>
             <th>
-                <input pInputText type="text"
-                    (input)="amenityTable.filter($event.target.value, 'amenityId', 'contains')" placeholder="Amenity Id"
-                    class="p-column-filter">
+                <input pInputText type="text" placeholder="Amenity Id" pTooltip="Filter by Amenity Id"
+                    (input)="amenityTable.filter($event.target.value, 'amenityId', 'contains')" class="p-column-filter">
             </th>
             <th>
-                <input pInputText type="text"
+                <input pInputText type="text" pTooltip="Filter by Amenity name"
                     (input)="amenityTable.filter($event.target.value, 'amenityName', 'contains')" placeholder="Name"
                     class="p-column-filter">
             </th>
             <th>
                 <input pInputText type="text" (input)="amenityTable.filter($event.target.value, 'price', 'contains')"
-                    placeholder="Price Per Day" class="p-column-filter">
+                    pTooltip="Filter by Price" placeholder="Price Per Day" class="p-column-filter">
             </th>
             <th></th>
             <th></th>
@@ -47,7 +47,8 @@
             <td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="amenity.amenityName" amenityName>
+                        <input pInputText type="text" [(ngModel)]="amenity.amenityName"
+                            pTooltip="Editing the name of amenity" amenityName>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{amenity.amenityName}}
@@ -57,7 +58,8 @@
             <td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText type="number" min="100" [(ngModel)]="amenity.price" amenityPrice>
+                        <input pInputText type="number" min="100" [(ngModel)]="amenity.price"
+                            pTooltip="Editing the price of amenity" amenityPrice>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{amenity.price}}
@@ -65,12 +67,13 @@
                 </p-cellEditor>
             </td>
             <td>
-                <button class="btn-primary" (click)="toggleDelete(amenity.amenityName)">
+                <button class="btn-primary" (click)="toggleDelete(amenity.amenityName)"
+                    pTooltip="{{amenity.deleted != 'Y'?'Delete the amenity':'Undelete the amenity'}}">
                     <div *ngIf="amenity.deleted != 'Y'">Delete</div>
                     <div *ngIf="amenity.deleted === 'Y'">Undelete</div>
                 </button>
             </td>
-            <td><button class="btn-primary" (click)="updateAmenity(amenity)">
+            <td><button class="btn-primary" (click)="updateAmenity(amenity)" pTooltip="Save the updates made">
                     Update</button></td>
         </tr>
     </ng-template>
@@ -81,7 +84,7 @@
             <tr>
                 <td colspan="2">
                     <div class="form-group">
-                        <input type="text" formControlName="amenityName" class="form-control"
+                        <input type="text" formControlName="amenityName" class="form-control" pTooltip="Name of Amenity"
                             [ngClass]="{ 'is-invalid': submitted && f.amenityName.errors }" name="amenityName"
                             id="amenityName" placeholder="Name of the Amenity" style="width: 100%;">
                         <div *ngIf="submitted && f.amenityName.errors" class="invalid-feedback">
@@ -93,7 +96,7 @@
             <tr>
                 <td colspan="2">
                     <div class="form-group">
-                        <input type="price" class="form-control" title="Price of Amenity being provided"
+                        <input type="price" class="form-control" pTooltip="Price of Amenity being provided"
                             [ngClass]="{ 'is-invalid': submitted && f.price.errors }" formControlName="price" id="price"
                             placeholder="Price" style="width: 100%;">
                         <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
@@ -103,8 +106,9 @@
                 </td>
             </tr>
             <tr>
-                <td><input type="submit" class="btn-primary" value="Create Amenity"></td>
-                <td><input type="reset" class="btn-primary" value="Reset"></td>
+                <td><input type="submit" pTooltip="Create the amenity with given details" class="btn-primary"
+                        value="Create Amenity"></td>
+                <td><input type="reset" pTooltip="Reset the form" class="btn-primary" value="Reset"></td>
             </tr>
         </table>
     </form>

@@ -5,8 +5,8 @@
                 <td colspan="2">
                     <div class="form-group">
                         <input type="text" formControlName="empName" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.empName.errors }" name="empName" id="empName"
-                            placeholder="Name of the Employee" style="width: 100%;">
+                            pTooltip="Name of the Employee" [ngClass]="{ 'is-invalid': submitted && f.empName.errors }"
+                            name="empName" id="empName" placeholder="Name of the Employee" style="width: 100%;">
                         <div *ngIf="submitted && f.empName.errors" class="invalid-feedback">
                             <div *ngIf="f.empName.errors.required">Name is required</div>
                         </div>
@@ -16,7 +16,7 @@
             <tr>
                 <td colspan="2">
                     <div class="form-group">
-                        <input type="text" formControlName="userName" class="form-control" title="Should be Unique"
+                        <input type="text" formControlName="userName" class="form-control" pTooltip="Should be Unique"
                             [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" id="userName"
                             placeholder="User Name" style="width: 100%;">
                         <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
@@ -30,13 +30,13 @@
                     <div class="form-group">
 
                         <select name="empGen" formControlName="empGen" class="form-control"
+                            pTooltip="Gender of the Employee"
                             [ngClass]="{ 'is-invalid': submitted && f.empGen.errors }">
                             <option value="">Gender</option>
                             <option value="female">Female</option>
                             <option value="Male">Male</option>
                             <option value="trans">Trans</option>
                         </select>
-
                         <div *ngIf="submitted && f.empGen.errors" class="invalid-feedback">
                             <div *ngIf="f.empGen.errors.required">Gender is required</div>
                         </div>
@@ -46,10 +46,10 @@
             <tr>
                 <td colspan="2">
                     <div class="form-group">
-                        <input type="email" class="form-control"
-                            title="Should be Unique and you will need to access this to login for first time"
-                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" formControlName="email" id="email"
-                            placeholder="Email" style="width: 100%;">
+                        <input type="email" class="form-control" placeholder="Email" style="width: 100%;"
+                            pTooltip="Should be Unique and you will need to access this to login for first time"
+                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" formControlName="email"
+                            id="email">
                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                             <div *ngIf="f.email.errors.required">Mail Id is required</div>
                         </div>
@@ -57,8 +57,9 @@
                 </td>
             </tr>
             <tr>
-                <td><input type="submit" class="btn-primary" value="Create Employee"></td>
-                <td><input type="reset" class="btn-primary" value="Reset"></td>
+                <td><input type="submit" class="btn-primary" pTooltip="Create the Employee with Given Details"
+                        value="Create Employee"></td>
+                <td><input type="reset" class="btn-primary" pTooltip="Reset the form" value="Reset"></td>
             </tr>
         </table>
     </form>
@@ -69,12 +70,13 @@
     [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
     <ng-template pTemplate="caption">
         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Global Filter"
+        <input type="text" pInputText size="50" placeholder="Global Filter" pToolTip="Use this to filter globally"
             (input)="employeeTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
     </ng-template>
     <ng-template pTemplate="header">
         <tr style="width: inherit">
-            <th pSortableColumn="empId">Employee Id<p-sortIcon field="empId"></p-sortIcon>
+            <th pToolTip="Sort by Employee Id" pSortableColumn="empId">Employee Id<p-sortIcon field="empId">
+                </p-sortIcon>
             </th>
             <th pSortableColumn="empName">Employee Name<p-sortIcon field="empName"></p-sortIcon>
             </th>

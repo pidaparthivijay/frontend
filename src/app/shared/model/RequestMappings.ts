@@ -14,6 +14,8 @@ export class RequestMappings {
     public static readonly CUSTOMER_VIEW_RWD_POINTS = environment.baseURL + '/viewRewardPoints';
     public static readonly EMP_CREATE = environment.baseURL + '/createEmployee';
     public static readonly EMP_VIEW_ALL = environment.baseURL + '/getAllEmployees';
+    public static readonly EMPLOYEE_UPDATE = environment.baseURL + '/udpateEmployee';
+    public static readonly EMPLOYEE_VIEW_DETAILS = environment.baseURL + '/viewEmployeeDetails';
     public static readonly LOGIN = environment.baseURL + '/login';
     public static readonly LOOKUP_CREATE = environment.baseURL + '/createLookup';
     public static readonly LOOKUP_DELETE_TOGGLE = environment.baseURL + '/toggleDelete';
@@ -25,6 +27,7 @@ export class RequestMappings {
     public static readonly OTP_REQUEST = environment.baseURL + '/requestOTP';
     public static readonly OTP_SUBMIT = environment.baseURL + '/submitOtp';
     public static readonly PENDING_BILL_VIEW = environment.baseURL + '/getPendingBillRequests';
+    public static readonly PENDING_BILL_PDF = environment.baseURL + '/generatePDF';
     public static readonly RESET_PWD = environment.baseURL + '/resetPwd';
     public static readonly ROOM_CREATE = environment.baseURL + '/createRoom';
     public static readonly ROOM_CREATE_MULTIPLE = environment.baseURL + '/createRoomMultiple';
