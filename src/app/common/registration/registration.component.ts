@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { LookupService } from '../adm-home/lookup-management/lookup.service';
-import { Constants } from '../shared/model/constants';
-import { Customer } from '../shared/model/customer.model';
-import { Lookup } from '../shared/model/lookup.model';
-import { RequestDTO } from '../shared/model/request-dto.model';
+import { LookupService } from 'src/app/adm-home/lookup-management/lookup.service';
+import { Constants } from 'src/app/shared/model/constants';
+import { Customer } from 'src/app/shared/model/customer.model';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 import { RegSerService } from './reg-ser.service';
 @Component({
   selector: 'app-registration',
@@ -69,6 +68,7 @@ export class RegistrationComponent implements OnInit {
     requestDTO.customer = customer;
     this.regSer.regCust(requestDTO).subscribe(
       resp => {
+        console.log(resp);
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
           this.customer = resp['customer'];

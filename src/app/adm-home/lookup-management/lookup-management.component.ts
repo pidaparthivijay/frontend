@@ -71,7 +71,10 @@ export class LookupManagementComponent implements OnInit {
     formData.append('lookupExcel', this.lookupExcel);
     let requestDTO = new RequestDTO();
     requestDTO.lookupExcel = formData;
-    this.lookupService.uploadLookupExcel(requestDTO).subscribe(resp => this.lookupList = resp['lookupList'],
+    this.lookupService.uploadLookupExcel(requestDTO).subscribe(resp => {
+      console.log(resp);
+      this.lookupList = resp['lookupList']
+    },
       error => console.error(error));
   }
 
@@ -80,7 +83,9 @@ export class LookupManagementComponent implements OnInit {
     let requestDTO = new RequestDTO();
     lookup.lookupId = lookupId;
     requestDTO.lookup = lookup;
-    this.lookupService.toggleDelete(requestDTO).subscribe(resp => this.lookupList = resp['lookupList'],
+    this.lookupService.toggleDelete(requestDTO).subscribe(resp => {
+      console.log(resp); this.lookupList = resp['lookupList']
+    },
       error => console.error(error));
   }
 
@@ -99,6 +104,7 @@ export class LookupManagementComponent implements OnInit {
     this.createNew = false;
     this.upload = false;
     this.lookupService.viewAllLookups().subscribe(resp => {
+      console.log(resp);
       this.lookupList = resp['lookupList'];
     },
       error => console.error(error));

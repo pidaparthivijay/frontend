@@ -41,6 +41,7 @@ export class CustHomeComponent implements OnInit {
     console.log(customer);
     this.custService.getCustomerDetails(requestDTO).subscribe(
       resp => {
+        console.log(resp);
         this.viewProf = true;
         this.customer = resp['customer'];
         this.customer.custDob = new Date(resp['customer']['custDob'])
@@ -58,6 +59,7 @@ export class CustHomeComponent implements OnInit {
     requestDTO.customer = customer;
     this.custService.getMyRequestsList(requestDTO).subscribe(
       resp => {
+        console.log(resp);
         this.viewRoomReq = true;
         this.roomRequestList = resp['roomRequestList'];
       },
@@ -86,6 +88,7 @@ export class CustHomeComponent implements OnInit {
     requestDTO.user = user;
     this.custService.viewRewardPoints(requestDTO).subscribe(
       resp => {
+        console.log(resp);
         this.viewRewards = true;
         this.rewardPointList = resp['rewardPointsList'];
       },

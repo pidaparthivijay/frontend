@@ -27,9 +27,14 @@ export class TourBookingComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.tourService.getAllTourPackages().subscribe(resp =>
-      this.tourPackagesList = resp['tourPackageList']);
+    this.tourService.getAllTourPackages().subscribe(resp => {
+      console.log(resp);
+      this.tourPackagesList = resp['tourPackageList'];
+    },
+      error => console.error(error)
+    );
   }
+
   bookTour(tourPackageName) {
     var guestCount = (<HTMLInputElement>document.getElementById('guestCount' + tourPackageName)).value;
     var startDate = (<HTMLInputElement>document.getElementById('startDate' + tourPackageName)).value;
@@ -41,11 +46,16 @@ export class TourBookingComponent implements OnInit {
     let requestDTO = new RequestDTO();
     requestDTO.tourPackageRequest = tourPackageRequest;
     this.tourService.bookTourPackage(requestDTO).subscribe(resp => {
+      console.log(resp);
       if (resp[Constants.ACT_STS]) {
         this.actionStatus = true;
         this.toastrService.success(Constants.TOUR_BOOK_SXS);
       }
-    });
+    },
+      error => {
+        console.error(error);
+      }
+    );
 
   }
 }

@@ -35,7 +35,7 @@ export class EmployeeManagementComponent implements OnInit {
   getAllEmployees() {
     this.empManageService.getAllEmployees().subscribe(
       resp => {
-        console.log(resp['employeesList']);
+        console.log(resp);
         this.employeesList = resp['employeesList'];
       }, error => {
         console.error(error);
@@ -58,6 +58,7 @@ export class EmployeeManagementComponent implements OnInit {
     requestDTO.employee = employee;
     this.empManageService.createEmployee(requestDTO).subscribe(
       resp => {
+        console.log(resp);
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
           this.employee = resp['employee'];

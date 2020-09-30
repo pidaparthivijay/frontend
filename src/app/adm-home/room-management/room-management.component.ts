@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Constants } from '../shared/model/constants';
-import { RequestDTO } from '../shared/model/request-dto.model';
-import { Room } from '../shared/model/room.model';
+import { Constants } from 'src/app/shared/model/constants';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
+import { Room } from 'src/app/shared/model/room.model';
 import { RoomService } from './room.service';
 
 @Component({
@@ -50,6 +50,7 @@ export class RoomManagementComponent implements OnInit {
       requestDto.room = room;
       this.roomService.createRoomMultiple(requestDto).subscribe(
         resp => {
+          console.log(resp);
           if (resp['actionStatus'] === Constants.RM_CRT_SXS) {
             this.getAllRooms();
           } else {
@@ -62,6 +63,7 @@ export class RoomManagementComponent implements OnInit {
       requestDto.room = room;
       this.roomService.createRoom(requestDto).subscribe(
         resp => {
+          console.log(resp);
           if (resp['actionStatus'] === Constants.RM_CRT_SXS) {
             this.getAllRooms();
           } else {
@@ -75,7 +77,8 @@ export class RoomManagementComponent implements OnInit {
   getAllRooms() {
     this.roomService.getAllRooms().subscribe(
       resp => {
-        this.roomsList = resp['roomsList']
+        console.log(resp),
+          this.roomsList = resp['roomsList']
       },
       error => console.error(error)
     );
@@ -85,7 +88,8 @@ export class RoomManagementComponent implements OnInit {
     let requestDto = new RequestDTO();
     requestDto.room = room;
     this.roomService.updateRoom(requestDto).subscribe(resp => {
-      this.roomsList = resp['roomsList']
+      console.log(resp),
+        this.roomsList = resp['roomsList']
     },
       error => console.error(error)
     );
@@ -94,7 +98,7 @@ export class RoomManagementComponent implements OnInit {
   getRoomsByStatus(roomStatus: string) {
     let requestDto = new RequestDTO();
     requestDto.roomStatus = roomStatus;
-    this.roomService.getRoomsByStatus(requestDto).subscribe(resp => this.roomsList = resp['roomsList'], error => console.error(error));
+    this.roomService.getRoomsByStatus(requestDto).subscribe(resp => { console.log(resp), this.roomsList = resp['roomsList'] }, error => console.error(error));
   }
 
   startCreateRoom() {

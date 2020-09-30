@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestDTO } from '../shared/model/request-dto.model';
-import { RoomRequest } from '../shared/model/room-request';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
+import { RoomRequest } from 'src/app/shared/model/room-request';
 import { RoomAllocateService } from './room-allocate.service';
 
 @Component({
@@ -19,7 +19,12 @@ export class RoomAllocateComponent implements OnInit {
   }
 
   viewAllRequests() {
-    this.roomAllocateService.getAllRoomRequests().subscribe(resp => this.roomRequestList = resp['roomRequestList']);
+    this.roomAllocateService.getAllRoomRequests().subscribe(resp => {
+      console.log(resp),
+        this.roomRequestList = resp['roomRequestList']
+    }, error => {
+      console.error(error);
+    });
     this.roomRequestList.forEach(element => {
       element.checkInDate = new Date(element.checkInDate),
         element.checkOutDate = new Date(element.checkOutDate)
@@ -32,7 +37,7 @@ export class RoomAllocateComponent implements OnInit {
     roomRequest.requestId = requestId
     requestDTO.roomRequest = roomRequest;
     this.actingRequestId = requestId;
-    this.roomAllocateService.viewFeasibleRooms(requestDTO).subscribe(resp => this.roomList = resp['roomsList'], error => console.error(error));
+    this.roomAllocateService.viewFeasibleRooms(requestDTO).subscribe(resp => { console.log(resp), this.roomList = resp['roomsList'] }, error => console.error(error));
   }
 
   assignRoomToRequest(roomNumber, requestId) {
@@ -44,7 +49,4 @@ export class RoomAllocateComponent implements OnInit {
     this.roomAllocateService.assignRoomToRequest(requestDTO).subscribe(resp => console.log(resp));
   }
 
-  private newMethod() {
-    return this.roomList;
-  }
 }

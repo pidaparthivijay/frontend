@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { LookupService } from '../adm-home/lookup-management/lookup.service';
-import { Constants } from '../shared/model/constants';
-import { Customer } from '../shared/model/customer.model';
-import { RequestDTO } from '../shared/model/request-dto.model';
-import { RoomRequest } from '../shared/model/room-request';
+import { LookupService } from 'src/app/adm-home/lookup-management/lookup.service';
+import { Constants } from 'src/app/shared/model/constants';
+import { Customer } from 'src/app/shared/model/customer.model';
+import { RequestDTO } from 'src/app/shared/model/request-dto.model';
+import { RoomRequest } from 'src/app/shared/model/room-request';
 import { RoomReqService } from './room-req.service';
 
 @Component({
@@ -114,6 +114,7 @@ export class RoomRegistrationComponent implements OnInit {
     requestDto.roomRequest = roomRequest;
     this.roomReqService.requestRoom(requestDto).subscribe(
       resp => {
+        console.log(resp);
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
           this.customer = resp['customer'];
@@ -121,6 +122,9 @@ export class RoomRegistrationComponent implements OnInit {
           this.roomForm.reset();
           this.submitted = false;
         }
+      },
+      error => {
+        console.error(error);
       }
     );
   }

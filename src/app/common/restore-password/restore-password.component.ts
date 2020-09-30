@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Constants } from '../shared/model/constants';
-import { OneTimePassword } from '../shared/model/one-time-password.model';
-import { User } from '../shared/model/user.model';
+import { Constants } from 'src/app/shared/model/constants';
+import { OneTimePassword } from 'src/app/shared/model/one-time-password.model';
+import { User } from 'src/app/shared/model/user.model';
 import { RestorePwdService } from './restore-pwd.service';
 
 @Component({
@@ -64,6 +64,7 @@ export class RestorePasswordComponent implements OnInit {
     user.userMail = this.restorePwdForm.value.userMail;
     this.restorePwdService.requestOTP(user).subscribe(
       resp => {
+        console.log(resp);
         if (resp) {
           this.actionStatus = true;
           this.submitReq = false;
@@ -85,6 +86,7 @@ export class RestorePasswordComponent implements OnInit {
     otp.otpValue = this.otpForm.value.otpValue;
     this.restorePwdService.submitOtp(otp).subscribe(
       resp => {
+        console.log(resp);
         if (resp[Constants.ACT_STS]) {
           this.rstPwd = true;
           this.otpSubmit = false;
@@ -106,6 +108,7 @@ export class RestorePasswordComponent implements OnInit {
     usr.password = this.resetPwdForm.value.newPassword;
     this.restorePwdService.resetPwd(usr).subscribe(
       resp => {
+        console.log(resp);
         if (resp[Constants.ACT_STS]) {
           this.rstPwdSuccess = true;
           this.otpSubmit = false;

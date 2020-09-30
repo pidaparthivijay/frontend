@@ -48,6 +48,7 @@ export class AmenityManagementComponent implements OnInit {
     requestDTO.amenity = amenity;
     this.amenityService.createAmenity(requestDTO).subscribe(
       resp => {
+        console.log(resp);
         if (resp[Constants.ACT_STS]) {
           this.actionStatus = true;
           this.amenity = resp['amenity'];
@@ -83,6 +84,7 @@ export class AmenityManagementComponent implements OnInit {
     requestDTO.amenity = amenity;
     this.amenityService.toggleDelete(requestDTO).subscribe(
       resp => {
+        console.log(resp);
         this.amenitiesList = resp['amenityList'];
       },
       error => console.error(error)
@@ -96,6 +98,7 @@ export class AmenityManagementComponent implements OnInit {
     requestDTO.amenity = amenity;
     this.amenityService.updateAmenity(requestDTO).subscribe(
       resp => {
+        console.log(resp);
         this.amenitiesList = resp['amenityList'];
       },
       error => console.error(error)

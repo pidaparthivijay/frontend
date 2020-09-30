@@ -40,6 +40,7 @@ export class RequestAmenitiesComponent implements OnInit {
     let requestDTO = new RequestDTO()
     requestDTO.amenityRequest = amenityRequest;
     this.amenityService.requestAmenity(requestDTO).subscribe(resp => {
+      console.log(resp);
       if (resp[Constants.ACT_STS]) {
         this.actionStatus = true;
         this.toastrService.success(Constants.AMENITY_REQ_SXS);
