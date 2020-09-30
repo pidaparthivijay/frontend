@@ -60,7 +60,6 @@
   </table>
 </div>
 
-
 <p-table #billTable *ngIf="requestList?.length>0" [style]="{'width':'70%','margin-top':'8px'}" [value]="requestList"
   [paginator]="true" [showCurrentPageReport]="true"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[3, 5,7]"

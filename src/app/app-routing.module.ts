@@ -8,6 +8,7 @@ import { TourManagementComponent } from './adm-home/tour-management/tour-managem
 import { HomeComponent } from './common/home/home.component';
 import { LoginComponent } from './common/login/login.component';
 import { LogoutComponent } from './common/logout/logout.component';
+import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 import { ContactComponent } from './contact/contact.component';
 import { CustHomeComponent } from './cust-home/cust-home.component';
 import { RequestAmenitiesComponent } from './cust-home/request-amenities/request-amenities.component';
@@ -94,6 +95,10 @@ const routes: Routes = [
   {
     path: 'restore',
     component: RestorePasswordComponent
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
 ]
 @NgModule({

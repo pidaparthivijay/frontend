@@ -13,6 +13,7 @@ export class RequestMappings {
     public static readonly CUSTOMER_REGISTER = environment.baseURL + '/registerCustomer';
     public static readonly CUSTOMER_VIEW_RWD_POINTS = environment.baseURL + '/viewRewardPoints';
     public static readonly EMP_CREATE = environment.baseURL + '/createEmployee';
+    public static readonly EMPLOYEE_MAIL_BILL = environment.baseURL + '/mailBill';
     public static readonly EMP_VIEW_ALL = environment.baseURL + '/getAllEmployees';
     public static readonly EMPLOYEE_UPDATE = environment.baseURL + '/udpateEmployee';
     public static readonly EMPLOYEE_VIEW_DETAILS = environment.baseURL + '/viewEmployeeDetails';

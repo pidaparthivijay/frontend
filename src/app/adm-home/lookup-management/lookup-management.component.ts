@@ -42,6 +42,7 @@ export class LookupManagementComponent implements OnInit {
     });
     this.lookupService.getLookupDefs().subscribe(resp => {
       this.lookupDefNames = resp['lookupDefsList'];
+      console.log(this.lookupDefNames);
     },
       error => console.error(error));
   }

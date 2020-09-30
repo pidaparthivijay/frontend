@@ -9,7 +9,62 @@
 </div>
 <br>
 <br>
-<p-table #lookupTable *ngIf="viewAll && !createNew" [style]="{'width':'70%','margin-top':'8px'}" [value]="lookupList"
+<div *ngIf="createNew" class="float-right">
+    <form [formGroup]="loookupCreationForm" (ngSubmit)="createLookup()">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Lookup Definition Name</th>
+                <td>
+                    <div class=" form-group">
+                        <select name="lookupDefName" formControlName="lookupDefName" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.lookupDefName.errors }">
+                            <option *ngFor="let lookupName of lookupDefNames; let i = index;" [selected]="i==0">
+                                {{lookupName}}</option>
+                        </select>
+                        <div *ngIf="submitted && f.lookupDefName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lookupDefName.errors.required">Lookup Definition Name is required</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Lookup Value</th>
+                <td>
+                    <div class="form-group">
+                        <input type="lookupValue" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.lookupValue.errors }"
+                            formControlName="lookupValue" id="lookupValue" placeholder="Lookup Value"
+                            style="width: 100%;">
+                        <div *ngIf="submitted && f.lookupValue.errors" class="invalid-feedback">
+                            <div *ngIf="f.lookupValue.errors.required">Lookup Value is required</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Lookup Display Name</th>
+                <td>
+                    <div class="form-group">
+                        <input type="text" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.displayName.errors }"
+                            formControlName="displayName" id="displayName" placeholder="Display Name"
+                            style="width: 100%;">
+                        <div *ngIf="submitted && f.displayName.errors" class="invalid-feedback">
+                            <div *ngIf="f.displayName.errors.required">Display Name is required</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+
+                <td><input type="submit" class="btn-primary" value="Create Lookup"></td>
+                <td><input type="reset" class="btn-primary" value="Reset"></td>
+
+        </table>
+    </form>
+</div>
+
+<p-table #lookupTable *ngIf="lookupList?.length" [style]="{'width':'70%','margin-top':'8px'}" [value]="lookupList"
     [globalFilterFields]="['lookupDefName','lookupValue','displayName']" [paginator]="true"
     [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
@@ -116,59 +171,3 @@
         </tr>
     </ng-template>
 </p-table>
-<br>
-<br>
-<div>
-    <form [formGroup]="loookupCreationForm" (ngSubmit)="createLookup()">
-        <table *ngIf="!viewAll && createNew" class="table table-bordered table-striped"
-            style="width: 75%; background:lightblue">
-            <thead>
-                <tr>
-                    <th>Lookup Definition Name</th>
-                    <th>Lookup Value</th>
-                    <th>Lookup Display Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select name="lookupDefName" formControlName="lookupDefName" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && f.lookupDefName.errors }">
-                                <option *ngFor="let lookupName of lookupDefNames; let i = index;" [selected]="i==0">
-                                    {{lookupName}}</option>
-                            </select>
-                            <div *ngIf="submitted && f.lookupDefName.errors" class="invalid-feedback">
-                                <div *ngIf="f.lookupDefName.errors.required">Lookup Definition Name is required</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <input type="lookupValue" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && f.lookupValue.errors }"
-                                formControlName="lookupValue" id="lookupValue" placeholder="Lookup Value"
-                                style="width: 100%;">
-                            <div *ngIf="submitted && f.lookupValue.errors" class="invalid-feedback">
-                                <div *ngIf="f.lookupValue.errors.required">Lookup Value is required</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <input type="text" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && f.displayName.errors }"
-                                formControlName="displayName" id="displayName" placeholder="Display Name"
-                                style="width: 100%;">
-                            <div *ngIf="submitted && f.displayName.errors" class="invalid-feedback">
-                                <div *ngIf="f.displayName.errors.required">Display Name is required</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td><input type="submit" class="btn-primary" value="Create Lookup"></td>
-                    <td><input type="reset" class="btn-primary" value="Reset"></td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
-</div>

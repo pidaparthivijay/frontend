@@ -15,6 +15,7 @@ export class RoomAllocateComponent implements OnInit {
   constructor(private roomAllocateService: RoomAllocateService) { }
 
   ngOnInit() {
+    this.viewAllRequests();
   }
 
   viewAllRequests() {

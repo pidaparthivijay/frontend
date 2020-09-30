@@ -34,6 +34,7 @@ import { RoomAllocateComponent } from './room-allocate/room-allocate.component';
 import { RoomManagementComponent } from './room-management/room-management.component';
 import { RoomRegistrationComponent } from './room-registration/room-registration.component';
 import { WelcomeCustomerComponent } from './welcome-customer/welcome-customer.component';
+import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { WelcomeCustomerComponent } from './welcome-customer/welcome-customer.co
     RequestAmenitiesComponent,
     TourBookingComponent,
     LookupManagementComponent,
-    LogoutComponent
+    LogoutComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

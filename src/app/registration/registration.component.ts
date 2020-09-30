@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LookupService } from '../adm-home/lookup-management/lookup.service';
 import { Constants } from '../shared/model/constants';
 import { Customer } from '../shared/model/customer.model';
+import { Lookup } from '../shared/model/lookup.model';
 import { RequestDTO } from '../shared/model/request-dto.model';
 import { RegSerService } from './reg-ser.service';
 @Component({
@@ -19,6 +20,7 @@ export class RegistrationComponent implements OnInit {
   statusMessage: string;
   customer: any;
   genderLookup: any[];
+  gender;
   constructor(private formBuilder: FormBuilder, private lookupService: LookupService, private regSer: RegSerService, private toastrService: ToastrService) { }
 
   ngOnInit() {
@@ -34,6 +36,7 @@ export class RegistrationComponent implements OnInit {
     });
     this.getLookups();
   }
+
   getLookups() {
     let requestDTO = new RequestDTO();
     requestDTO.lookupDefinitionName = Constants.GENDER;
@@ -44,7 +47,6 @@ export class RegistrationComponent implements OnInit {
       }
     );
   }
-
 
   get f() { return this.registerForm.controls; }
 
@@ -58,14 +60,13 @@ export class RegistrationComponent implements OnInit {
     customer.custName = this.registerForm.get('custName').value;
     customer.userName = this.registerForm.get('userName').value;
     customer.custMob = this.registerForm.get('custMob').value;
-    customer.custGen = this.registerForm.get('custGen').value;
+    customer.custGen = this.gender.lookupValue;
     customer.custPass = this.registerForm.get('custPass').value;
     customer.custEmail = this.registerForm.get('custMail').value;
     customer.custDob = this.registerForm.get('custDob').value;
     let requestDTO = new RequestDTO();
     console.log(customer);
     requestDTO.customer = customer;
-    return;
     this.regSer.regCust(requestDTO).subscribe(
       resp => {
         if (resp[Constants.ACT_STS]) {
@@ -94,8 +95,4 @@ export class RegistrationComponent implements OnInit {
     return invalid;
   }
 
-  onGender(event) {
-    this.registerForm.controls['custGen'].setValue(event.value.lookupValue);
-    console.log(event.value.lookupValue);
-  }
 }

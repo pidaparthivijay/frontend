@@ -7,6 +7,10 @@ import { RequestMappings } from '../shared/model/RequestMappings';
   providedIn: 'root'
 })
 export class EmployeeService {
+  mailBillToUser(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.EMPLOYEE_MAIL_BILL, requestDTO);
+  }
+
   getEmployeeDetails(requestDTO: RequestDTO) {
     return this.httpClient.post(RequestMappings.EMPLOYEE_VIEW_DETAILS, requestDTO);
   }

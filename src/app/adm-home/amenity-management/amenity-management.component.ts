@@ -17,7 +17,7 @@ export class AmenityManagementComponent implements OnInit {
   amenity: any;
   amenityRegistrationForm: FormGroup;
   loading: boolean;
-  newAmenity: boolean;
+  newAmenity: boolean = false;
   statusMessage: any;
   submitted: boolean;
   viewAmenities: boolean;
@@ -30,6 +30,7 @@ export class AmenityManagementComponent implements OnInit {
       amenityName: ['', Validators.required],
       price: ['', Validators.required]
     });
+    this.viewAmenitiesList();
   }
 
   get f() { return this.amenityRegistrationForm.controls; }

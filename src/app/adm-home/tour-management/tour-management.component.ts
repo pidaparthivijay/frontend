@@ -28,6 +28,7 @@ export class TourManagementComponent implements OnInit {
       duration: ['', Validators.required],
       pricePerHead: ['', Validators.required]
     });
+    this.viewPackageList();
   }
   get f() { return this.tourPackageForm.controls; }
 

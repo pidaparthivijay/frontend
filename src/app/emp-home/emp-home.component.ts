@@ -104,4 +104,18 @@ export class EmpHomeComponent implements OnInit {
         console.error(error);
       });
   }
+
+  mailBillToUser() {
+    var custEmail = (<HTMLInputElement>document.getElementById('custEmail')).value;
+    let requestDTO = new RequestDTO();
+    let customer = new Customer();
+    customer.custEmail = custEmail;
+    requestDTO.customer = customer;
+    this.employeeService.mailBillToUser(requestDTO).subscribe((responseMessage) => {
+      console.log(responseMessage);
+    },
+      error => {
+        console.error(error);
+      });
+  }
 }
