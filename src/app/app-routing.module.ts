@@ -5,6 +5,7 @@ import { AmenityManagementComponent } from './adm-home/amenity-management/amenit
 import { EmployeeManagementComponent } from './adm-home/employee-management/employee-management.component';
 import { LookupManagementComponent } from './adm-home/lookup-management/lookup-management.component';
 import { TourManagementComponent } from './adm-home/tour-management/tour-management.component';
+import { AuthGuard } from './common/authguard/auth-guard';
 import { HomeComponent } from './common/home/home.component';
 import { LoginComponent } from './common/login/login.component';
 import { LogoutComponent } from './common/logout/logout.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   {
     path: 'admWelcome',
     component: AdmHomeComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'amenity',
@@ -52,12 +54,18 @@ const routes: Routes = [
     ]
   }, {
     path: 'empWelcome',
-    component: EmpHomeComponent
+    component: EmpHomeComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'custWelcome',
     component: CustHomeComponent,
+    canActivate: [AuthGuard],
     children: [
+      {
+        path: 'roomReg',
+        component: RoomRegistrationComponent
+      },
       {
         path: 'requestAmenities',
         component: RequestAmenitiesComponent
@@ -71,10 +79,6 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
-  },
-  {
-    path: 'roomReg',
-    component: RoomRegistrationComponent
   },
   {
     path: 'contact',

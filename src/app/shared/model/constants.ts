@@ -2,6 +2,7 @@ export class Constants {
 
     public static readonly ACT_STS = 'actionStatus';
     public static readonly ADM_SXS = 'Admin Login Success';
+    public static readonly ADMIN = "A";
     public static readonly AMENITY_REQ_SXS = 'Amenity Request Success';
     public static readonly AMNT_CRT_FAIL = "Amenity Creation Failure";
     public static readonly AMNT_CRT_SXS = "Amenity Creation Success";
@@ -10,9 +11,11 @@ export class Constants {
     public static readonly CUST_REG_FAIL = "Customer Registration Failed";
     public static readonly CUST_REG_SXS = "Customer Registration Success";
     public static readonly CUST_SXS = 'Customer Login Success';
+    public static readonly CUSTOMER = "C";
     public static readonly EMP_CRT_FAIL = "Employee Creation Failure";
     public static readonly EMP_CRT_SXS = "Employee Creation Success";
     public static readonly EMP_SXS = 'Employee Login Success';
+    public static readonly EMPLOYEE = "E";
     public static readonly EXCEPTION_OCCURED = "Exception Occured";
     public static readonly FAILURE = "failure"
     public static readonly GENDER = 'GENDER';

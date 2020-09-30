@@ -35,6 +35,7 @@ import { RoomManagementComponent } from './room-management/room-management.compo
 import { RoomRegistrationComponent } from './room-registration/room-registration.component';
 import { WelcomeCustomerComponent } from './welcome-customer/welcome-customer.component';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
+import { AuthGuard } from './common/authguard/auth-guard';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,7 @@ import { PageNotFoundComponent } from './common/page-not-found/page-not-found.co
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [RegSerService],
+  providers: [RegSerService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

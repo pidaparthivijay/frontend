@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Constants } from 'src/app/shared/model/constants';
 import { LoginService } from '../login/login.service';
 
 @Component({
@@ -9,13 +10,30 @@ import { LoginService } from '../login/login.service';
 export class SidebarComponent implements OnInit {
 
   constructor(private loginService: LoginService) { }
-  loggedIn: boolean = false;
+  custLogin: boolean = false;
+  empLogin: boolean = false;
+  admLogin: boolean = false;
   ngOnInit() {
     this.loginService.getUserDetails().subscribe(
       response => {
         if (response) {
-          this.loggedIn = true;
+          if (response['userType'] === Constants.CUSTOMER) {
+            this.custLogin = true;
+            this.admLogin = false;
+            this.empLogin = false;
+          } else if (response['userType'] === Constants.EMPLOYEE) {
+            this.empLogin = true;
+            this.custLogin = false;
+            this.admLogin = false;
+          } else if (response['userType'] === Constants.ADMIN) {
+            this.admLogin = true;
+            this.empLogin = false;
+            this.custLogin = false;
+          }
+        } else {
+          this.admLogin = this.custLogin = this.empLogin = false;
         }
+
       }
     );
   }

@@ -41,14 +41,17 @@ export class LoginComponent implements OnInit {
         switch (resp[Constants.STS_MSG]) {
           case Constants.CUST_SXS:
             user.name = resp['custName'];
+            user.userType = Constants.CUSTOMER;
             this.loginService.setLoggedIn(true);
             break;
           case Constants.EMP_SXS:
             user.name = resp['empName'];
+            user.userType = Constants.EMPLOYEE;
             this.loginService.setLoggedIn(true);
             break;
           case Constants.ADM_SXS:
             user.name = resp['admName'];
+            user.userType = Constants.ADMIN;
             this.loginService.setLoggedIn(true);
             break;
           default:
