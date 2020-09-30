@@ -25,9 +25,12 @@ export class LoginService {
 
   setUserDetails(user: User) {
     this.userDetails.next(user);
-    sessionStorage.setItem('userName', user.userName);
-    sessionStorage.setItem('name', user.name);
-    sessionStorage.setItem('userId', JSON.stringify(user.userId));
+    if (user != null) {
+      sessionStorage.setItem('userName', user.userName);
+      sessionStorage.setItem('name', user.name);
+      sessionStorage.setItem('userId', JSON.stringify(user.userId));
+    }
+
   }
 
   loginServ(user: User): any {
