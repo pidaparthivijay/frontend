@@ -70,7 +70,7 @@
     [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
     <ng-template pTemplate="caption">
         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Global Filter" pToolTip="Use this to filter globally"
+        <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Use this to filter globally"
             (input)="employeeTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
     </ng-template>
     <ng-template pTemplate="header">
@@ -91,22 +91,22 @@
         <tr>
             <th>
                 <input pInputText type="text" (input)="employeeTable.filter($event.target.value, 'empId', 'contains')"
-                    placeholder="Employee Id" class="p-column-filter">
+                    pTooltip="Filter By Id" placeholder="Employee Id" class="p-column-filter">
             </th>
             <th>
                 <input pInputText type="text" (input)="employeeTable.filter($event.target.value, 'empName', 'contains')"
-                    placeholder="Employee Name" class="p-column-filter">
+                    pTooltip="Filter By Name" placeholder="Employee Name" class="p-column-filter">
             </th>
             <th>
                 <input pInputText type="text" (input)="employeeTable.filter($event.target.value, 'empGen', 'contains')"
-                    placeholder="Gender" class="p-column-filter">
+                    pTooltip="Filter By Gender -> Should be a dropdown" placeholder="Gender" class="p-column-filter">
             </th>
             <th>
                 <input pInputText type="text" (input)="employeeTable.filter($event.target.value, 'email', 'contains')"
-                    placeholder="Email" class="p-column-filter">
+                    pTooltip="Filter By Email" placeholder="Email" class="p-column-filter">
             </th>
             <th>
-                <input pInputText type="text"
+                <input pInputText type="text" pTooltip="Filter By User Name"
                     (input)="employeeTable.filter($event.target.value, 'userName', 'contains')" placeholder="User Name"
                     class="p-column-filter">
             </th>
@@ -119,7 +119,7 @@
             <td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="employee.empName" empName>
+                        <input pInputText type="text" pTooltip="Employee Name" [(ngModel)]="employee.empName" empName>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{employee.empName}}
@@ -129,7 +129,8 @@
             <td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText [(ngModel)]="employee.empGen" empGen>
+                        <input pInputText pTooltip="Employee Gender -> Should be a dropdown"
+                            [(ngModel)]="employee.empGen" empGen>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{employee.empGen}}
@@ -139,7 +140,7 @@
             <td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText [(ngModel)]="employee.email" email>
+                        <input pInputTextpTooltip="Email of the employee" [(ngModel)]="employee.email" email>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{employee.email}}
@@ -149,14 +150,14 @@
             <td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText min="100" [(ngModel)]="employee.userName" userName>
+                        <input pInputText pTooltip="Username of the Employee" [(ngModel)]="employee.userName" userName>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{employee.userName}}
                     </ng-template>
                 </p-cellEditor>
             </td>
-            <td><button class="btn-primary" (click)="updateEmployee(employee)">
+            <td><button class="btn-primary" pTooltip="Update the employee details" (click)="updateEmployee(employee)">
                     Update</button></td>
         </tr>
     </ng-template>

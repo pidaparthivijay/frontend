@@ -16,17 +16,17 @@
             <td>{{tourPackage.duration}}</td>
             <td>{{tourPackage.pricePerHead}}</td>
             <td>
-                <input type="number" min="2500" name="guestCount" id="guestCount{{tourPackage.tourPackageName}}"
-                    value="2">
+                <input type="number" pTooltip="No of the guests" name="guestCount"
+                    id="guestCount{{tourPackage.tourPackageName}}" value="2">
             </td>
             <td>
                 <input type="date" pTooltip="Tour Start Date" name="startDate" class="form-control"
                     id="startDate{{tourPackage.tourPackageName}}">
 
             </td>
-            <td><button class="btn-primary" (click)="bookTour(tourPackage.tourPackageName)">
+            <td><button class="btn-primary" pTooltip="Book the Tour Package"
+                    (click)="bookTour(tourPackage.tourPackageName)">
                     Book Tour</button></td>
         </tr>
     </tbody>
-
 </table>

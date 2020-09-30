@@ -19,8 +19,10 @@
         <tr *ngFor="let amenity of amenitiesList">
             <td>{{amenity.amenityName}}</td>
             <td>{{amenity.price}}</td>
-            <td><input type="text" name="noOfDays" id="noOfDays{{amenity.amenityId}}"></td>
-            <td><button class="btn btn-primary" (click)="requestAmenity(amenity.amenityId);">Request</button></td>
+            <td><input type="text" name="noOfDays" pTooltip="No of days for which the amenity is being requested"
+                    id="noOfDays{{amenity.amenityId}}"></td>
+            <td><button class="btn btn-primary" pTooltip="Request the amenity."
+                    (click)="requestAmenity(amenity.amenityId);">Request</button></td>
         </tr>
     </tbody>
 </table>

@@ -1,8 +1,10 @@
 <br>
 <table class="table table-bordered table-striped" style="width: 45%">
   <tr>
-    <td><button class="btn btn-primary" (click)="generateBill();">Generate Bill</button></td>
-    <td><button class="btn btn-primary" (click)="viewProfile();">View My Profile</button></td>
+    <td><button class="btn btn-primary" pTooltip="Generate the bill" (click)="generateBill();">Generate Bill</button>
+    </td>
+    <td><button class="btn btn-primary" pTooltip="View and update details" (click)="viewProfile();">View My
+        Profile</button></td>
   </tr>
 </table>
 <p-table #employeeTable *ngIf="viewProf" [style]="{'width':'70%','margin-top':'8px'}" [value]="[employee]">
@@ -34,7 +36,7 @@
         <p-cellEditor>
           <ng-template pTemplate="input">
             <p-dropdown [options]="genderLookup" [(ngModel)]="employee.empGen" optionLabel="displayName"
-              optionValue="lookupValue" (onChange)="onGender($event)" pTooltip="Gender"
+              optionValue="lookupValue" (onChange)="onGender($event)" pTooltip="Gender" pTooltip="Gender"
               [style]="{'width':'auto', 'height':'auto'}">
             </p-dropdown>
           </ng-template>
@@ -45,7 +47,8 @@
       </td>
       <td style="width:25%">{{employee.email}}</td>
       <td>{{employee.userName}}</td>
-      <td><button class="btn btn-primary" (click)="updateDetails(employee);">Update</button></td>
+      <td><button class="btn btn-primary" pTooltip="Save the changes" (click)="updateDetails(employee);">Update</button>
+      </td>
     </tr>
   </ng-template>
 </p-table>
@@ -54,8 +57,9 @@
   <table class="table table-bordered table-striped" style="width: 45%">
     <tr>
       <th>Email</th>
-      <td><input type="text" name="custEmail" id="custEmail" #custEmail></td>
-      <td><button class="btn btn-primary" (click)="generateBillForMail();">Submit</button></td>
+      <td><input type="text" name="custEmail" pTooltip="Provide Customer email" id="custEmail" #custEmail></td>
+      <td><button class="btn btn-primary" pTooltip="Generate the Bill for given customer email"
+          (click)="generateBillForMail();">Submit</button></td>
     </tr>
   </table>
 </div>
@@ -83,8 +87,10 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="summary">
-    <button style="text-align: left;" download="bill.pdf" class="btn btn-primary" (click)="getFile();">Print</button>
-    <button style="float: right;" download="bill.pdf" class="btn btn-primary" (click)="mailBillToUser();">Send to
+    <button style="text-align: left;" download="bill.pdf" pTooltip="Download & Print the bill" class="btn btn-primary"
+      (click)="getFile();">Print</button>
+    <button style="float: right;" download="bill.pdf" pTooltip="Mail the bill to User" class="btn btn-primary"
+      (click)="mailBillToUser();">Send to
       User</button>
   </ng-template>
 </p-table>

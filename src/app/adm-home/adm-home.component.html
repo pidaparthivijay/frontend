@@ -1,13 +1,19 @@
-<div style="padding-left: 2.5%">
-  Hi {{empName}}, <br>
-  <table class="table table-bordered table-striped" style="width: 45%">
-    <tr>
-      <td><button class="btn btn-primary" routerLink="/admWelcome/roomAllocate"> Room Allocate</button>
-      <td><button class="btn btn-primary" routerLink="/admWelcome/employeeManagement">Manage Employees</button></td>
-      <td><button class="btn btn-primary" routerLink="/admWelcome/amenity">Manage Amenities</button></td>
-      <td><button class="btn btn-primary" routerLink="/admWelcome/tourPackage">Manage Tour Packages</button></td>
-      <td><button class="btn btn-primary" routerLink="/admWelcome/roomManagement">Manage Rooms</button></td>
-      <td><button class="btn btn-primary" routerLink="/admWelcome/lookupManagement">Manage Lookups</button></td>
-    </tr>
-  </table>
-  <router-outlet></router-outlet>
+Hi {{empName}}, <br>
+<table class="table table-bordered table-striped" style="width: 45%">
+  <tr>
+    <td><button class="btn btn-primary" pTooltip="View Requests & Allocate Rooms" routerLink="roomAllocate"> Room
+        Allocate</button>
+    <td><button class="btn btn-primary" pTooltip="View & Add Employees" routerLink="employeeManagement">Manage
+        Employees</button></td>
+    <td><button class="btn btn-primary" pTooltip="Add,View,Edit,Delete Amenities" routerLink="amenity">Manage
+        Amenities</button></td>
+    <td><button class="btn btn-primary" pTooltip="Add,View,Edit,Delete Tour Packages" routerLink="tourPackage">Manage
+        Tour Packages</button></td>
+    <td><button class="btn btn-primary" pTooltip="Manage Rooms" routerLink="roomManagement">Manage
+        Rooms</button></td>
+    <td><button class="btn btn-primary" pTooltip="Manage the Look ups that appear" routerLink="lookupManagement">Manage
+        Lookups</button></td>
+  </tr>
+</table>
+<br>
+<router-outlet></router-outlet>

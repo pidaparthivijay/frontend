@@ -1,88 +1,96 @@
 <table class="table table-bordered table-striped" style="width: 45%">
   <tr>
-    <td><button class="btn btn-success" (click)="startCreateRoom()">Create Room</button></td>
-    <td><button class="btn btn-success" (click)="startCreateMultipleRooms()">Create Multiple Rooms</button></td>
-    <td><button class="btn btn-success" (click)="getAllRooms()">Query All Rooms</button></td>
-    <td><button class="btn btn-success" (click)="getRoomsByStatus(constants.VACANT)">Query Free Rooms</button></td>
-    <td><button class="btn btn-success" (click)="getRoomsByStatus(constants.OCCUPIED)">Query Booked Rooms</button></td>
+    <td><button class="btn btn-success" pTooltip="Create a new Room" (click)="startCreateRoom()">Create Room</button>
+    </td>
+    <td><button class="btn btn-success" pTooltip="Create multiple rooms of same configuration"
+        (click)="startCreateMultipleRooms()">Create Multiple Rooms</button></td>
+    <td><button class="btn btn-success" pTooltip="View All rooms" (click)="getAllRooms()">Query All Rooms</button></td>
+    <td><button class="btn btn-success" pTooltip="View All Free Rooms"
+        (click)="getRoomsByStatus(constants.VACANT)">Query Free Rooms</button></td>
+    <td><button class="btn btn-success" pTooltip="View All Booked Rooms"
+        (click)="getRoomsByStatus(constants.OCCUPIED)">Query Booked Rooms</button></td>
   </tr>
 </table>
-<form [formGroup]="createRoomForm" (ngSubmit)="createRoom()">
-  <table id="createRoom" class="table table-bordered table-striped" style="width: 45%;display: none;">
-    <thead>
-      <tr>
-        <th>Attribute</th>
-        <th>Specification</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>Type Of Room</th>
-        <td>
-          <select formControlName="typeOfRoom" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.typeOfRoom.errors }">
-            <option value="">--Select--</option>
-            <option value="AC">Air Conditioned</option>
-            <option value="nonAC">Non AirConditioned</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <th>Model Of Room</th>
-        <td>
-          <select formControlName="modelOfRoom" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.modelOfRoom.errors }">
-            <option value="">--Select--</option>
-            <option value="DLX">Deluxe</option>
-            <option value="STE">Suite</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <th>Category Of Room</th>
-        <td><select formControlName="categoryOfRoom" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.categoryOfRoom.errors }">
-            <option value="">--Select--</option>
-            <option value="SNG">Single</option>
-            <option value="DBL">Double</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <th>Floor</th>
-        <td><select formControlName="floorNumber" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.floorNumber.errors }">
-            <option value="">--Select--</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-        </td>
-      </tr>
-      <tr *ngIf="createRoomMultipleFlag">
-        <th>Count of Rooms</th>
-        <td>
-          <input type="text" formControlName="countOfRooms" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.countOfRooms.errors }" id="countOfRooms"
-            placeholder="Count Of Rooms" style="width: 100%;" value="1">
-        </td>
-      </tr>
-      <tr>
-        <td><input type="submit" class="btn-primary" value="Submit"></td>
-        <td><input type="reset" class="btn-primary" value="Reset"></td>
-      </tr>
-    </tbody>
-  </table>
-</form>
-
+<div class="float-right">
+  <form [formGroup]="createRoomForm" (ngSubmit)="createRoom()">
+    <table id="createRoom" class="table table-striped" style="width: 50%;display: none;">
+      <thead>
+        <tr>
+          <th>Attribute</th>
+          <th>Specification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Type Of Room</th>
+          <td>
+            <select formControlName="typeOfRoom" class="form-control" pTooltip="Room Type"
+              [ngClass]="{ 'is-invalid': submitted && f.typeOfRoom.errors }">
+              <option value="">--Select--</option>
+              <option value="AC">Air Conditioned</option>
+              <option value="nonAC">Non AirConditioned</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Model Of Room</th>
+          <td>
+            <select formControlName="modelOfRoom" class="form-control" pTooltip="Room Model"
+              [ngClass]="{ 'is-invalid': submitted && f.modelOfRoom.errors }">
+              <option value="">--Select--</option>
+              <option value="DLX">Deluxe</option>
+              <option value="STE">Suite</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Category Of Room</th>
+          <td><select formControlName="categoryOfRoom" class="form-control" pTooltip="Room Category"
+              [ngClass]="{ 'is-invalid': submitted && f.categoryOfRoom.errors }">
+              <option value="">--Select--</option>
+              <option value="SNG">Single</option>
+              <option value="DBL">Double</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Floor</th>
+          <td><select formControlName="floorNumber" class="form-control" pTooltip="Floor Number"
+              [ngClass]="{ 'is-invalid': submitted && f.floorNumber.errors }">
+              <option value="">--Select--</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </td>
+        </tr>
+        <tr *ngIf="createRoomMultipleFlag">
+          <th>Count of Rooms</th>
+          <td>
+            <input type="text" formControlName="countOfRooms" class="form-control"
+              pTooltip="All rooms will have same configuration"
+              [ngClass]="{ 'is-invalid': submitted && f.countOfRooms.errors }" id="countOfRooms"
+              placeholder="Count Of Rooms" style="width: 100%;" value="1">
+          </td>
+        </tr>
+        <tr>
+          <td><input type="submit" pTooltip="Create Room(s) with given configuration" class="btn-primary"
+              value="Submit">
+          </td>
+          <td><input type="reset" pTooltip="Reset form" class="btn-primary" value="Reset"></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
 <p-table #roomTable *ngIf="roomsList?.length" [style]="{'width':'70%','margin-top':'8px'}" [value]="roomsList"
   [globalFilterFields]="['roomNumber','floorNumber','roomCategory','roomModel','roomType']" [paginator]="true"
   [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
   <ng-template pTemplate="caption">
     <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-    <input type="text" pInputText size="50" placeholder="Global Filter"
+    <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Global Filter"
       (input)="roomTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
   </ng-template>
   <ng-template pTemplate="header">
@@ -102,23 +110,23 @@
     <tr>
       <th>
         <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'roomNumber', 'contains')"
-          placeholder="Room Number" class="p-column-filter">
+          pTooltip="Filter By Room Number" placeholder="Room Number" class="p-column-filter">
       </th>
       <th>
         <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'floorNumber', 'contains')"
-          placeholder="Floor Number" class="p-column-filter">
+          pTooltip="Filter By Floor Number" placeholder="Floor Number" class="p-column-filter">
       </th>
       <th>
         <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'roomCategory', 'contains')"
-          placeholder="Category" class="p-column-filter">
+          pTooltip="Filter By SNG or DBL" placeholder="SNG or DBL" class="p-column-filter">
       </th>
       <th>
         <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'roomModel', 'contains')"
-          placeholder="Model" class="p-column-filter">
+          pTooltip="Filter By STE or DLX" placeholder="Model" class="p-column-filter">
       </th>
       <th>
         <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'roomType', 'contains')"
-          placeholder="Type" class="p-column-filter">
+          pTooltip="Filter By AC or NAC" placeholder="Type" class="p-column-filter">
       </th>
       <th></th>
     </tr>
@@ -130,7 +138,8 @@
       <td pEditableColumn>
         <p-cellEditor>
           <ng-template pTemplate="input">
-            <input pInputText type="number" [(ngModel)]="room.floorNumber" floorNumber>
+            <input pTooltip="Change the floor Number" pInputText type="number" [(ngModel)]="room.floorNumber"
+              floorNumber>
           </ng-template>
           <ng-template pTemplate="output">
             {{room.floorNumber}}
@@ -140,7 +149,8 @@
       <td pEditableColumn>
         <p-cellEditor>
           <ng-template pTemplate="input">
-            <input pInputText min="100" [(ngModel)]="room.roomCategory" roomCategory>
+            <input pInputText pTooltip="Change the room Category -> This should be a dropdown"
+              [(ngModel)]="room.roomCategory" roomCategory>
           </ng-template>
           <ng-template pTemplate="output">
             {{room.roomCategory}}
@@ -150,7 +160,8 @@
       <td pEditableColumn>
         <p-cellEditor>
           <ng-template pTemplate="input">
-            <input pInputText min="100" [(ngModel)]="room.roomModel" roomModel>
+            <input pInputText [(ngModel)]="room.roomModel" pTooltip="Change the room Model -> This should be a dropdown"
+              roomModel>
           </ng-template>
           <ng-template pTemplate="output">
             {{room.roomModel}}
@@ -160,14 +171,15 @@
       <td pEditableColumn>
         <p-cellEditor>
           <ng-template pTemplate="input">
-            <input pInputText min="100" [(ngModel)]="room.roomType" roomType>
+            <input pInputText pTooltip="Change the room Type -> This should be a dropdown" [(ngModel)]="room.roomType"
+              roomType>
           </ng-template>
           <ng-template pTemplate="output">
             {{room.roomType}}
           </ng-template>
         </p-cellEditor>
       </td>
-      <td><button class="btn-primary" (click)="updateRoom(room)">
+      <td><button class="btn-primary" pTooltip="Save the updated configuration of the room" (click)="updateRoom(room)">
           Update</button></td>
     </tr>
   </ng-template>

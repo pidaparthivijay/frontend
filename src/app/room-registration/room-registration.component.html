@@ -4,7 +4,7 @@
       <tr>
         <td colspan="2">
           <div class="form-group">
-            <input type="text" formControlName="guestName" class="form-control"
+            <input type="text" formControlName="guestName" class="form-control" pTooltip="Name of the Guest staying"
               [ngClass]="{ 'is-invalid': submitted && f.guestName.errors }" id="guestName"
               placeholder="Primary Guest Please.." style="width: 100%;">
             <div *ngIf="submitted && f.guestName.errors" class="invalid-feedback">
@@ -100,8 +100,8 @@
         </td>
       </tr>
       <tr>
-        <td><input type="submit" class="btn-primary" value="Submit Request"></td>
-        <td><input type="reset" class="btn-primary" value="Reset"></td>
+        <td><input type="submit" pTooltip="Submit the Room Request" class="btn-primary" value="Submit Request"></td>
+        <td><input type="reset" pTooltip="Reset the form" class="btn-primary" value="Reset"></td>
       </tr>
     </table>
   </form>

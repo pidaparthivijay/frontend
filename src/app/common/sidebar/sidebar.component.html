@@ -1,31 +1,31 @@
 <nav>
   <ul>
     <li>
-      <a routerLink="" [class.activated]="currentUrl == '/home'">
+      <a routerLink="" pTooltip="Home" [class.activated]="currentUrl == '/home'">
         <i class="pi pi-home"></i>
       </a>
     </li>
     <li *ngIf="!(empLogin||admLogin||custLogin)">
-      <a routerLink="/login" [class.activated]="true">
+      <a routerLink="/login" pTooltip="Login Screen" [class.activated]="true">
         <i class="pi pi-sign-in"></i>
       </a>
     </li>
     <li *ngIf="!(empLogin||admLogin||custLogin)">
-      <a routerLink="register" [class.activated]="true">
+      <a routerLink="register" pTooltip="Sign Up!" [class.activated]="true">
         <i class="pi pi-user-plus"></i>
       </a>
     </li>
     <li>
-      <a routerLink="contact" [class.activated]="true">
+      <a routerLink="contact" pTooltip="Developer Contact" [class.activated]="true">
         <i class="pi pi-id-card"></i>
       </a>
     </li>
-    <li *ngIf="custLogin">
+    <li *ngIf="custLogin" pTooltip="Register for Room">
       <a routerLink="custWelcome/roomReg" [class.activated]="true">
         <i class="pi pi-key"></i>
       </a>
     </li>
-    <li *ngIf="(empLogin||admLogin||custLogin)">
+    <li *ngIf="(empLogin||admLogin||custLogin)" pTooltip="Sign out">
       <a routerLink="logout" [class.activated]="true">
         <i class="pi pi-sign-out"></i>
       </a>

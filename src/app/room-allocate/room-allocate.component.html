@@ -1,7 +1,5 @@
-<br>
-<br>
 <div *ngIf="roomRequestList.length">
-  <table class="table table-bordered" style="width: 85%; background-color:tan">
+  <table class="table table-bordered" style="width: 70%; background-color:tan">
     <thead>
       <tr>
         <th>Request Id</th>
@@ -28,14 +26,14 @@
       <td>{{roomRequest.guestGen}}</td>
       <td>{{roomRequest.roomModel}}</td>
       <td>{{roomRequest.roomType}}</td>
-      <td><input type="submit" class="btn-primary" (click)="viewFeasibleRooms(roomRequest.requestId)"
-          value="View Feasible Rooms"></td>
+      <td><input type="submit" class="btn-primary" pTooltip="View Rooms that can accommodate the request"
+          (click)="viewFeasibleRooms(roomRequest.requestId)" value="View Feasible Rooms"></td>
     </tr>
   </table>
 </div>
 
 <div *ngIf="roomList.length">
-  <table class="table table-bordered" style="width: 85%; background-color:tan">
+  <table class="table table-bordered" style="width: 70%; background-color:tan">
     <thead>
       <tr>
         <th>Room Number</th>
@@ -53,8 +51,8 @@
         <td>{{room.roomType}}</td>
         <td>{{room.roomModel}}</td>
         <td>{{room.roomCategory}}</td>
-        <td><input type="submit" class="btn-primary" (click)="assignRoomToRequest(room.roomNumber,actingRequestId)"
-            value="Assign Room">
+        <td><input type="submit" class="btn-primary" pTooltip="Assign room to the given request"
+            (click)="assignRoomToRequest(room.roomNumber,actingRequestId)" value="Assign Room">
         </td>
       </tr>
     </tbody>

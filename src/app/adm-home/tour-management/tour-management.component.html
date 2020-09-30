@@ -1,4 +1,4 @@
-<button class="btn-primary" (click)="newTourPackage()">New Tour Packages</button>
+<button class="btn-primary" pTooltip="Create a new Tour Package" (click)="newTourPackage()">New Tour Packages</button>
 <br>
 <br>
 <div *ngIf="newPackage" class="float-right">
@@ -8,8 +8,8 @@
                 <td colspan="2">
                     <div class="form-group">
                         <input type="text" formControlName="location" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.location.errors }" name="location" id="location"
-                            placeholder="Location of the Tour" style="width: 100%;">
+                            pTooltip="Location of the Tour" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+                            name="location" id="location" placeholder="Location of the Tour" style="width: 100%;">
                         <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
                             <div *ngIf="f.location.errors.required">Location is required</div>
                         </div>
@@ -19,7 +19,7 @@
             <tr>
                 <td colspan="2">
                     <div class="form-group">
-                        <input type="text" formControlName="pricePerHead" class="form-control"
+                        <input type="text" formControlName="pricePerHead" class="form-control" pTooltip="Price Per Head"
                             [ngClass]="{ 'is-invalid': submitted && f.pricePerHead.errors }" name="pricePerHead"
                             id="pricePerHead" placeholder="Price Per Head" style="width: 100%;">
                         <div *ngIf="submitted && f.pricePerHead.errors" class="invalid-feedback">
@@ -31,7 +31,7 @@
             <tr>
                 <td>
                     <div class="form-group">
-                        <select formControlName="duration" class="form-control"
+                        <select formControlName="duration" class="form-control" pTooltip="Duration of the Tour"
                             [ngClass]="{ 'is-invalid': submitted && f.duration.errors }">
                             <option value="">Duration</option>
                             <option value="2D3N">Short</option>
@@ -45,8 +45,9 @@
                 </td>
             </tr>
             <tr>
-                <td><input type="submit" class="btn-primary" value="Create Tour Package"></td>
-                <td><input type="reset" class="btn-primary" value="Reset"></td>
+                <td><input type="submit" pTooltip="Complete the creation of tour package" class="btn-primary"
+                        value="Create Tour Package"></td>
+                <td><input type="reset" pTooltip="Reset the form" class="btn-primary" value="Reset"></td>
             </tr>
         </table>
     </form>
@@ -57,7 +58,7 @@
     [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     <ng-template pTemplate="caption">
         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Global Filter"
+        <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Global Filter"
             (input)="tourPackageTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
     </ng-template>
     <ng-template pTemplate="header">
@@ -79,27 +80,27 @@
             <th>
                 <input pInputText type="text"
                     (input)="tourPackageTable.filter($event.target.value, 'tourPackageId', 'contains')"
-                    placeholder="TourPackage Id" class="p-column-filter">
+                    pTooltip="Filter by id" placeholder="Tour Package Id" class="p-column-filter">
             </th>
             <th>
                 <input pInputText type="text"
                     (input)="tourPackageTable.filter($event.target.value, 'tourPackageName', 'contains')"
-                    placeholder="Name" class="p-column-filter">
+                    pTooltip="Filter By name" placeholder="Name" class="p-column-filter">
             </th>
             <th>
                 <input pInputText type="text"
                     (input)="tourPackageTable.filter($event.target.value, 'location', 'contains')"
-                    placeholder="Location" class="p-column-filter">
+                    pTooltip="Filter by location" placeholder="Location" class="p-column-filter">
             </th>
             <th>
                 <input pInputText type="text"
                     (input)="tourPackageTable.filter($event.target.value, 'duration', 'contains')"
-                    placeholder="Duration" class="p-column-filter">
+                    pTooltip="Filter By Duration" placeholder="Duration" class="p-column-filter">
             </th>
             <th>
                 <input pInputText type="text"
                     (input)="tourPackageTable.filter($event.target.value, 'pricePerHead', 'contains')"
-                    placeholder="Price Per Day" class="p-column-filter">
+                    pTooltip="Filter By Price" placeholder="Price Per Day" class="p-column-filter">
             </th>
             <th></th>
             <th></th>
@@ -111,7 +112,8 @@
             <td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="tourPackage.tourPackageName" tourPackageName>
+                        <input pInputText type="text" pTooltip="Name of the tour package"
+                            [(ngModel)]="tourPackage.tourPackageName" tourPackageName>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{tourPackage.tourPackageName}}
@@ -119,19 +121,13 @@
                 </p-cellEditor>
             </td>
             <td pEditableColumn>
-                <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="tourPackage.location" location>
-                    </ng-template>
-                    <ng-template pTemplate="output">
-                        {{tourPackage.location}}
-                    </ng-template>
-                </p-cellEditor>
+                {{tourPackage.location}}
             </td>
             <td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="tourPackage.duration" duration>
+                        <input pInputText type="text" [(ngModel)]="tourPackage.duration"
+                            pTooltip="Update the tour package duration => this shoudl be a dropdown" duration>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{tourPackage.duration}}
@@ -142,7 +138,8 @@
                 <p-cellEditor>
                     <ng-template pTemplate="input">
                         <input pInputText type="number" min="2500" name="pricePerHead"
-                            [(ngModel)]="tourPackage.pricePerHead" tourPackagePrice>
+                            pTooltip="Update the tour package price" [(ngModel)]="tourPackage.pricePerHead"
+                            tourPackagePrice>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{tourPackage.pricePerHead}}
@@ -151,11 +148,12 @@
             </td>
             <td>
                 <button class="btn-primary" (click)="toggleDelete(tourPackage.tourPackageName)">
-                    <div *ngIf="tourPackage.deleted != 'Y'">Delete</div>
-                    <div *ngIf="tourPackage.deleted === 'Y'">Undelete</div>
+                    <div pTooltip="Delete the tour package" *ngIf="tourPackage.deleted != 'Y'">Delete</div>
+                    <div pTooltip="Undelete the tour package" *ngIf="tourPackage.deleted === 'Y'">Undelete</div>
                 </button>
             </td>
-            <td><button class="btn-primary" (click)="updateTourPackage(tourPackage)">
+            <td><button class="btn-primary" pTooltip="Update the tour package details"
+                    (click)="updateTourPackage(tourPackage)">
                     Update</button></td>
 
         </tr>

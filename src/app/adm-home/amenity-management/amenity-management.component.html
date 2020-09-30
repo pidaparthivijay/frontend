@@ -1,6 +1,5 @@
 <button class="btn-primary" pTooltip="Click to create a new Amenity" (click)="createNewAmenity()">New Amenity</button>
 <br>
-<br>
 <div class="float-right" *ngIf="newAmenity">
     <form [formGroup]="amenityRegistrationForm" (ngSubmit)="createAmenity()">
         <table class="table table-striped table-hover" style="width: 25rem;">
