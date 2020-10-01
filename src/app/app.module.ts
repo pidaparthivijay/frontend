@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
@@ -71,6 +72,7 @@ import { EmpHomeComponent } from './emp-home/emp-home.component';
     SliderModule,
     FormsModule,
     TableModule,
+    FileUploadModule,
     TooltipModule,
     CalendarModule,
     ToastrModule.forRoot(),

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Table } from 'primeng/table';
+import { Constants } from 'src/app/shared/model/constants';
 import { Lookup } from 'src/app/shared/model/lookup.model';
 import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 import { LookupService } from './lookup.service';
@@ -13,6 +15,7 @@ import { LookupService } from './lookup.service';
 export class LookupManagementComponent implements OnInit {
   @ViewChild('lookupTable', null) table: Table;
   lookupDefNames: any = [];
+  uploadedFiles: any[] = [];
   lookupExcel: any = File;
   lookupList: any = [];
   lookupDefinitions: any[] = [
@@ -32,7 +35,7 @@ export class LookupManagementComponent implements OnInit {
   upload: boolean;
   viewAll: boolean;
 
-  constructor(private formBuilder: FormBuilder, private lookupService: LookupService) { }
+  constructor(private formBuilder: FormBuilder, private lookupService: LookupService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.loookupCreationForm = this.formBuilder.group({
@@ -42,7 +45,6 @@ export class LookupManagementComponent implements OnInit {
     });
     this.lookupService.getLookupDefs().subscribe(resp => {
       this.lookupDefNames = resp['lookupDefsList'];
-      console.log(this.lookupDefNames);
     },
       error => console.error(error));
   }
@@ -66,16 +68,24 @@ export class LookupManagementComponent implements OnInit {
     }
   }
 
-  uploadLookupExcel() {
+  uploadLookupExcel(event) {
+    const file = event.files[0];
+    this.lookupExcel = file;
     const formData = new FormData();
     formData.append('lookupExcel', this.lookupExcel);
     let requestDTO = new RequestDTO();
     requestDTO.lookupExcel = formData;
-    this.lookupService.uploadLookupExcel(requestDTO).subscribe(resp => {
-      console.log(resp);
-      this.lookupList = resp['lookupList']
+    this.lookupService.uploadLookupExcel(formData).subscribe(resp => {
+      this.lookupList = resp['lookupList'],
+        this.toastrService.success(resp[Constants.ACT_STS]);
+      if (resp[Constants.ACT_STS] === Constants.LOOKUP_EXCEL_SXS) {
+        this.viewAllLookups();
+      }
     },
-      error => console.error(error));
+      error => {
+        this.toastrService.error(Constants.XL_UPLOAD_FAILED, error);
+        console.error(error)
+      });
   }
 
   toggleDelete(lookupId) {
@@ -84,19 +94,31 @@ export class LookupManagementComponent implements OnInit {
     lookup.lookupId = lookupId;
     requestDTO.lookup = lookup;
     this.lookupService.toggleDelete(requestDTO).subscribe(resp => {
-      console.log(resp); this.lookupList = resp['lookupList']
+      this.lookupList = resp['lookupList'];
+      this.toastrService.success(resp[Constants.ACT_STS]);
+      this.viewAllLookups();
     },
-      error => console.error(error));
+      error => {
+        console.error(error),
+          this.toastrService.error(error);
+      });
   }
 
   updateLookup(lookup: Lookup) {
     let requestDTO = new RequestDTO();
     requestDTO.lookup = lookup;
     this.lookupService.updateLookup(requestDTO).subscribe(resp => {
-      console.log(resp),
-        this.lookupList = resp['lookupList'];
+      this.lookupList = resp['lookupList'];
+      if (Constants.UPDATE_SXS === resp[Constants.ACT_STS]) {
+        this.toastrService.success(Constants.UPDATE_SXS);
+        this.viewAllLookups();
+      } else {
+        this.toastrService.error(resp[Constants.ACT_STS]);
+      }
     },
-      error => console.error(error));
+      error => {
+        this.toastrService.error(Constants.UPDATE_FAIL, error)
+      });
   }
 
   viewAllLookups() {
@@ -104,10 +126,11 @@ export class LookupManagementComponent implements OnInit {
     this.createNew = false;
     this.upload = false;
     this.lookupService.viewAllLookups().subscribe(resp => {
-      console.log(resp);
       this.lookupList = resp['lookupList'];
     },
-      error => console.error(error));
+      error => {
+        this.toastrService.error(error)
+      });
   }
 
   onRowEditInit(lookup: Lookup) {
@@ -134,15 +157,17 @@ export class LookupManagementComponent implements OnInit {
     let requestDTO = new RequestDTO();
     requestDTO.lookup = lookup;
     this.lookupService.createLookup(requestDTO).subscribe(resp => {
-      console.log(resp);
+      if (Constants.SUCCESS === resp[Constants.ACT_STS]) {
+        this.toastrService.success(Constants.AMNT_CRT_SXS);
+        this.viewAllLookups();
+        this.loookupCreationForm.reset();
+      } else {
+        this.toastrService.error(Constants.AMNT_CRT_FAIL);
+      }
     },
-      error => console.error(error));
-  }
-
-  onSelectFile(event) {
-    const file = event.target.files[0];
-    this.lookupExcel = file;
-    console.log(file);
+      error => {
+        this.toastrService.error(Constants.AMNT_CRT_FAIL, error);
+      });
   }
 
   onDateSelect(value) {
@@ -158,7 +183,6 @@ export class LookupManagementComponent implements OnInit {
     if (day < 10) {
       day = '0' + day;
     }
-    console.log(day + '-' + month + '-' + date.getYear());
     return day + '-' + month + '-' + date.getYear();
   }
 }

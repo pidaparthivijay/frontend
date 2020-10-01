@@ -3,18 +3,20 @@
 <button class="btn btn-primary" pTooltip="create a new Lookup" (click)="toggleViews('create')">Create
     New</button>&nbsp;&nbsp;&nbsp;
 <button class="btn btn-primary" pTooltip="View all the existing lookups" (click)="toggleViews('view')">View All</button>
-<br>
-<br>
+<br><br>
 <div *ngIf="upload">
-    <input type="file" name="lookupExcel" pTooltip="Select the Excel for new Lookups" (change)="onSelectFile($event)"
-        id="lookupExcel">
-    <button class="btn btn-primary" pTooltip="Upload the selected Excel" (click)="uploadLookupExcel()">Upload
-        Excel</button>
-    <button class="btn btn-primary" pTooltip="Download a sample Excel -> YTD" (click)="downloadSample()">Download
-        Sample</button>
+    <p-fileUpload pTooltip="Select & Upload Excel for new Lookups" customUpload="true"
+        (uploadHandler)="uploadLookupExcel($event)" maxFileSize="1000000">
+        <ng-template pTemplate="content">
+
+            {{file?.name}} {{file?.size}}
+
+        </ng-template>
+    </p-fileUpload>
+    <a href="assets/samples/LookupExcel.xlsx" class="btn btn-primary" download
+        pTooltip="Download a Sample Excel">Download Sample</a>
 </div>
-<br>
-<br>
+<br><br>
 <div *ngIf="createNew" class="float-right">
     <form [formGroup]="loookupCreationForm" (ngSubmit)="createLookup()">
         <table class="table table-bordered table-striped">

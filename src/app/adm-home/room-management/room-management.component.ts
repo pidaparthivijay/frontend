@@ -51,7 +51,7 @@ export class RoomManagementComponent implements OnInit {
       this.roomService.createRoomMultiple(requestDto).subscribe(
         resp => {
           console.log(resp);
-          if (resp['actionStatus'] === Constants.RM_CRT_SXS) {
+          if (resp[Constants.ACT_STS] === Constants.RM_CRT_SXS) {
             this.getAllRooms();
           } else {
             //showerror
@@ -64,7 +64,7 @@ export class RoomManagementComponent implements OnInit {
       this.roomService.createRoom(requestDto).subscribe(
         resp => {
           console.log(resp);
-          if (resp['actionStatus'] === Constants.RM_CRT_SXS) {
+          if (resp[Constants.ACT_STS] === Constants.RM_CRT_SXS) {
             this.getAllRooms();
           } else {
             //showerror

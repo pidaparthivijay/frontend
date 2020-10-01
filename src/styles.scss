@@ -3,41 +3,42 @@
 body {
     margin: 0;
     background: #f2f2f2;
-    font-family: 'Montserrat',sans-serif;
-    height: 100vh; 
+    font-family: "Montserrat", sans-serif;
+    height: 100vh;
 }
-body{
-    background-image: url('assets/bnc.jpg');
+body {
+    background-image: url("assets/abe.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-     /* Set a specific height */
-  height: 500px;
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-    }
+    /* Set a specific height */
+    height: 500px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+}
 #container {
     display: grid;
     grid-template-columns: 70px auto;
-    height: 100vh;    
-.headerTable {
-    width: 100%;
-    text-transform: uppercase;
-    font-size: .8em;
-}
-#content {
+    height: 100vh;
+    .headerTable {
+        width: 100%;
+        text-transform: uppercase;
+        font-size: 0.8em;
+    }
+    #content {
         padding: 0;
         ul {
             list-style-type: none;
-            margin: 0; padding: 0;
-        }       
+            margin: 0;
+            padding: 0;
+        }
     }
 }
 
-.success{
+.success {
     color: blue;
 }
 
-.error{
+.error {
     color: #ff0000;
 }

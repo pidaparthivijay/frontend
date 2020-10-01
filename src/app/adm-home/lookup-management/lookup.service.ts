@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RequestDTO } from 'src/app/shared/model/request-dto.model';
 import { RequestMappings } from 'src/app/shared/model/RequestMappings';
@@ -16,8 +16,8 @@ export class LookupService {
     return this.httpClient.post(RequestMappings.LOOKUP_UPDATE, requestDTO);
   }
 
-  uploadLookupExcel(requestDTO: RequestDTO) {
-    return this.httpClient.post(RequestMappings.LOOKUP_EXCEL_UPLOAD, requestDTO);
+  uploadLookupExcel(formData: FormData) {
+    return this.httpClient.post(RequestMappings.LOOKUP_EXCEL_UPLOAD, formData);
   }
 
   toggleDelete(requestDTO: RequestDTO) {
