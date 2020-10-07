@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Constants } from 'src/app/shared/model/constants';
-import { RequestDTO } from 'src/app/shared/model/request-dto.model';
-import { Room } from 'src/app/shared/model/room.model';
+import { Constants } from 'src/app/common/model/constants';
+import { RequestDTO } from 'src/app/common/model/request-dto.model';
+import { Room } from 'src/app/common/model/room.model';
 import { RoomService } from './room.service';
 
 @Component({

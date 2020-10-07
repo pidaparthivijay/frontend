@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestDTO } from 'src/app/shared/model/request-dto.model';
-import { RoomRequest } from 'src/app/shared/model/room-request';
+import { RequestDTO } from 'src/app/common/model/request-dto.model';
+import { RoomRequest } from 'src/app/common/model/room-request';
 import { RoomAllocateService } from './room-allocate.service';
 
 @Component({

@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LookupService } from 'src/app/adm-home/lookup-management/lookup.service';
-import { Constants } from 'src/app/shared/model/constants';
-import { Customer } from 'src/app/shared/model/customer.model';
-import { RequestDTO } from 'src/app/shared/model/request-dto.model';
-import { RoomRequest } from 'src/app/shared/model/room-request';
+import { Constants } from 'src/app/common/model/constants';
+import { Customer } from 'src/app/common/model/customer.model';
+import { RequestDTO } from 'src/app/common/model/request-dto.model';
+import { RoomRequest } from 'src/app/common/model/room-request';
 import { RoomReqService } from './room-req.service';
+
 
 @Component({
   selector: 'app-room-registration',

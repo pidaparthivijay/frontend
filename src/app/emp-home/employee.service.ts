@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RequestDTO } from '../shared/model/request-dto.model';
-import { RequestMappings } from '../shared/model/RequestMappings';
+import { RequestDTO } from '../common/model/request-dto.model';
+import { RequestMappings } from '../common/model/RequestMappings';
 
 @Injectable({
   providedIn: 'root'

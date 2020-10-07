@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Amenity } from 'src/app/shared/model/amenity.model';
-import { Constants } from 'src/app/shared/model/constants';
-import { RequestDTO } from 'src/app/shared/model/request-dto.model';
+import { Amenity } from 'src/app/common/model/amenity.model';
+import { Constants } from 'src/app/common/model/constants';
+import { RequestDTO } from 'src/app/common/model/request-dto.model';
 import { AmenityService } from './amenity.service';
 
 @Component({

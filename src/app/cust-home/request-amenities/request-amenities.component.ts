@@ -3,9 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AmenityService } from 'src/app/adm-home/amenity-management/amenity.service';
-import { AmenityRequest } from 'src/app/shared/model/amenityRequest.model';
-import { Constants } from 'src/app/shared/model/constants';
-import { RequestDTO } from 'src/app/shared/model/request-dto.model';
+import { AmenityRequest } from 'src/app/common/model/amenityRequest.model';
+import { Constants } from 'src/app/common/model/constants';
+import { RequestDTO } from 'src/app/common/model/request-dto.model';
 
 @Component({
   selector: 'app-request-amenities',

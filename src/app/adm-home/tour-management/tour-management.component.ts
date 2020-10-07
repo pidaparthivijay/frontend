@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Constants } from 'src/app/shared/model/constants';
-import { RequestDTO } from 'src/app/shared/model/request-dto.model';
-import { TourPackage } from 'src/app/shared/model/tour-package.model';
+import { Constants } from 'src/app/common/model/constants';
+import { RequestDTO } from 'src/app/common/model/request-dto.model';
+import { TourPackage } from 'src/app/common/model/tour-package.model';
+
 import { TourService } from './tour.service';
 
 @Component({

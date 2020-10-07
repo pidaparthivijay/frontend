@@ -1,12 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LookupService } from '../adm-home/lookup-management/lookup.service';
-import { Constants } from '../shared/model/constants';
-import { Customer } from '../shared/model/customer.model';
-import { Employee } from '../shared/model/employee.model';
-import { Lookup } from '../shared/model/lookup.model';
-import { RequestDTO } from '../shared/model/request-dto.model';
+import { Constants } from '../common/model/constants';
+import { Customer } from '../common/model/customer.model';
+import { Employee } from '../common/model/employee.model';
+import { RequestDTO } from '../common/model/request-dto.model';
 import { EmployeeService } from './employee.service';
 
 @Component({

@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RequestDTO } from 'src/app/shared/model/request-dto.model';
-import { RequestMappings } from 'src/app/shared/model/RequestMappings';
-import { TourPackageRequest } from 'src/app/shared/model/tour-package-request';
-import { TourPackage } from 'src/app/shared/model/tour-package.model';
+import { RequestDTO } from 'src/app/common/model/request-dto.model';
+import { RequestMappings } from 'src/app/common/model/RequestMappings';
+
 
 @Injectable({
   providedIn: 'root'

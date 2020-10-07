@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Table } from 'primeng/table';
-import { Constants } from 'src/app/shared/model/constants';
-import { Lookup } from 'src/app/shared/model/lookup.model';
-import { RequestDTO } from 'src/app/shared/model/request-dto.model';
+import { Constants } from 'src/app/common/model/constants';
+import { Lookup } from 'src/app/common/model/lookup.model';
+import { RequestDTO } from 'src/app/common/model/request-dto.model';
 import { LookupService } from './lookup.service';
 
 @Component({

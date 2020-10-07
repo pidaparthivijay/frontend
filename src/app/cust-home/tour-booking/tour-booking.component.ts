@@ -3,9 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TourService } from 'src/app/adm-home/tour-management/tour.service';
-import { Constants } from 'src/app/shared/model/constants';
-import { RequestDTO } from 'src/app/shared/model/request-dto.model';
-import { TourPackageRequest } from 'src/app/shared/model/tour-package-request';
+import { Constants } from 'src/app/common/model/constants';
+import { RequestDTO } from 'src/app/common/model/request-dto.model';
+import { TourPackageRequest } from 'src/app/common/model/tour-package-request';
 
 @Component({
   selector: 'app-tour-booking',

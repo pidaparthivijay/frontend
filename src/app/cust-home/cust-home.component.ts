@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../common/login/login.service';
-import { Customer } from '../shared/model/customer.model';
-import { RequestDTO } from '../shared/model/request-dto.model';
-import { RoomRequest } from '../shared/model/room-request';
-import { User } from '../shared/model/user.model';
+import { LoginService } from '../common/components/login/login.service';
+import { Customer } from '../common/model/customer.model';
+import { RequestDTO } from '../common/model/request-dto.model';
+import { RoomRequest } from '../common/model/room-request';
+import { User } from '../common/model/user.model';
 import { CustomerService } from './customer.service';
+
 
 @Component({
   selector: 'app-cust-home',
