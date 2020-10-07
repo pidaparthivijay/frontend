@@ -21,6 +21,7 @@ export class Constants {
     public static readonly FAILURE = "failure"
     public static readonly GENDER = "GENDER";
     public static readonly GUEST_COUNT = "GUEST_COUNT";
+    public static readonly INVALID = "Invalid details"
     public static readonly LOCATION = "LOCATION";
     public static readonly LOOKUP_SAVE_SXS = "Lookups Save Success";
     public static readonly OCCUPIED = "occupied";

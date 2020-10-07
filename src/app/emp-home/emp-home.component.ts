@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LookupService } from '../adm-home/lookup-management/lookup.service';
 import { Constants } from '../shared/model/constants';
 import { Customer } from '../shared/model/customer.model';
@@ -18,13 +19,13 @@ export class EmpHomeComponent implements OnInit {
   private userId: number;
   private viewProf: boolean;
   private viewCustBill: boolean;
-  private requestList: any = [];
+  private pendingBillList: any = [];
   private employee: any;
   private genderLookup: any;
   private userName: string;
   @ViewChild('pdfViewer') pdfViewer: ElementRef;
-  constructor(private route: ActivatedRoute, private lookupService: LookupService, private router: Router, private employeeService: EmployeeService) {
-    this.route.queryParams.subscribe(params => {
+  constructor(private activatedRoute: ActivatedRoute, private lookupService: LookupService, private toastrService: ToastrService, private employeeService: EmployeeService) {
+    this.activatedRoute.queryParams.subscribe(params => {
       this.userId = params['userId']
     });
   }
@@ -53,6 +54,7 @@ export class EmpHomeComponent implements OnInit {
 
   viewProfile() {
     this.viewCustBill = false;
+    this.pendingBillList = [];
     let employee = new Employee();
     let requestDTO = new RequestDTO();
     employee.userName = this.userName;
@@ -76,7 +78,7 @@ export class EmpHomeComponent implements OnInit {
     this.employeeService.getPendingBill(requestDTO).subscribe(
       resp => {
         console.log(resp);
-        this.requestList = resp['pendingBillRequests'];
+        this.pendingBillList = resp['pendingBillRequests'];
       },
       error => console.error(error)
     );
@@ -112,7 +114,7 @@ export class EmpHomeComponent implements OnInit {
     customer.custEmail = custEmail;
     requestDTO.customer = customer;
     this.employeeService.mailBillToUser(requestDTO).subscribe((responseMessage) => {
-      console.log(responseMessage);
+      this.toastrService.success(responseMessage[Constants.ACT_STS]);
     },
       error => {
         console.error(error);

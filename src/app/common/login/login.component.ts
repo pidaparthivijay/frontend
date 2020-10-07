@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Constants } from 'src/app/shared/model/constants';
 import { User } from 'src/app/shared/model/user.model';
 import { LoginService } from './login.service';
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   customer: any;
   loggedUser: User;
-  constructor(private formBuilder: FormBuilder, private router: Router, private loginService: LoginService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private toastrService: ToastrService, private loginService: LoginService) { }
   get f() { return this.loginForm.controls; }
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -54,7 +55,14 @@ export class LoginComponent implements OnInit {
             user.userType = Constants.ADMIN;
             this.loginService.setLoggedIn(true);
             break;
+          case Constants.ADM_SXS:
+            user.name = resp['admName'];
+            user.userType = Constants.ADMIN;
+            this.loginService.setLoggedIn(true);
+            break;
           default:
+            this.toastrService.error(Constants.INVALID);
+            this.loginForm.reset();
             this.loginService.setLoggedIn(false);
             user = null;
             break;

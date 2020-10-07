@@ -8,9 +8,7 @@
     <p-fileUpload pTooltip="Select & Upload Excel for new Lookups" customUpload="true"
         (uploadHandler)="uploadLookupExcel($event)" maxFileSize="1000000">
         <ng-template pTemplate="content">
-
             {{file?.name}} {{file?.size}}
-
         </ng-template>
     </p-fileUpload>
     <a href="assets/samples/LookupExcel.xlsx" class="btn btn-primary" download
