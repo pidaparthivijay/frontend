@@ -78,7 +78,11 @@ export class LoginComponent implements OnInit {
           case Constants.ADM_SXS:
             this.router.navigate(['/admWelcome']);
             break;
-          default: break;
+          default:
+            this.toastrService.error(Constants.INVALID);
+            this.loginForm.reset();
+            this.loginService.setLoggedIn(false);
+            break;
         }
       },
       error => console.error(error)
