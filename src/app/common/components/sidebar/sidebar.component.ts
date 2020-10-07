@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Constants } from 'src/app/shared/model/constants';
+import { Constants } from '../../model/constants';
 import { LoginService } from '../login/login.service';
+
 
 @Component({
   selector: 'app-sidebar',

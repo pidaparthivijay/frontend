@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Constants } from 'src/app/shared/model/constants';
-import { OneTimePassword } from 'src/app/shared/model/one-time-password.model';
-import { User } from 'src/app/shared/model/user.model';
+import { Constants } from '../../model/constants';
+import { OneTimePassword } from '../../model/one-time-password.model';
+import { User } from '../../model/user.model';
 import { RestorePwdService } from './restore-pwd.service';
 
 @Component({

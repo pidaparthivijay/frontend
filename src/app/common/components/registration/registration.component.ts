@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { LookupService } from 'src/app/adm-home/lookup-management/lookup.service';
-import { Constants } from 'src/app/shared/model/constants';
-import { Customer } from 'src/app/shared/model/customer.model';
-import { RequestDTO } from 'src/app/shared/model/request-dto.model';
+import { Constants } from '../../model/constants';
+import { Customer } from '../../model/customer.model';
+import { RequestDTO } from '../../model/request-dto.model';
 import { RegSerService } from './reg-ser.service';
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',

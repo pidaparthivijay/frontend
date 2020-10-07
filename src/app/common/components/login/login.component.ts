@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Constants } from 'src/app/shared/model/constants';
-import { User } from 'src/app/shared/model/user.model';
+import { Constants } from '../../model/constants';
+import { User } from '../../model/user.model';
+
 import { LoginService } from './login.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OneTimePassword } from 'src/app/shared/model/one-time-password.model';
-import { RequestMappings } from 'src/app/shared/model/RequestMappings';
-import { User } from 'src/app/shared/model/user.model';
+import { OneTimePassword } from '../../model/one-time-password.model';
+import { RequestMappings } from '../../model/RequestMappings';
+import { User } from '../../model/user.model';
+
 
 @Injectable({
   providedIn: 'root'
