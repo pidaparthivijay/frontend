@@ -16,8 +16,11 @@
       <tr>
         <td>
           <div class="form-group">
-            <input type="date" pTooltip="Checking In Date" formControlName="checkInDate" class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.checkInDate.errors }">
+            <p-calendar class="form-control" dateFormat="yy-mm-dd" [showIcon]="true" [touchUI]="true"
+              [ngClass]="{ 'is-invalid': submitted && f.checkInDate.errors }" [showButtonBar]="true"
+              pTooltip="CheckIn Date" formControlName="checkInDate" placeholder="Checkin In Date"
+              [readonlyInput]="true">
+            </p-calendar>
             <div *ngIf="submitted && f.checkInDate.errors" class="invalid-feedback">
               <div *ngIf="f.checkInDate.errors.required">Check In Date is required</div>
             </div>
@@ -39,8 +42,11 @@
       <tr>
         <td>
           <div class="form-group">
-            <input type="date" pTooltip="Checking Out Date" formControlName="checkOutDate" class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.checkOutDate.errors }">
+            <p-calendar class="form-control" dateFormat="yy-mm-dd" [showIcon]="true" [touchUI]="true"
+              [ngClass]="{ 'is-invalid': submitted && f.checkOutDate.errors }" [showButtonBar]="true"
+              pTooltip="CheckOut Date" formControlName="checkOutDate" placeholder="Checkin Out Date"
+              [readonlyInput]="true">
+            </p-calendar>
             <div *ngIf="submitted && f.checkOutDate.errors" class="invalid-feedback">
               <div *ngIf="f.checkOutDate.errors.required">Check Out Date is required</div>
             </div>

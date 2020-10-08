@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MenuItem } from 'primeng/api';
 import { LookupService } from '../adm-home/lookup-management/lookup.service';
 import { Constants } from '../common/model/constants';
 import { Customer } from '../common/model/customer.model';
@@ -14,25 +15,51 @@ import { EmployeeService } from './employee.service';
   styleUrls: ['./emp-home.component.scss']
 })
 export class EmpHomeComponent implements OnInit {
-
-  private userId: number;
+  menuList: MenuItem[];
   private viewProf: boolean;
   private viewCustBill: boolean;
   private pendingBillList: any = [];
   private employee: any;
   private genderLookup: any;
   private userName: string;
-  @ViewChild('pdfViewer') pdfViewer: ElementRef;
+  private empName: string;
   constructor(private activatedRoute: ActivatedRoute, private lookupService: LookupService, private toastrService: ToastrService, private employeeService: EmployeeService) {
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.userId = params['userId']
-    });
+
   }
   onGender(event) {
     this.employee.empGen = event.value.lookupValue;
     console.log(event.value.lookupValue);
   }
   ngOnInit() {
+    this.empName = sessionStorage.getItem('name');
+    this.menuList = [
+      {
+        label: 'Generate Bill',
+        icon: 'pi pi-fw pi-money-bill',
+        title: 'Generate the bill',
+        command: (event) => {
+          if (event.originalEvent.type === 'click') {
+            this.generateBill()
+          }
+        }
+      },
+      {
+        label: this.empName,
+        icon: 'pi pi-fw pi-user',
+        title: 'View ' + this.empName + ' \'s details',
+        command: (event) => {
+          if (event.originalEvent.type === 'click') {
+            this.viewProfile()
+          }
+        }
+      },
+      {
+        label: 'Logout',
+        title: 'Logout',
+        routerLink: '/logout',
+        icon: 'pi pi-fw pi-power-off'
+      }
+    ];
     this.userName = sessionStorage.getItem('userName');
     let requestDto = new RequestDTO();
     requestDto.lookupDefinitionName = Constants.GENDER;
@@ -70,13 +97,19 @@ export class EmpHomeComponent implements OnInit {
 
   generateBillForMail() {
     var custEmail = (<HTMLInputElement>document.getElementById('custEmail')).value;
+    if (custEmail === undefined || custEmail === '' || custEmail == null) {
+      this.toastrService.error("Please provide customer email Id");
+      return;
+    }
     let requestDTO = new RequestDTO();
     let customer = new Customer();
     customer.custEmail = custEmail;
     requestDTO.customer = customer;
     this.employeeService.getPendingBill(requestDTO).subscribe(
       resp => {
-        console.log(resp);
+        if (resp['actionStatus'] === Constants.INVALID_MAIL) {
+          this.toastrService.error(Constants.INVALID_MAIL);
+        }
         this.pendingBillList = resp['pendingBillRequests'];
       },
       error => console.error(error)
@@ -86,12 +119,20 @@ export class EmpHomeComponent implements OnInit {
 
   getFile() {
     var custEmail = (<HTMLInputElement>document.getElementById('custEmail')).value;
+    if (custEmail === undefined || custEmail === '' || custEmail == null) {
+      this.toastrService.error("Please provide customer email Id");
+      return;
+    }
     let requestDTO = new RequestDTO();
     let customer = new Customer();
     customer.custEmail = custEmail;
     requestDTO.customer = customer;
     this.employeeService.generatePDF(requestDTO).subscribe((responseMessage) => {
       console.log(responseMessage);
+      if (responseMessage['actionStatus'] === Constants.INVALID_MAIL || responseMessage['size'] == 20) {
+        this.toastrService.error(Constants.INVALID_MAIL);
+        return;
+      }
       let file = new Blob([responseMessage as Blob], { type: "application/pdf" });
       var fileURL = URL.createObjectURL(file);
       const a: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
@@ -108,12 +149,20 @@ export class EmpHomeComponent implements OnInit {
 
   mailBillToUser() {
     var custEmail = (<HTMLInputElement>document.getElementById('custEmail')).value;
+    if (custEmail === undefined || custEmail === '' || custEmail == null) {
+      this.toastrService.error("Please provide customer email Id");
+      return;
+    }
     let requestDTO = new RequestDTO();
     let customer = new Customer();
     customer.custEmail = custEmail;
     requestDTO.customer = customer;
     this.employeeService.mailBillToUser(requestDTO).subscribe((responseMessage) => {
-      this.toastrService.success(responseMessage[Constants.ACT_STS]);
+      if (responseMessage['actionStatus'] === Constants.INVALID_MAIL) {
+        this.toastrService.error(Constants.INVALID_MAIL);
+      } else {
+        this.toastrService.success(responseMessage[Constants.ACT_STS]);
+      }
     },
       error => {
         console.error(error);

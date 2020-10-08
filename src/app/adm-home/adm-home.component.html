@@ -1,19 +1,9 @@
-Hi {{empName}}, <br>
-<table class="table table-bordered table-striped" style="width: 45%">
-  <tr>
-    <td><button class="btn btn-primary" pTooltip="View Requests & Allocate Rooms" routerLink="roomAllocate"> Room
-        Allocate</button>
-    <td><button class="btn btn-primary" pTooltip="View & Add Employees" routerLink="employeeManagement">Manage
-        Employees</button></td>
-    <td><button class="btn btn-primary" pTooltip="Add,View,Edit,Delete Amenities" routerLink="amenity">Manage
-        Amenities</button></td>
-    <td><button class="btn btn-primary" pTooltip="Add,View,Edit,Delete Tour Packages" routerLink="tourPackage">Manage
-        Tour Packages</button></td>
-    <td><button class="btn btn-primary" pTooltip="Manage Rooms" routerLink="roomManagement">Manage
-        Rooms</button></td>
-    <td><button class="btn btn-primary" pTooltip="Manage the Look ups that appear" routerLink="lookupManagement">Manage
-        Lookups</button></td>
-  </tr>
-</table>
-<br>
-<router-outlet></router-outlet>
+<p-menubar *ngIf="items?.length>0" [model]="items">
+    <ng-template pTemplate="start">
+    </ng-template>
+    <ng-template pTemplate="end">
+    </ng-template>
+</p-menubar>
+<div style="padding-left: 20px; padding-top:20px">
+    <router-outlet></router-outlet>
+</div>

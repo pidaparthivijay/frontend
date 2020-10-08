@@ -26,6 +26,7 @@ export class RoomManagementComponent implements OnInit {
       floorNumber: ['', Validators.required],
       countOfRooms: ['']
     });
+    this.getAllRooms();
   }
   get f() { return this.createRoomForm.controls; }
 
@@ -41,37 +42,19 @@ export class RoomManagementComponent implements OnInit {
     room.roomCategory = this.createRoomForm.value.categoryOfRoom;
     room.floorNumber = this.createRoomForm.value.floorNumber;
     room.roomStatus = Constants.VACANT;
-    if (this.createRoomMultipleFlag) {
-      if (this.createRoomForm.value.countOfRooms == undefined || this.createRoomForm.value.countOfRooms == "" || this.createRoomForm.value.countOfRooms == null) {
-        alert("Input count of Rooms");
-        return;
+    room.countOfRooms = this.createRoomForm.value.countOfRooms === 0 ? 1 : this.createRoomForm.value.countOfRooms;
+    requestDto.room = room;
+    this.roomService.createRoomMultiple(requestDto).subscribe(
+      resp => {
+        console.log(resp);
+        if (resp[Constants.ACT_STS] === Constants.RM_CRT_SXS) {
+          this.getAllRooms();
+        } else {
+          console.log(resp);
+          //showerror
+        }
       }
-      room.countOfRooms = this.createRoomForm.value.countOfRooms;
-      requestDto.room = room;
-      this.roomService.createRoomMultiple(requestDto).subscribe(
-        resp => {
-          console.log(resp);
-          if (resp[Constants.ACT_STS] === Constants.RM_CRT_SXS) {
-            this.getAllRooms();
-          } else {
-            //showerror
-          }
-        }
-      );
-
-    } else {
-      requestDto.room = room;
-      this.roomService.createRoom(requestDto).subscribe(
-        resp => {
-          console.log(resp);
-          if (resp[Constants.ACT_STS] === Constants.RM_CRT_SXS) {
-            this.getAllRooms();
-          } else {
-            //showerror
-          }
-        }
-      );
-    }
+    );
   }
 
   getAllRooms() {

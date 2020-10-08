@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
 import { LoginService } from '../common/components/login/login.service';
 import { Customer } from '../common/model/customer.model';
 import { RequestDTO } from '../common/model/request-dto.model';
@@ -23,6 +24,7 @@ export class CustHomeComponent implements OnInit {
   viewProf: boolean;
   viewRewards: boolean;
   viewRoomReq: boolean;
+  items: MenuItem[];
 
   constructor(private custService: CustomerService, private loginService: LoginService, private router: Router) {
   }
@@ -31,6 +33,70 @@ export class CustHomeComponent implements OnInit {
     this.custName = sessionStorage.getItem('name')
     this.userName = sessionStorage.getItem('userName');
     this.userId = +sessionStorage.getItem('userId');
+    this.items = [
+      {
+        title: 'Register for Room',
+        routerLink: 'roomReg',
+        icon: 'pi pi-fw pi-home',
+        label: 'Room Registration'
+      },
+      {
+        title: 'Request Amenities',
+        icon: 'pi pi-fw pi-th-large',
+        routerLink: 'requestAmenities',
+        label: 'Request Amenities '
+      },
+      {
+        title: 'Book a Tour Package',
+        icon: 'pi pi-fw pi-briefcase',
+        routerLink: 'tourBooking',
+        label: 'Book Tour Packages'
+      },
+      {
+        label: this.custName,
+        icon: 'pi pi-fw pi-user',
+        title: 'View ' + this.custName + '\'s Menu',
+        items: [
+
+          {
+            icon: 'pi pi-fw pi-user-edit',
+            label: 'View My Profile',
+            title: 'View your details',
+            command: (event) => {
+              if (event.originalEvent.type === 'click') {
+                this.viewProfile()
+              }
+            }
+          },
+          {
+            title: 'View the Requests raised by you',
+            icon: 'pi pi-fw pi-sitemap',
+            label: 'View My Requests',
+            command: (event) => {
+              if (event.originalEvent.type === 'click') {
+                this.viewRequests()
+              }
+            }
+
+          }, {
+            title: 'View the Reward Points you have',
+            icon: 'pi pi-fw pi-star-o',
+            label: 'View My Reward Points',
+            command: (event) => {
+              if (event.originalEvent.type === 'click') {
+                this.viewRewardPoints()
+              }
+            }
+          },
+          {
+            title: 'Logout',
+            label: 'Logout',
+            routerLink: '/logout',
+            icon: 'pi pi-fw pi-power-off'
+          }
+        ]
+      },
+    ];
   }
 
   viewProfile() {

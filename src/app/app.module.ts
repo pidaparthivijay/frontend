@@ -1,4 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,6 +9,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { MenubarModule } from 'primeng/menubar';
+import { TabMenuModule } from 'primeng/tabmenu';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
@@ -22,7 +25,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './common/authguard/auth-guard';
 import { ContactComponent } from './common/components/contact/contact.component';
-import { HeaderComponent } from './common/components/header/header.component';
 import { HomeComponent } from './common/components/home/home.component';
 import { LoginComponent } from './common/components/login/login.component';
 import { LogoutComponent } from './common/components/logout/logout.component';
@@ -41,7 +43,6 @@ import { EmpHomeComponent } from './emp-home/emp-home.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     SidebarComponent,
     HomeComponent,
     ContactComponent,
@@ -72,14 +73,17 @@ import { EmpHomeComponent } from './emp-home/emp-home.component';
     SliderModule,
     FormsModule,
     TableModule,
+    TabMenuModule,
+    MenubarModule,
     FileUploadModule,
+    BreadcrumbModule,
     TooltipModule,
     CalendarModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [RegSerService, AuthGuard],
+  providers: [RegSerService, AuthGuard, LookupManagementComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

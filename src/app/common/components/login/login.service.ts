@@ -23,6 +23,7 @@ export class LoginService {
   }
 
   setUserDetails(user: User) {
+    console.log(user);
     this.userDetails.next(user);
     if (user != null) {
       sessionStorage.setItem('userName', user.userName);

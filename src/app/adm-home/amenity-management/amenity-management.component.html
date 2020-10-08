@@ -42,7 +42,7 @@
     [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
     <ng-template pTemplate="caption">
         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Global Filter" pToolTip="Use this to filter globally"
+        <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Use this to filter globally"
             (input)="amenityTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
     </ng-template>
     <ng-template pTemplate="header">

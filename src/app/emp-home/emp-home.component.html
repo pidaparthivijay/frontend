@@ -1,94 +1,90 @@
-<br>
-<table class="table table-bordered table-striped" style="width: 45%">
-  <tr>
-    <td><button class="btn btn-primary" pTooltip="Generate the bill" (click)="generateBill();">Generate Bill</button>
-    </td>
-    <td><button class="btn btn-primary" pTooltip="View and update details" (click)="viewProfile();">View My
-        Profile</button></td>
-  </tr>
-</table>
-<p-table #employeeTable *ngIf="viewProf" [style]="{'width':'70%','margin-top':'8px'}" [value]="[employee]">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Employee Id</th>
-      <th>Name</th>
-      <th>Gender</th>
-      <th style="width:25%">Email</th>
-      <th>Username</th>
-      <th>Action</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body">
-    <tr>
-      <td>{{employee.empId}}</td>
-      <td pEditableColumn>
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <input pInputText type="text" [(ngModel)]="employee.empName" pTooltip="Editing the name of employee"
-              amenityName>
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{employee.empName}}
-          </ng-template>
-        </p-cellEditor>
-      </td>
-      <td pEditableColumn>
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <p-dropdown [options]="genderLookup" [(ngModel)]="employee.empGen" optionLabel="displayName"
-              optionValue="lookupValue" (onChange)="onGender($event)" pTooltip="Gender" pTooltip="Gender"
-              [style]="{'width':'auto', 'height':'auto'}">
-            </p-dropdown>
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{employee.empGen}}
-          </ng-template>
-        </p-cellEditor>
-      </td>
-      <td style="width:25%">{{employee.email}}</td>
-      <td>{{employee.userName}}</td>
-      <td><button class="btn btn-primary" pTooltip="Save the changes" (click)="updateDetails(employee);">Update</button>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+<p-tabMenu [model]="menuList" pTooltip="{{activeItem?.title}}" [activeItem]="activeItem">
+</p-tabMenu>
+<div style="padding-left: 20px; padding-top:20px">
+  <p-table #employeeTable *ngIf="viewProf" [style]="{'width':'70%','margin-top':'8px'}" [value]="[employee]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Employee Id</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th style="width:25%">Email</th>
+        <th>Username</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body">
+      <tr>
+        <td>{{employee.empId}}</td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="employee.empName" pTooltip="Editing the name of employee"
+                amenityName>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{employee.empName}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-dropdown [options]="genderLookup" [(ngModel)]="employee.empGen" optionLabel="displayName"
+                optionValue="lookupValue" (onChange)="onGender($event)" pTooltip="Gender" pTooltip="Gender"
+                [style]="{'width':'auto', 'height':'auto'}">
+              </p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{employee.empGen}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td style="width:25%">{{employee.email}}</td>
+        <td>{{employee.userName}}</td>
+        <td><button class="btn btn-primary" pTooltip="Save the changes"
+            (click)="updateDetails(employee);">Update</button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 
-<div *ngIf="viewCustBill">
-  <table class="table table-bordered table-striped" style="width: 45%">
-    <tr>
-      <th>Email</th>
-      <td><input type="text" name="custEmail" pTooltip="Provide Customer email" id="custEmail" #custEmail></td>
-      <td><button class="btn btn-primary" pTooltip="Generate the Bill for given customer email"
-          (click)="generateBillForMail();">Submit</button></td>
-    </tr>
-  </table>
+  <div *ngIf="viewCustBill">
+    <table class="table table-bordered table-striped" style="width: 45%">
+      <tr>
+        <th>Email</th>
+        <td><input type="text" name="custEmail" pTooltip="Provide Customer email" id="custEmail" #custEmail></td>
+        <td><button class="btn btn-primary" pTooltip="Generate the Bill for given customer email"
+            (click)="generateBillForMail();">Submit</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <p-table #billTable *ngIf="pendingBillList?.length>0" [style]="{'width':'70%','margin-top':'8px'}"
+    [value]="pendingBillList" [paginator]="true" [showCurrentPageReport]="true" [rows]="10"
+    [rowsPerPageOptions]="[3, 5,7]" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Request Id
+        </th>
+        <th>Request Date
+        </th>
+        <th>Request Type</th>
+        <th>Bill Amount</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-request let-editing="editing" let-ri="rowIndex">
+      <tr>
+        <td>{{request.requestId === 0 ?"" : request.requestId}}</td>
+        <td>{{request.typeOfRequest}}</td>
+        <td>{{request.requestDate === null ? "" : request.requestDate| date:'dd MMM, yyyy'}}</td>
+        <td>{{request.billAmount}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <a style="text-align: left;" download="bill.pdf" pTooltip="Download & Print the bill" class="btn btn-primary"
+        (click)="getFile();">Print</a>
+      <button style="float: right;" pTooltip="Mail the bill to User" class="btn btn-primary"
+        (click)="mailBillToUser();">Send to User</button>
+    </ng-template>
+  </p-table>
 </div>
-
-<p-table #billTable *ngIf="pendingBillList?.length>0" [style]="{'width':'70%','margin-top':'8px'}"
-  [value]="pendingBillList" [paginator]="true" [showCurrentPageReport]="true" [rows]="10"
-  [rowsPerPageOptions]="[3, 5,7]" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Request Id
-      </th>
-      <th>Request Date
-      </th>
-      <th>Request Type</th>
-      <th>Bill Amount</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-request let-editing="editing" let-ri="rowIndex">
-    <tr>
-      <td>{{request.requestId === 0 ?"" : request.requestId}}</td>
-      <td>{{request.typeOfRequest}}</td>
-      <td>{{request.requestDate === null ? "" : request.requestDate| date:'dd MMM, yyyy'}}</td>
-      <td>{{request.billAmount}}</td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="summary">
-    <a style="text-align: left;" download="bill.pdf" pTooltip="Download & Print the bill" class="btn btn-primary"
-      (click)="getFile();">Print</a>
-    <button style="float: right;" pTooltip="Mail the bill to User" class="btn btn-primary"
-      (click)="mailBillToUser();">Send to User</button>
-  </ng-template>
-</p-table>

@@ -47,10 +47,12 @@ export class LookupManagementComponent implements OnInit {
       this.lookupDefNames = resp['lookupDefsList'];
     },
       error => console.error(error));
+    this.viewAllLookups()
   }
   get f() { return this.loookupCreationForm.controls; }
 
   toggleViews(type) {
+    console.log('here');
     if (type === 'create') {
       this.createNew = true;
       this.viewAll = false;

@@ -1,33 +1,17 @@
-<button class="btn btn-primary" pTooltip="Upload the Excel for new Lookups" (click)="toggleViews('upload')">Upload
-    Excel</button> &nbsp;&nbsp;&nbsp;
-<button class="btn btn-primary" pTooltip="create a new Lookup" (click)="toggleViews('create')">Create
-    New</button>&nbsp;&nbsp;&nbsp;
-<button class="btn btn-primary" pTooltip="View all the existing lookups" (click)="toggleViews('view')">View All</button>
-<br><br>
-<div *ngIf="upload">
-    <p-fileUpload pTooltip="Select & Upload Excel for new Lookups" customUpload="true"
-        (uploadHandler)="uploadLookupExcel($event)" maxFileSize="1000000">
-        <ng-template pTemplate="content">
-            {{file?.name}} {{file?.size}}
-        </ng-template>
-    </p-fileUpload>
-    <a href="assets/samples/LookupExcel.xlsx" class="btn btn-primary" download
-        pTooltip="Download a Sample Excel">Download Sample</a>
-</div>
-<br><br>
-<div *ngIf="createNew" class="float-right">
+<div class="float-right">
     <form [formGroup]="loookupCreationForm" (ngSubmit)="createLookup()">
         <table class="table table-bordered table-striped">
             <tr>
                 <th>Lookup Definition Name</th>
                 <td>
                     <div class="form-group">
-                        <select name="lookupDefName" formControlName="lookupDefName" class="form-control"
-                            pTooltip="Download a sample Excel -> Should be a p-dropdown"
-                            [ngClass]="{ 'is-invalid': submitted && f.lookupDefName.errors }">
-                            <option *ngFor="let lookupName of lookupDefNames; let i = index;" [selected]="i==0">
-                                {{lookupName}}</option>
-                        </select>
+                        <p-dropdown [options]="lookupDefNames" pTooltip="Look up definition Name" name="lookupDefName"
+                            formControlName="lookupDefName" class="form-control" placeholder="Look up definition Name"
+                            [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option}}</span>
+                            </ng-template>
+                        </p-dropdown>
                         <div *ngIf="submitted && f.lookupDefName.errors" class="invalid-feedback">
                             <div *ngIf="f.lookupDefName.errors.required">Lookup Definition Name is required</div>
                         </div>
@@ -69,6 +53,15 @@
                 <td><input type="reset" class="btn-primary" pTooltip="Reset the form" value="Reset"></td>
 
         </table>
+        <p-fileUpload pTooltip="Select & Upload Excel for new Lookups" customUpload="true"
+            (uploadHandler)="uploadLookupExcel($event)" maxFileSize="1000000">
+            <ng-template pTemplate="content">
+                {{file?.name}} {{file?.size}}
+            </ng-template>
+        </p-fileUpload>
+        <a href="assets/samples/LookupExcel.xlsx" class="btn btn-primary" download
+            pTooltip="Download a Sample Excel">Download
+            Sample</a>
     </form>
 </div>
 
@@ -97,7 +90,7 @@
             <th>
                 <p-dropdown [options]="lookupDefinitions" pTooltip="Filter By definition name"
                     (onChange)="lookupTable.filter($event.value, 'lookupDefName', 'equals')"
-                    styleClass="p-column-filter" placeholder="Select a Status" [showClear]="true">
+                    styleClass="p-column-filter" placeholder="Select a Definition Name" [showClear]="true">
                     <ng-template let-option pTemplate="item">
                         <span>{{option.label}}</span>
                     </ng-template>

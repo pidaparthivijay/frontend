@@ -8,6 +8,7 @@
             placeholder="Username" style="width: 100%;">
           <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
             <div *ngIf="f.username.errors.required">User Name is required</div>
+            <div *ngIf="f.username.errors.minlength">User Name must be at least 6 characters</div>
           </div>
         </div>
       </td>

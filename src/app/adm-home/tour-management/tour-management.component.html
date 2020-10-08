@@ -31,13 +31,12 @@
             <tr>
                 <td>
                     <div class="form-group">
-                        <select formControlName="duration" class="form-control" pTooltip="Duration of the Tour"
-                            [ngClass]="{ 'is-invalid': submitted && f.duration.errors }">
-                            <option value="">Duration</option>
-                            <option value="2D3N">Short</option>
-                            <option value="4D5N">Medium</option>
-                            <option value="6D7N">Long</option>
-                        </select>
+                        <p-dropdown [options]="durations" formControlName="duration" class="form-control"
+                            pTooltip="Duration of the Tour" [ngClass]="{ 'is-invalid': submitted && f.duration.errors }"
+                            class="form-control" placeholder="Select Duration of Tour" name="duration"
+                            [(ngModel)]="duration" [virtualScroll]="false" optionLabel="displayName"
+                            [style]="{'width':'200px', 'height':'auto'}">
+                        </p-dropdown>
                         <div *ngIf="submitted && f.duration.errors" class="invalid-feedback">
                             <div *ngIf="f.duration.errors.required">Please select duration of Package</div>
                         </div>
@@ -52,7 +51,7 @@
         </table>
     </form>
 </div>
-<p-table #tourPackageTable *ngIf="tourPackagesList?.length>0" [style]="{'width':'50%','margin-top':'8px'}"
+<p-table #tourPackageTable *ngIf="tourPackagesList?.length>0" [style]="{'width':'70%','margin-top':'8px'}"
     [value]="tourPackagesList" [paginator]="true" [rowsPerPageOptions]="[5, 10,15]" [rows]="10"
     [globalFilterFields]="['tourPackageId','tourPackageName','location','duration','pricePerHead']"
     [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">

@@ -53,12 +53,7 @@ export class LoginComponent implements OnInit {
             this.loginService.setLoggedIn(true);
             break;
           case Constants.ADM_SXS:
-            user.name = resp['admName'];
-            user.userType = Constants.ADMIN;
-            this.loginService.setLoggedIn(true);
-            break;
-          case Constants.ADM_SXS:
-            user.name = resp['admName'];
+            user.name = resp['empName'];
             user.userType = Constants.ADMIN;
             this.loginService.setLoggedIn(true);
             break;

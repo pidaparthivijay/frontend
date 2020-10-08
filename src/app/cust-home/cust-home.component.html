@@ -1,20 +1,10 @@
-Hey {{custName}}!!! What would you like to do now? <br>
-<table class="table table-bordered table-striped" style="width: 45%">
-  <tr>
-    <td><button class="btn btn-primary" pTooltip="Register for Room" routerLink="roomReg">Room
-        Registration</button></td>
-    <td><button class="btn btn-primary" pTooltip="View your details" (click)="viewProfile();">View My Profile</button>
-    </td>
-    <td><button class="btn btn-primary" pTooltip="View the Requests raised by you" (click)="viewRequests();">View My
-        Requests</button></td>
-    <td><button class="btn btn-primary" pTooltip="View the Reward Points you have" (click)="viewRewardPoints();">View My
-        Reward Points</button></td>
-    <td><button class="btn btn-primary" pTooltip="Request Amenities" routerLink="/custWelcome/requestAmenities">Request
-        Amenities</button></td>
-    <td><button class="btn btn-primary" pTooltip="Book a Tour Package" routerLink="/custWelcome/tourBooking">Book Tour
-        Packages</button></td>
-  </tr>
-</table>
+<p-menubar *ngIf="items?.length>0" [model]="items">
+  <ng-template pTemplate="start">
+  </ng-template>
+  <ng-template pTemplate="end">
+  </ng-template>
+</p-menubar>
+<br>
 <div *ngIf="viewProf">
   <table class="table table-bordered" style="width: 70%; background:thistle;">
     <tr>
