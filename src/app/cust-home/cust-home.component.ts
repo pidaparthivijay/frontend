@@ -25,6 +25,7 @@ export class CustHomeComponent implements OnInit {
   viewRewards: boolean;
   viewRoomReq: boolean;
   items: MenuItem[];
+  viewTourRegistrations: boolean;
 
   constructor(private custService: CustomerService, private loginService: LoginService, private router: Router) {
   }
@@ -64,7 +65,10 @@ export class CustHomeComponent implements OnInit {
             title: 'View your details',
             command: (event) => {
               if (event.originalEvent.type === 'click') {
-                this.viewProfile()
+                this.viewProfile();
+                this.viewTourRegistrations = false;
+                this.viewRewards = false;
+                this.viewRoomReq = false;
               }
             }
           },
@@ -74,17 +78,38 @@ export class CustHomeComponent implements OnInit {
             label: 'View My Requests',
             command: (event) => {
               if (event.originalEvent.type === 'click') {
-                this.viewRequests()
+                this.viewRequests();
+                this.viewTourRegistrations = false;
+                this.viewRewards = false;
+                this.viewProf = false;
               }
             }
 
-          }, {
+          },
+          {
             title: 'View the Reward Points you have',
             icon: 'pi pi-fw pi-star-o',
             label: 'View My Reward Points',
             command: (event) => {
               if (event.originalEvent.type === 'click') {
-                this.viewRewardPoints()
+                this.viewRewardPoints();
+                this.viewTourRegistrations = false;
+                this.viewProf = false;
+                this.viewRoomReq = false;
+
+              }
+            }
+          },
+          {
+            title: 'View the Tours you have registered -> YTD',
+            icon: 'pi pi-fw pi-star-o',
+            label: 'View My Tour Registrations',
+            command: (event) => {
+              if (event.originalEvent.type === 'click') {
+                this.viewTourRegistrations = true;
+                this.viewProf = false;
+                this.viewRewards = false;
+                this.viewRoomReq = false;
               }
             }
           },

@@ -36,6 +36,7 @@ export class RequestDTO {
     roomRequestList: any;
     roomsList: any;
     roomStatus: string;
+    statusMessage: string;
     tourPackage: TourPackage;
     tourPackageList: any;
     tourPackageRequest: TourPackageRequest;

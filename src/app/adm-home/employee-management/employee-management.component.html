@@ -94,8 +94,13 @@
                     pTooltip="Filter By Name" placeholder="Employee Name" class="p-column-filter">
             </th>
             <th>
-                <input pInputText type="text" (input)="employeeTable.filter($event.target.value, 'empGen', 'contains')"
-                    pTooltip="Filter By Gender -> Should be a dropdown" placeholder="Gender" class="p-column-filter">
+                <p-dropdown [options]="lookupDefinitions" pTooltip="Filter By Gender"
+                    (onChange)="employeeTable.filter($event.value, 'empGen', 'equals')" styleClass="p-column-filter"
+                    placeholder="Select Gender" [showClear]="true">
+                    <ng-template let-option pTemplate="item">
+                        <span>{{option.label}}</span>
+                    </ng-template>
+                </p-dropdown>
             </th>
             <th>
                 <input pInputText type="text" (input)="employeeTable.filter($event.target.value, 'email', 'contains')"
@@ -125,8 +130,10 @@
             <td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText pTooltip="Employee Gender -> Should be a dropdown"
-                            [(ngModel)]="employee.empGen" empGen>
+                        <p-dropdown [options]="genders" placeholder="Gender of the Employee" [virtualScroll]="false"
+                            [(ngModel)]="employee.empGen" empGen pTooltip="Gender of the Employee"
+                            optionLabel="displayName">
+                        </p-dropdown>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{employee.empGen}}

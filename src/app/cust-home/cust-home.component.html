@@ -6,105 +6,316 @@
 </p-menubar>
 <br>
 <div *ngIf="viewProf">
-  <table class="table table-bordered" style="width: 70%; background:thistle;">
-    <tr>
-      <th>Name</th>
-      <td>{{customer.custName}}</td>
-    </tr>
-    <tr>
-      <th>Gender</th>
-      <td>{{customer.custGen}}</td>
-    </tr>
-    <tr>
-      <th>Customer Id</th>
-      <td>{{customer.custId}}</td>
-    </tr>
-    <tr>
-      <th>Mobile</th>
-      <td>{{customer.custMob}}</td>
-    </tr>
-    <tr>
-      <th>Email</th>
-      <td>{{customer.custEmail}}</td>
-    </tr>
-    <tr>
-      <th>Date Of Birth</th>
-      <td>{{customer.custDob === null ? "" : customer.custDob| date:'dd MMM, yyyy'}}</td>
-    </tr>
-    <tr>
-      <th>Username</th>
-      <td>{{customer.userName}}</td>
-    </tr>
-    <tr>
-      <th>Password</th>
-      <td>{{customer.custPass}}</td>
-    </tr>
-  </table>
-</div>
-<div *ngIf="viewRoomReq">
-  <table class="table table-bordered" style="width: 70%; background:thistle;">
-    <thead>
-      <tr style="background-color: wheat;">
-        <th>Request ID</th>
-        <th>Guest Name</th>
-        <th>Check In Date</th>
-        <th>Check Out Date</th>
-        <th>Guest Count</th>
-        <th>Room Type</th>
-        <th>Room Model</th>
-        <th>Room Category</th>
-        <th>Request Status</th>
-        <th>Cancel</th>
+  <p-table #customerTable *ngIf="viewProf" [style]="{'width':'70%','margin-top':'8px'}" [value]="[customer]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Customer Id</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th style="width:25%">Email</th>
+        <th>Date of Birth</th>
+        <th>Mobile #</th>
+        <th>Username</th>
+        <th>Action</th>
       </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let roomRequest of roomRequestList">
-        <td>{{roomRequest.requestId}}</td>
-        <td>{{roomRequest.guestName}}</td>
-        <td>{{roomRequest.checkInDate === null ? "" : roomRequest.checkInDate| date:'dd MMM, yyyy'}}</td>
-        <td>{{roomRequest.checkOutDate === null ? "" : roomRequest.checkOutDate| date:'dd MMM, yyyy'}}</td>
-        <td>{{roomRequest.guestCount}}</td>
-        <td>{{roomRequest.roomType}}</td>
-        <td>{{roomRequest.roomModel}}</td>
-        <td>{{roomRequest.roomCategory}}</td>
-        <td>{{roomRequest.roomRequestStatus}}</td>
-        <td>
-          <span *ngIf="roomRequest.roomRequestStatus == 'P'">
-            <input type="submit" class="btn-primary" pTooltip="Cancel the Room Request"
-              (click)="cancelRequest(roomRequest.requestId)" value="Cancel"></span>
+    </ng-template>
+    <ng-template pTemplate="body">
+      <tr>
+        <td>{{customer.custId}}</td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="customer.custName" pTooltip="Editing the name of customer"
+                custName>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{customer.custName}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-dropdown [options]="genderLookup" [(ngModel)]="customer.custGen" optionLabel="displayName"
+                optionValue="lookupValue" (onChange)="onGender($event)" pTooltip="Gender" pTooltip="Gender"
+                [style]="{'width':'auto', 'height':'auto'}">
+              </p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{customer.custGen}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td style="width:25%">{{customer.custEmail}}</td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-calendar dateFormat="yy-mm-dd" [showIcon]="true" [touchUI]="true" [showButtonBar]="true"
+                pTooltip="Date of Birth" [(ngModel)]="customer.custDob" placeholder="Date of Birth"
+                [readonlyInput]="true">
+              </p-calendar>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{customer.custDob === null ? "" : customer.custDob| date:'dd MMM, yyyy'}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="customer.custMob" pTooltip="Editing the Mobile # of customer"
+                custMob>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{customer.custMob}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>{{customer.userName}}</td>
+        <td><button class="btn btn-primary" pTooltip="Save the changes"
+            (click)="updateDetails(customer);">Update</button>
         </td>
       </tr>
-    </tbody>
-  </table>
+    </ng-template>
+  </p-table>
+</div>
+<div *ngIf="viewRoomReq">
+  <p-table #roomRequestTable *ngIf="roomRequestList?.length" [style]="{'width':'100%','margin-top':'8px'}"
+    [value]="roomRequestList"
+    [globalFilterFields]="['requestId','custName','guestName','checkInDate','checkOutDate','roomCategory','guestCount','guestGen','roomModel','roomType']"
+    [paginator]="true" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10,15]"
+    [rows]="10">
+    <ng-template pTemplate="caption">
+      <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+      <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Global Filter"
+        (input)="roomRequestTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="requestId">Request Id<p-sortIcon field="requestId"></p-sortIcon>
+        </th>
+        <th pSortableColumn="custName">Customer Name<p-sortIcon field="custName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="guestName">Guest Name<p-sortIcon field="guestName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="checkInDate">Check In Date<p-sortIcon field="checkInDate"></p-sortIcon>
+        </th>
+        <th pSortableColumn="checkOutDate">Check Out Date<p-sortIcon field="checkOutDate"></p-sortIcon>
+        </th>
+        <th pSortableColumn="roomCategory">Room Category<p-sortIcon field="roomCategory"></p-sortIcon>
+        </th>
+        <th pSortableColumn="guestCount">Guest Count<p-sortIcon field="guestCount"></p-sortIcon>
+        </th>
+        <th pSortableColumn="guestGen">Guest Gender<p-sortIcon field="guestGen"></p-sortIcon>
+        </th>
+        <th pSortableColumn="roomModel">Model Of Rooms<p-sortIcon field="roomModel"></p-sortIcon>
+        </th>
+        <th pSortableColumn="roomType">Type Of Rooms<p-sortIcon field="roomType"></p-sortIcon>
+        </th>
+        <th pSortableColumn="roomRequestStatus">Request Status<p-sortIcon field="roomRequestStatus"></p-sortIcon>
+        </th>
+        <th>Update</th>
+        <th>Cancel</th>
+      </tr>
+      <tr>
+        <th>
+          <input pInputText type="text" pTooltip="Filter By Request Id"
+            (input)="roomRequestTable.filter($event.target.value, 'requestId', 'contains')"
+            placeholder="Filter By Request Id" class="p-column-filter">
+        </th>
+        <th>
+          <input pInputText type="text" pTooltip="Filter By Customer Name"
+            (input)="roomRequestTable.filter($event.target.value, 'custName', 'contains')"
+            placeholder="Filter By Customer Name" class="p-column-filter">
+        </th>
+        <th>
+          <input pInputText type="text" pTooltip="Filter By Guest Name"
+            (input)="roomRequestTable.filter($event.target.value, 'guestName', 'contains')" placeholder="Guest Name"
+            class="p-column-filter">
+        </th>
+        <th>
+          <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By created Date"
+            (onClearClick)="roomRequestTable.filter('', 'date', 'checkInDate')" [showButtonBar]="true"
+            styleClass="p-column-filter" placeholder="Created Date" [readonlyInput]="true">
+          </p-calendar>
+        </th>
+        <th>
+          <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By Updated Date"
+            (onClearClick)="roomRequestTable.filter('', 'date', 'checkOutDate')" [showButtonBar]="true"
+            styleClass="p-column-filter" placeholder="Updated Date" [readonlyInput]="true">
+          </p-calendar>
+        </th>
+        <th>
+          <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By Room Category"
+            (onChange)="roomRequestTable.filter($event.value, 'roomCategory', 'equals')" styleClass="p-column-filter"
+            placeholder="Room Category" [showClear]="true">
+            <ng-template let-option pTemplate="item">
+              <span>{{option.label}}</span>
+            </ng-template>
+          </p-dropdown>
+        </th>
+        <th>
+          <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By Guest Count"
+            (onChange)="roomRequestTable.filter($event.value, 'guestCount', 'equals')" styleClass="p-column-filter"
+            placeholder="Guest Count" [showClear]="true">
+            <ng-template let-option pTemplate="item">
+              <span>{{option.label}}</span>
+            </ng-template>
+          </p-dropdown>
+        </th>
+        <th>
+          <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By Guest Gender"
+            (onChange)="roomRequestTable.filter($event.value, 'guestGen', 'equals')" styleClass="p-column-filter"
+            placeholder="Guest Gender" [showClear]="true">
+            <ng-template let-option pTemplate="item">
+              <span>{{option.label}}</span>
+            </ng-template>
+          </p-dropdown>
+        </th>
+        <th>
+          <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By Room Type"
+            (onChange)="roomRequestTable.filter($event.value, 'roomType', 'equals')" styleClass="p-column-filter"
+            placeholder="Room Type" [showClear]="true">
+            <ng-template let-option pTemplate="item">
+              <span>{{option.label}}</span>
+            </ng-template>
+          </p-dropdown>
+        </th>
+        <th>
+          <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By Room Model"
+            (onChange)="roomRequestTable.filter($event.value, 'roomModel', 'equals')" styleClass="p-column-filter"
+            placeholder="Room Model" [showClear]="true">
+            <ng-template let-option pTemplate="item">
+              <span>{{option.label}}</span>
+            </ng-template>
+          </p-dropdown>
+        </th>
+        <th>
+          <input pInputText type="text" pTooltip="Filter By Room Request Status"
+            (input)="roomRequestTable.filter($event.target.value, 'roomRequestStatus', 'contains')"
+            placeholder="Room Request Status" class="p-column-filter">
+        </th>
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-roomRequest let-editing="editing" let-ri="rowIndex">
+      <tr [pEditableRow]="roomRequest">
+        <td>{{roomRequest.requestId}}</td>
+        <td>{{roomRequest.custName}}</td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="roomRequest.guestName" pTooltip="Editing the name of Guest"
+                guestName>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{roomRequest.guestName}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>{{roomRequest.checkInDate === null ? "" : roomRequest.checkInDate| date:'dd-MMM-yyyy'}}
+        </td>
+        <td>{{roomRequest.checkOutDate === null ? "" : roomRequest.checkOutDate| date:'dd-MMM-yyyy'}}</td>
+
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-dropdown [options]="roomRequestDefinitions" [(ngModel)]="roomRequest.roomCategory"
+                pTooltip="Editing Room Category" placeholder="Room Category" [showClear]="true">
+                <ng-template let-option pTemplate="item">
+                  <span>{{option.label}}</span>
+                </ng-template>
+              </p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{roomRequest.roomCategory}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="roomRequest.guestCount" pTooltip="Editing Guest Count"
+                guestName>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{roomRequest.guestCount}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>{{roomRequest.guestGen}}</td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-dropdown [options]="roomRequestDefinitions" [(ngModel)]="roomRequest.roomModel"
+                pTooltip="Editing Room Model" placeholder="Room Model" [showClear]="true">
+                <ng-template let-option pTemplate="item">
+                  <span>{{option.label}}</span>
+                </ng-template>
+              </p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{roomRequest.roomModel}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-dropdown [options]="roomRequestDefinitions" [(ngModel)]="roomRequest.roomType"
+                pTooltip="Editing Room Type" placeholder="Room Type" [showClear]="true">
+                <ng-template let-option pTemplate="item">
+                  <span>{{option.label}}</span>
+                </ng-template>
+              </p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{roomRequest.roomModel}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>{{roomRequest.roomRequestStatus}}</td>
+        <td><input *ngIf="roomRequest.roomRequestStatus == 'P'" type="submit" class="btn-primary"
+            pTooltip="Update the Room Request" (click)="updateRoomRequest(roomRequest)" value="Update"></td>
+        <td>
+          <input *ngIf="roomRequest.roomRequestStatus == 'P'" type="submit" class="btn-primary"
+            pTooltip="Cancel the Room Request" (click)="cancelRequest(roomRequest.requestId)" value="Cancel">
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
 <div *ngIf="viewRewards">
-  <table class="table table-bordered" style="width: 70%; background:thistle;">
-    <thead>
-      <tr style="background-color: wheat;">
+  <p-table #customerTable *ngIf="viewRewards" [style]="{'width':'70%','margin-top':'8px'}" [value]="[rewardPointList]">
+    <ng-template pTemplate="header">
+      <tr>
         <th>Earned Through</th>
         <th>Points Earned</th>
         <th>Points Earned Date</th>
         <th>Use By Date</th>
       </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let rewardPoints of rewardPointList; last as isLast">
+    </ng-template>
+    <ng-template pTemplate="body" let-rewardPoints>
+      <tr>
         <td>
-          <span *ngIf="isLast" style="font-weight:bold">{{rewardPoints.pointsTransactionName}}</span>
-          <span *ngIf="!isLast">{{rewardPoints.pointsTransactionName}}</span>
+          {{rewardPoints.pointsTransactionName}}
         </td>
-
-        <td><span *ngIf="isLast" style="font-weight:bold">{{rewardPoints.pointsEarned}}</span>
-          <span *ngIf="!isLast">{{rewardPoints.pointsEarned}}</span>
+        <td>{{rewardPoints.pointsEarned}}
         </td>
         <td>{{rewardPoints.pointsEarnedDate === null ? "" : rewardPoints.pointsEarnedDate| date:'dd MMM, yyyy'}}
         </td>
         <td>{{rewardPoints.pointsExpiryDate === null ? "" : rewardPoints.pointsExpiryDate| date:'dd MMM, yyyy'}}
         </td>
-
       </tr>
-    </tbody>
-  </table>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <div *ngIf="rewardPointList.length==0">
+        No records found
+      </div>
+    </ng-template>
+  </p-table>
 </div>
 <div *ngIf="viewTourRegistrations">
   //Yet to be implemented

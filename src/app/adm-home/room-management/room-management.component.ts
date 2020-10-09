@@ -23,7 +23,6 @@ export class RoomManagementComponent implements OnInit {
       typeOfRoom: ['', Validators.required],
       modelOfRoom: ['', Validators.required],
       categoryOfRoom: ['', Validators.required],
-      floorNumber: ['', Validators.required],
       countOfRooms: ['']
     });
     this.getAllRooms();
@@ -40,7 +39,7 @@ export class RoomManagementComponent implements OnInit {
     room.roomType = this.createRoomForm.value.typeOfRoom;
     room.roomModel = this.createRoomForm.value.modelOfRoom;
     room.roomCategory = this.createRoomForm.value.categoryOfRoom;
-    room.floorNumber = this.createRoomForm.value.floorNumber;
+    room.floorNumber = 1;
     room.roomStatus = Constants.VACANT;
     room.countOfRooms = this.createRoomForm.value.countOfRooms === 0 ? 1 : this.createRoomForm.value.countOfRooms;
     requestDto.room = room;

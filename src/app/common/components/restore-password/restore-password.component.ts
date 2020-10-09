@@ -12,12 +12,11 @@ import { RestorePwdService } from './restore-pwd.service';
   styleUrls: ['./restore-password.component.scss']
 })
 export class RestorePasswordComponent implements OnInit {
-  restorePwdForm: FormGroup;
-  otpForm: FormGroup;
+  requestOTPForm: FormGroup;
+  submitOTPForm: FormGroup;
   resetPwdForm: FormGroup;
 
-  actionStatus: boolean;
-  rstPwdSuccess: boolean;
+
   submitReq: boolean = true;
   otpSubmit: boolean;
   rstPwd: boolean;
@@ -25,19 +24,17 @@ export class RestorePasswordComponent implements OnInit {
   submitted: boolean;
   otpSubmitted: boolean;
   passSubmitted: boolean;
-  otpValid: boolean;
   constructor(private formBuilder: FormBuilder, private toastrService: ToastrService,
     private restorePwdService: RestorePwdService) { }
 
   ngOnInit() {
-    this.restorePwdForm = this.formBuilder.group({
-      userId: ['', Validators.required],
+    this.requestOTPForm = this.formBuilder.group({
       userName: ['', Validators.required],
       userMail: ['', [Validators.required, Validators.email]],
       userMob: ['', Validators.required],
     });
 
-    this.otpForm = this.formBuilder.group({
+    this.submitOTPForm = this.formBuilder.group({
       otpFormUserName: ['', Validators.required],
       otpValue: ['', Validators.required],
     });
@@ -48,56 +45,56 @@ export class RestorePasswordComponent implements OnInit {
       reNewPassword: ['', Validators.required],
     });
   }
-  get f() { return this.restorePwdForm.controls; }
-  get of() { return this.otpForm.controls; }
+  get f() { return this.requestOTPForm.controls; }
+  get of() { return this.submitOTPForm.controls; }
   get pf() { return this.resetPwdForm.controls; }
 
-  restorePwd() {
+  requestOTP() {
     this.submitted = true;
-    if (this.restorePwdForm.invalid) {
+    if (this.requestOTPForm.invalid) {
       return;
     }
     let user = new User();
-    user.userName = this.restorePwdForm.value.userName;
-    user.userMob = this.restorePwdForm.value.userMob;
-    user.userId = this.restorePwdForm.value.userId;
-    user.userMail = this.restorePwdForm.value.userMail;
+    user.userName = this.requestOTPForm.value.userName;
+    user.userMob = this.requestOTPForm.value.userMob;
+    user.userMail = this.requestOTPForm.value.userMail;
     this.restorePwdService.requestOTP(user).subscribe(
       resp => {
         console.log(resp);
         if (resp) {
-          this.actionStatus = true;
+          this.toastrService.success(Constants.OTP_MAIL_SENT);
           this.submitReq = false;
           this.otpSubmit = true;
-          setTimeout(() =>
-            this.actionStatus = false
-            , 4000)
+        } else {
+          this.toastrService.error("Error Occured Please retry");
         }
       }
     );
   }
+
   otpFormSubmit() {
     this.otpSubmitted = true;
-    if (this.otpForm.invalid) {
+    if (this.submitOTPForm.invalid) {
       return;
     }
     let otp = new OneTimePassword();
-    otp.userName = this.otpForm.value.otpFormUserName;
-    otp.otpValue = this.otpForm.value.otpValue;
+    otp.userName = this.submitOTPForm.value.otpFormUserName;
+    otp.otpValue = this.submitOTPForm.value.otpValue;
+    console.log(otp);
     this.restorePwdService.submitOtp(otp).subscribe(
       resp => {
         console.log(resp);
         if (resp[Constants.ACT_STS]) {
           this.rstPwd = true;
           this.otpSubmit = false;
-          this.otpValid = true;
-          setTimeout(() =>
-            this.otpValid = false
-            , 4000)
+          this.toastrService.success(Constants.VALID_OTP, Constants.CHOOSE_PWD);
+        } else {
+          this.toastrService.error(Constants.INVALID_OTP)
         }
       }
     );
   }
+
   resetPwdSubmit() {
     this.passSubmitted = true;
     if (this.resetPwdForm.invalid) {
@@ -109,10 +106,10 @@ export class RestorePasswordComponent implements OnInit {
     this.restorePwdService.resetPwd(usr).subscribe(
       resp => {
         console.log(resp);
-        if (resp[Constants.ACT_STS]) {
-          this.rstPwdSuccess = true;
+        if (resp[Constants.ACT_STS] === Constants.PWD_RESET_SUCCESS) {
+          this.toastrService.success(Constants.PWD_RESET_SUCCESS, Constants.NEW_PWD_RESPONSE)
           this.otpSubmit = false;
-          this.otpForm.reset();
+          this.submitOTPForm.reset();
         }
       }
     );

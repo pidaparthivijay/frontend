@@ -1,16 +1,63 @@
-<table class="table table-bordered" style="width: 50%; background: greenyellow">
-    <thead>
+<p-table #tourPackageTable *ngIf="tourPackagesList?.length>0" [style]="{'width':'70%','margin-top':'8px'}"
+    [value]="tourPackagesList" [paginator]="true" [rowsPerPageOptions]="[5, 10,15]" [rows]="10"
+    [globalFilterFields]="['tourPackageId','tourPackageName','location','duration','pricePerHead']"
+    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+    <ng-template pTemplate="caption">
+        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Global Filter"
+            (input)="tourPackageTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </ng-template>
+    <ng-template pTemplate="header">
         <tr>
-            <th>Tour Package Name</th>
-            <th>Location</th>
-            <th>Duration</th>
-            <th>Price Per Head</th>
+
+            <th pSortableColumn="tourPackageId">Package Id<p-sortIcon field="tourPackageId"></p-sortIcon>
+            </th>
+            <th pSortableColumn="tourPackageName">Package Name<p-sortIcon field="tourPackageName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="location">Location<p-sortIcon field="location"></p-sortIcon>
+            </th>
+            <th pSortableColumn="duration">Duration<p-sortIcon field="duration"></p-sortIcon>
+            </th>
+            <th pSortableColumn="pricePerHead">Price Per Head<p-sortIcon field="pricePerHead"></p-sortIcon>
+            </th>
             <th>No Of Tourists</th>
             <th>Travel Date</th>
+            <th>Action</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let tourPackage of tourPackagesList">
+        <tr>
+            <th>
+                <input pInputText type="text"
+                    (input)="tourPackageTable.filter($event.target.value, 'tourPackageId', 'contains')"
+                    pTooltip="Filter by id" placeholder="Tour Package Id" class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text"
+                    (input)="tourPackageTable.filter($event.target.value, 'tourPackageName', 'contains')"
+                    pTooltip="Filter By name" placeholder="Name" class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text"
+                    (input)="tourPackageTable.filter($event.target.value, 'location', 'contains')"
+                    pTooltip="Filter by location" placeholder="Location" class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text"
+                    (input)="tourPackageTable.filter($event.target.value, 'duration', 'contains')"
+                    pTooltip="Filter By Duration" placeholder="Duration" class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text"
+                    (input)="tourPackageTable.filter($event.target.value, 'pricePerHead', 'contains')"
+                    pTooltip="Filter By Price" placeholder="Price Per Day" class="p-column-filter">
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tourPackage let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="tourPackage">
+            <td>{{tourPackage.tourPackageId}}</td>
             <td>{{tourPackage.tourPackageName}}</td>
             <td>{{tourPackage.location}}</td>
             <td>{{tourPackage.duration}}</td>
@@ -31,5 +78,5 @@
                     (click)="bookTour(tourPackage.tourPackageName)">
                     Book Tour</button></td>
         </tr>
-    </tbody>
-</table>
+    </ng-template>
+</p-table>

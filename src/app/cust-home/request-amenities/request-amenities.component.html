@@ -1,11 +1,19 @@
-<table class="table table-striped table-bordered" style="width: 50%; background:yellowgreen">
-    <thead>
+<p-table #amenityTable *ngIf="amenitiesList?.length" [style]="{'width':'50%','margin-top':'8px'}"
+    [value]="amenitiesList" [globalFilterFields]="['amenityId','amenityName','price']" [paginator]="true"
+    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
+    <ng-template pTemplate="caption">
+        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Use this to filter globally"
+            (input)="amenityTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </ng-template>
+    <ng-template pTemplate="header">
         <tr>
-            <th>
-                Amenity Name
+            <th pSortableColumn="amenityId">Amenity Id<p-sortIcon field="amenityId"></p-sortIcon>
             </th>
-            <th>
-                Amenity Price
+            <th pSortableColumn="amenityName">Amenity Name<p-sortIcon field="amenityName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="price">Price Per Day<p-sortIcon field="price"></p-sortIcon>
             </th>
             <th>
                 No Of Days
@@ -14,9 +22,27 @@
                 Request
             </th>
         </tr>
-    </thead>
-    <tbody *ngIf="amenitiesList.length >0">
-        <tr *ngFor="let amenity of amenitiesList">
+        <tr>
+            <th>
+                <input pInputText type="text" placeholder="Amenity Id" pTooltip="Filter by Amenity Id"
+                    (input)="amenityTable.filter($event.target.value, 'amenityId', 'contains')" class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text" pTooltip="Filter by Amenity name"
+                    (input)="amenityTable.filter($event.target.value, 'amenityName', 'contains')" placeholder="Name"
+                    class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text" (input)="amenityTable.filter($event.target.value, 'price', 'contains')"
+                    pTooltip="Filter by Price" placeholder="Price Per Day" class="p-column-filter">
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-amenity let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="amenity">
+            <td>{{amenity.amenityId}}</td>
             <td>{{amenity.amenityName}}</td>
             <td>{{amenity.price}}</td>
             <td><input type="text" name="noOfDays" pTooltip="No of days for which the amenity is being requested"
@@ -24,5 +50,5 @@
             <td><button class="btn btn-primary" pTooltip="Request the amenity."
                     (click)="requestAmenity(amenity.amenityId);">Request</button></td>
         </tr>
-    </tbody>
-</table>
+    </ng-template>
+</p-table>

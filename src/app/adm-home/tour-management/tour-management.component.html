@@ -31,10 +31,10 @@
             <tr>
                 <td>
                     <div class="form-group">
-                        <p-dropdown [options]="durations" formControlName="duration" class="form-control"
-                            pTooltip="Duration of the Tour" [ngClass]="{ 'is-invalid': submitted && f.duration.errors }"
-                            class="form-control" placeholder="Select Duration of Tour" name="duration"
-                            [(ngModel)]="duration" [virtualScroll]="false" optionLabel="displayName"
+                        <p-dropdown [options]="durations" formControlName="duration" pTooltip="Duration of the Tour"
+                            [ngClass]="{ 'is-invalid': submitted && f.duration.errors }" class="form-control"
+                            placeholder="Select Duration of Tour" name="duration" [(ngModel)]="duration"
+                            [virtualScroll]="false" optionLabel="displayName"
                             [style]="{'width':'200px', 'height':'auto'}">
                         </p-dropdown>
                         <div *ngIf="submitted && f.duration.errors" class="invalid-feedback">
@@ -92,9 +92,11 @@
                     pTooltip="Filter by location" placeholder="Location" class="p-column-filter">
             </th>
             <th>
-                <input pInputText type="text"
+                <p-dropdown [options]="durations" placeholder="Duration of the Tour"
                     (input)="tourPackageTable.filter($event.target.value, 'duration', 'contains')"
-                    pTooltip="Filter By Duration" placeholder="Duration" class="p-column-filter">
+                    class="p-column-filter" pTooltip="Filter By Duration" name="duration" [virtualScroll]="false"
+                    optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
+                </p-dropdown>
             </th>
             <th>
                 <input pInputText type="text"
@@ -125,8 +127,11 @@
             <td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="tourPackage.duration"
-                            pTooltip="Update the tour package duration => this shoudl be a dropdown" duration>
+                        <p-dropdown [options]="durations" pTooltip="Update duration of the Tour"
+                            [(ngModel)]="tourPackage.duration" placeholder="Select Duration of Tour" name="duration"
+                            [virtualScroll]="false" optionLabel="displayName"
+                            [style]="{'width':'200px', 'height':'auto'}">
+                        </p-dropdown>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{tourPackage.duration}}
@@ -154,7 +159,6 @@
             <td><button class="btn-primary" pTooltip="Update the tour package details"
                     (click)="updateTourPackage(tourPackage)">
                     Update</button></td>
-
         </tr>
     </ng-template>
 </p-table>

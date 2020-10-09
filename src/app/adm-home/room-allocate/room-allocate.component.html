@@ -1,60 +1,234 @@
-<div *ngIf="roomRequestList.length">
-  <table class="table table-bordered" style="width: 70%; background-color:tan">
-    <thead>
-      <tr>
-        <th>Request Id</th>
-        <th>Customer Name</th>
-        <th>Guest Name</th>
-        <th>Check In Date</th>
-        <th>Check Out Date</th>
-        <th>Room Count</th>
-        <th>Guest Count</th>
-        <th>Guest Gender</th>
-        <th>Model Of Rooms</th>
-        <th>Type Of Rooms</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tr *ngFor="let roomRequest of roomRequestList">
+<p-table #roomRequestTable *ngIf="roomRequestList?.length" [style]="{'width':'90%','margin-top':'8px'}"
+  [value]="roomRequestList"
+  [globalFilterFields]="['requestId','custName','guestName','checkInDate','checkOutDate','roomCategory','guestCount','guestGen','roomModel','roomType']"
+  [paginator]="true" [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10,15]"
+  [rows]="10">
+  <ng-template pTemplate="caption">
+    <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+    <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Global Filter"
+      (input)="roomRequestTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="requestId">Request Id<p-sortIcon field="requestId"></p-sortIcon>
+      </th>
+      <th pSortableColumn="custName">Customer Name<p-sortIcon field="custName"></p-sortIcon>
+      </th>
+      <th pSortableColumn="guestName">Guest Name<p-sortIcon field="guestName"></p-sortIcon>
+      </th>
+      <th pSortableColumn="checkInDate">Check In Date<p-sortIcon field="checkInDate"></p-sortIcon>
+      </th>
+      <th pSortableColumn="checkOutDate">Check Out Date<p-sortIcon field="checkOutDate"></p-sortIcon>
+      </th>
+      <th pSortableColumn="roomCategory">Room Category<p-sortIcon field="roomCategory"></p-sortIcon>
+      </th>
+      <th pSortableColumn="guestCount">Guest Count<p-sortIcon field="guestCount"></p-sortIcon>
+      </th>
+      <th pSortableColumn="guestGen">Guest Gender<p-sortIcon field="guestGen"></p-sortIcon>
+      </th>
+      <th pSortableColumn="roomModel">Model Of Rooms<p-sortIcon field="roomModel"></p-sortIcon>
+      </th>
+      <th pSortableColumn="roomType">Type Of Rooms<p-sortIcon field="roomType"></p-sortIcon>
+      </th>
+      <th>Action</th>
+    </tr>
+    <tr>
+      <th>
+        <input pInputText type="text" pTooltip="Filter By Request Id"
+          (input)="roomRequestTable.filter($event.target.value, 'requestId', 'contains')"
+          placeholder="Filter By Request Id" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" pTooltip="Filter By Customer Name"
+          (input)="roomRequestTable.filter($event.target.value, 'custName', 'contains')"
+          placeholder="Filter By Customer Name" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" pTooltip="Filter By Guest Name"
+          (input)="roomRequestTable.filter($event.target.value, 'guestName', 'contains')" placeholder="Guest Name"
+          class="p-column-filter">
+      </th>
+      <th>
+        <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By created Date"
+          (onClearClick)="roomRequestTable.filter('', 'date', 'checkInDate')" [showButtonBar]="true"
+          styleClass="p-column-filter" placeholder="Created Date" [readonlyInput]="true">
+        </p-calendar>
+      </th>
+      <th>
+        <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By Updated Date"
+          (onClearClick)="roomRequestTable.filter('', 'date', 'checkOutDate')" [showButtonBar]="true"
+          styleClass="p-column-filter" placeholder="Updated Date" [readonlyInput]="true">
+        </p-calendar>
+      </th>
+      <th>
+        <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By Room Category"
+          (onChange)="roomRequestTable.filter($event.value, 'roomCategory', 'equals')" styleClass="p-column-filter"
+          placeholder="Room Category" [showClear]="true">
+          <ng-template let-option pTemplate="item">
+            <span>{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
+      </th>
+      <th>
+        <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By Guest Count"
+          (onChange)="roomRequestTable.filter($event.value, 'guestCount', 'equals')" styleClass="p-column-filter"
+          placeholder="Guest Count" [showClear]="true">
+          <ng-template let-option pTemplate="item">
+            <span>{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
+      </th>
+      <th>
+        <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By Guest Gender"
+          (onChange)="roomRequestTable.filter($event.value, 'guestGen', 'equals')" styleClass="p-column-filter"
+          placeholder="Guest Gender" [showClear]="true">
+          <ng-template let-option pTemplate="item">
+            <span>{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
+      </th>
+      <th>
+        <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By Room Type"
+          (onChange)="roomRequestTable.filter($event.value, 'roomType', 'equals')" styleClass="p-column-filter"
+          placeholder="Room Type" [showClear]="true">
+          <ng-template let-option pTemplate="item">
+            <span>{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
+      </th>
+      <th>
+        <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By Room Model"
+          (onChange)="roomRequestTable.filter($event.value, 'roomModel', 'equals')" styleClass="p-column-filter"
+          placeholder="Room Model" [showClear]="true">
+          <ng-template let-option pTemplate="item">
+            <span>{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
+      </th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-roomRequest let-editing="editing" let-ri="rowIndex">
+    <tr [pEditableRow]="roomRequest">
       <td>{{roomRequest.requestId}}</td>
       <td>{{roomRequest.custName}}</td>
       <td>{{roomRequest.guestName}}</td>
-      <td>{{roomRequest.checkInDate}}</td>
-      <td>{{roomRequest.checkOutDate}}</td>
-      <td>{{roomRequest.roomCount}}</td>
+      <td>
+        {{roomRequest.checkInDate === null ? "" : roomRequest.checkInDate| date:'dd-MMM-yyyy'}}
+      </td>
+      <td>{{roomRequest.checkOutDate === null ? "" : roomRequest.checkOutDate| date:'dd-MMM-yyyy'}}</td>
+      <td>{{roomRequest.roomCategory}}</td>
       <td>{{roomRequest.guestCount}}</td>
       <td>{{roomRequest.guestGen}}</td>
       <td>{{roomRequest.roomModel}}</td>
       <td>{{roomRequest.roomType}}</td>
       <td><input type="submit" class="btn-primary" pTooltip="View Rooms that can accommodate the request"
-          (click)="viewFeasibleRooms(roomRequest.requestId)" value="View Feasible Rooms"></td>
+          (click)="viewFeasibleRooms(roomRequest.requestId)" value="Feasible Rooms"></td>
     </tr>
-  </table>
-</div>
+  </ng-template>
+</p-table>
+<br>
 
-<div *ngIf="roomList.length">
-  <table class="table table-bordered" style="width: 70%; background-color:tan">
-    <thead>
-      <tr>
-        <th>Room Number</th>
-        <th>Floor Number</th>
-        <th>Room Type</th>
-        <th>Room Model</th>
-        <th>Room Category</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let room of roomList">
-        <td>{{room.roomNumber}}</td>
-        <td>{{room.floorNumber}}</td>
-        <td>{{room.roomType}}</td>
-        <td>{{room.roomModel}}</td>
-        <td>{{room.roomCategory}}</td>
-        <td><input type="submit" class="btn-primary" pTooltip="Assign room to the given request"
-            (click)="assignRoomToRequest(room.roomNumber,actingRequestId)" value="Assign Room">
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+
+
+<p-table #roomTable *ngIf="roomList?.length" [style]="{'width':'70%','margin-top':'8px'}" [value]="roomList"
+  [globalFilterFields]="['roomNumber','floorNumber','roomCategory','roomModel','roomType']" [paginator]="true"
+  [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
+  <ng-template pTemplate="caption">
+    <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+    <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Global Filter"
+      (input)="roomTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr style="width: inherit">
+      <th pSortableColumn="roomNumber">Room Number<p-sortIcon field="roomNumber"></p-sortIcon>
+      </th>
+      <th pSortableColumn="floorNumber">Floor Number<p-sortIcon field="floorNumber"></p-sortIcon>
+      </th>
+      <th pSortableColumn="roomCategory">Category<p-sortIcon field="roomCategory"></p-sortIcon>
+      </th>
+      <th pSortableColumn="roomModel">Model<p-sortIcon field="roomModel"></p-sortIcon>
+      </th>
+      <th pSortableColumn="roomType">Type<p-sortIcon field="roomType"></p-sortIcon>
+      </th>
+      <th>Action</th>
+    </tr>
+    <tr>
+      <th>
+        <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'roomNumber', 'contains')"
+          pTooltip="Filter By Room Number" placeholder="Room Number" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'floorNumber', 'contains')"
+          pTooltip="Filter By Floor Number" placeholder="Floor Number" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'roomCategory', 'contains')"
+          pTooltip="Filter By SNG or DBL" placeholder="SNG or DBL" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'roomModel', 'contains')"
+          pTooltip="Filter By STE or DLX" placeholder="Model" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'roomType', 'contains')"
+          pTooltip="Filter By AC or NAC" placeholder="Type" class="p-column-filter">
+      </th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-room let-editing="editing" let-ri="rowIndex">
+    <tr [pEditableRow]="room">
+      <td>{{room.roomNumber}}</td>
+      <td pEditableColumn>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pTooltip="Change the floor Number" pInputText type="number" [(ngModel)]="room.floorNumber"
+              floorNumber>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{room.floorNumber}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText pTooltip="Change the room Category -> This should be a dropdown"
+              [(ngModel)]="room.roomCategory" roomCategory>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{room.roomCategory}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText [(ngModel)]="room.roomModel" pTooltip="Change the room Model -> This should be a dropdown"
+              roomModel>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{room.roomModel}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText pTooltip="Change the room Type -> This should be a dropdown" [(ngModel)]="room.roomType"
+              roomType>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{room.roomType}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td><input type="submit" class="btn-primary" pTooltip="Assign room to the given request"
+          (click)="assignRoomToRequest(room.roomNumber,actingRequestId)" value="Assign Room">
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

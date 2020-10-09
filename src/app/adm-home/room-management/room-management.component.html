@@ -31,25 +31,11 @@
         <tr>
           <th>Category Of Room</th>
           <td>
-
             <p-dropdown [options]="roomCategoryList" class="form-control" placeholder="Select Room Category"
               pTooltip="Room Category" name="categoryOfRoom" [(ngModel)]="categoryOfRoom" [virtualScroll]="false"
               [ngClass]="{ 'is-invalid': submitted && f.categoryOfRoom.errors }" formControlName="categoryOfRoom"
               optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
             </p-dropdown>
-
-          </td>
-        </tr>
-        <tr>
-          <th>Floor</th>
-          <td><select formControlName="floorNumber" class="form-control" pTooltip="Floor Number"
-              [ngClass]="{ 'is-invalid': submitted && f.floorNumber.errors }">
-              <option value="">--Select--</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
           </td>
         </tr>
         <tr>
@@ -109,16 +95,31 @@
           pTooltip="Filter By Floor Number" placeholder="Floor Number" class="p-column-filter">
       </th>
       <th>
-        <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'roomCategory', 'contains')"
-          pTooltip="Filter By SNG or DBL" placeholder="SNG or DBL" class="p-column-filter">
+        <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By SNG or DBL"
+          (onChange)="roomTable.filter($event.value, 'roomCategory', 'equals')" styleClass="p-column-filter"
+          placeholder="Room Category" [showClear]="true">
+          <ng-template let-option pTemplate="item">
+            <span>{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
       </th>
       <th>
-        <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'roomModel', 'contains')"
-          pTooltip="Filter By STE or DLX" placeholder="Model" class="p-column-filter">
+        <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By STE or DLX"
+          (onChange)="roomTable.filter($event.value, 'roomModel', 'equals')" styleClass="p-column-filter"
+          placeholder="Room Model" [showClear]="true">
+          <ng-template let-option pTemplate="item">
+            <span>{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
       </th>
       <th>
-        <input pInputText type="text" (input)="roomTable.filter($event.target.value, 'roomType', 'contains')"
-          pTooltip="Filter By AC or NAC" placeholder="Type" class="p-column-filter">
+        <p-dropdown [options]="roomRequestDefinitions" pTooltip="Filter By AC or NAC"
+          (onChange)="roomTable.filter($event.value, 'roomType', 'equals')" styleClass="p-column-filter"
+          placeholder="Room Type" [showClear]="true">
+          <ng-template let-option pTemplate="item">
+            <span>{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
       </th>
       <th></th>
     </tr>
@@ -141,8 +142,12 @@
       <td pEditableColumn>
         <p-cellEditor>
           <ng-template pTemplate="input">
-            <input pInputText pTooltip="Change the room Category -> This should be a dropdown"
-              [(ngModel)]="room.roomCategory" roomCategory>
+            <p-dropdown [options]="roomRequestDefinitions" pTooltip="Change the room Category"
+              [(ngModel)]="room.roomCategory" placeholder="Room Category" roomCategory [showClear]="true">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.label}}</span>
+              </ng-template>
+            </p-dropdown>
           </ng-template>
           <ng-template pTemplate="output">
             {{room.roomCategory}}
@@ -152,8 +157,12 @@
       <td pEditableColumn>
         <p-cellEditor>
           <ng-template pTemplate="input">
-            <input pInputText [(ngModel)]="room.roomModel" pTooltip="Change the room Model -> This should be a dropdown"
-              roomModel>
+            <p-dropdown [options]="roomRequestDefinitions" pTooltip="Change the room Model" [(ngModel)]="room.roomModel"
+              placeholder="Room Model" roomModel [showClear]="true">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.label}}</span>
+              </ng-template>
+            </p-dropdown>
           </ng-template>
           <ng-template pTemplate="output">
             {{room.roomModel}}
@@ -163,8 +172,12 @@
       <td pEditableColumn>
         <p-cellEditor>
           <ng-template pTemplate="input">
-            <input pInputText pTooltip="Change the room Type -> This should be a dropdown" [(ngModel)]="room.roomType"
-              roomType>
+            <p-dropdown [options]="roomRequestDefinitions" pTooltip="Change the room Type" [(ngModel)]="room.roomType"
+              placeholder="Room Type" roomType [showClear]="true">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.label}}</span>
+              </ng-template>
+            </p-dropdown>
           </ng-template>
           <ng-template pTemplate="output">
             {{room.roomType}}

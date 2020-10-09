@@ -107,13 +107,13 @@
                     placeholder="Display Name" class="p-column-filter">
             </th>
             <th>
-                <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By created Date"
+                <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By Created Date" [touchUI]="true"
                     (onClearClick)="lookupTable.filter('', 'date', 'createdDate')" [showButtonBar]="true"
                     styleClass="p-column-filter" placeholder="Created Date" [readonlyInput]="true">
                 </p-calendar>
             </th>
             <th>
-                <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By Updated Date"
+                <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By Updated Date" [touchUI]="true"
                     (onClearClick)="lookupTable.filter('', 'date', 'updatedDate')" [showButtonBar]="true"
                     styleClass="p-column-filter" placeholder="Updated Date" [readonlyInput]="true">
                 </p-calendar>

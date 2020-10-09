@@ -70,7 +70,7 @@ export class RegistrationComponent implements OnInit {
     this.regSer.regCust(requestDTO).subscribe(
       resp => {
         console.log(resp);
-        if (resp[Constants.ACT_STS]) {
+        if (resp[Constants.ACT_STS] === Constants.CUST_REG_SXS) {
           this.actionStatus = true;
           this.customer = resp['customer'];
           this.toastrService.success(Constants.REG_SXS, 'Your customer id is: ' + this.customer.custId);
