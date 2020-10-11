@@ -67,8 +67,8 @@
                     id="guestCount{{tourPackage.tourPackageName}}" value="2">
             </td>
             <td>
-                <p-calendar class="form-control" dateFormat="yy-mm-dd" [showIcon]="true" [touchUI]="true"
-                    [showButtonBar]="true" name="startDate" class="form-control"
+                <p-calendar class="form-control" dateFormat="yy-mm-dd" [showIcon]="true" yearRange="1950:2002"
+                    [yearNavigator]="true" [showButtonBar]="true" name="startDate" class="form-control"
                     id="startDate{{tourPackage.tourPackageName}}" pTooltip="Tour Start Date"
                     placeholder="Date of Travel" [readonlyInput]="true">
                 </p-calendar>

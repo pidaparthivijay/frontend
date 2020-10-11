@@ -1,5 +1,4 @@
-<p-tabMenu [model]="menuList" pTooltip="{{activeItem?.title}}" [activeItem]="activeItem">
-</p-tabMenu>
+<p-tabMenu [model]="menuList" pTooltip="{{activeItem?.title}}" [activeItem]="activeItem"></p-tabMenu>
 <div style="padding-left: 20px; padding-top:20px">
   <p-table #employeeTable *ngIf="viewProf" [style]="{'width':'70%','margin-top':'8px'}" [value]="[employee]">
     <ng-template pTemplate="header">

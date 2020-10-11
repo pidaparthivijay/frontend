@@ -27,9 +27,10 @@
     <tr>
       <td>
         <div class="form-group">
-          <p-calendar class="form-control" dateFormat="yy-mm-dd" [showIcon]="true" [touchUI]="true"
-            [ngClass]="{ 'is-invalid': submitted && f.custDob.errors }" id="custDob" [showButtonBar]="true"
-            pTooltip="Date of Birth" formControlName="custDob" placeholder="Date of Birth" [readonlyInput]="true">
+          <p-calendar class="form-control" dateFormat="yy-mm-dd" [showIcon]="true" yearRange="1950:2002"
+            [yearNavigator]="true" [ngClass]="{ 'is-invalid': submitted && f.custDob.errors }" id="custDob"
+            [showButtonBar]="true" pTooltip="Date of Birth" formControlName="custDob" placeholder="Date of Birth"
+            [readonlyInput]="true">
           </p-calendar>
           <div *ngIf="submitted && f.custDob.errors" class="invalid-feedback">
             <div *ngIf="f.custDob.errors.required">Date Of Birth is required</div>

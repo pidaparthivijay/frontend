@@ -50,9 +50,9 @@
         <td pEditableColumn>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <p-calendar dateFormat="yy-mm-dd" [showIcon]="true" [touchUI]="true" [showButtonBar]="true"
-                pTooltip="Date of Birth" [(ngModel)]="customer.custDob" placeholder="Date of Birth"
-                [readonlyInput]="true">
+              <p-calendar dateFormat="yy-mm-dd" [showIcon]="true" yearRange="1950:2002" [yearNavigator]="true"
+                [showButtonBar]="true" pTooltip="Date of Birth" [(ngModel)]="customer.custDob"
+                placeholder="Date of Birth" [readonlyInput]="true">
               </p-calendar>
             </ng-template>
             <ng-template pTemplate="output">
@@ -135,15 +135,15 @@
             class="p-column-filter">
         </th>
         <th>
-          <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By created Date"
-            (onClearClick)="roomRequestTable.filter('', 'date', 'checkInDate')" [showButtonBar]="true"
-            styleClass="p-column-filter" placeholder="Created Date" [readonlyInput]="true">
+          <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By created Date" yearRange="1950:2002"
+            [yearNavigator]="true" (onClearClick)="roomRequestTable.filter('', 'date', 'checkInDate')"
+            [showButtonBar]="true" styleClass="p-column-filter" placeholder="Created Date" [readonlyInput]="true">
           </p-calendar>
         </th>
         <th>
-          <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By Updated Date"
-            (onClearClick)="roomRequestTable.filter('', 'date', 'checkOutDate')" [showButtonBar]="true"
-            styleClass="p-column-filter" placeholder="Updated Date" [readonlyInput]="true">
+          <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By Updated Date" yearRange="1950:2002"
+            [yearNavigator]="true" (onClearClick)="roomRequestTable.filter('', 'date', 'checkOutDate')"
+            [showButtonBar]="true" styleClass="p-column-filter" placeholder="Updated Date" [readonlyInput]="true">
           </p-calendar>
         </th>
         <th>
