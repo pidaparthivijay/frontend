@@ -47,6 +47,24 @@ export class AdmHomeComponent implements OnInit {
         routerLink: 'roomAllocate'
       },
       {
+        label: 'Vehicle Management',
+        icon: 'pi pi-fw pi-minus-circle',
+        title: 'Add, Update, Remove Vehicles',
+        routerLink: 'vehicleManagement'
+      },
+      {
+        label: 'Handle Tour Requests',
+        icon: 'pi pi-fw pi-globe',
+        title: 'Assign Vehicles & Drivers',
+        routerLink: 'tour'
+      },
+      {
+        label: 'Driver Management',
+        icon: 'pi pi-fw pi-compass',
+        title: 'Add, Update, Remove Drivers',
+        routerLink: 'driverManagement'
+      },
+      {
         label: 'Rooms',
         icon: 'pi pi-fw pi-sitemap',
         title: 'Manage Rooms',

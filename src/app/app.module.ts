@@ -38,6 +38,9 @@ import { RequestAmenitiesComponent } from './cust-home/request-amenities/request
 import { RoomRegistrationComponent } from './cust-home/room-registration/room-registration.component';
 import { TourBookingComponent } from './cust-home/tour-booking/tour-booking.component';
 import { EmpHomeComponent } from './emp-home/emp-home.component';
+import { VehicleManagementComponent } from './common/components/vehicle-management/vehicle-management.component';
+import { DriverManagementComponent } from './common/components/driver-management/driver-management.component';
+import { TourComponent } from './common/components/tour/tour.component';
 
 
 @NgModule({
@@ -62,7 +65,10 @@ import { EmpHomeComponent } from './emp-home/emp-home.component';
     TourBookingComponent,
     LookupManagementComponent,
     LogoutComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    VehicleManagementComponent,
+    DriverManagementComponent,
+    TourComponent
   ],
   imports: [
     BrowserModule,

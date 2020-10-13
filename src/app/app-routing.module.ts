@@ -9,12 +9,15 @@ import { RoomManagementComponent } from './adm-home/room-management/room-managem
 import { TourManagementComponent } from './adm-home/tour-management/tour-management.component';
 import { AuthGuard } from './common/authguard/auth-guard';
 import { ContactComponent } from './common/components/contact/contact.component';
+import { DriverManagementComponent } from './common/components/driver-management/driver-management.component';
 import { HomeComponent } from './common/components/home/home.component';
 import { LoginComponent } from './common/components/login/login.component';
 import { LogoutComponent } from './common/components/logout/logout.component';
 import { PageNotFoundComponent } from './common/components/page-not-found/page-not-found.component';
 import { RegistrationComponent } from './common/components/registration/registration.component';
 import { RestorePasswordComponent } from './common/components/restore-password/restore-password.component';
+import { TourComponent } from './common/components/tour/tour.component';
+import { VehicleManagementComponent } from './common/components/vehicle-management/vehicle-management.component';
 import { CustHomeComponent } from './cust-home/cust-home.component';
 import { RequestAmenitiesComponent } from './cust-home/request-amenities/request-amenities.component';
 import { RoomRegistrationComponent } from './cust-home/room-registration/room-registration.component';
@@ -50,12 +53,39 @@ const routes: Routes = [
       {
         path: 'lookupManagement',
         component: LookupManagementComponent
+      },
+      {
+        path: 'tour',
+        component: TourComponent
+      },
+      {
+        path: 'vehicleManagement',
+        component: VehicleManagementComponent
+      },
+      {
+        path: 'driverManagement',
+        component: DriverManagementComponent
       }
     ]
-  }, {
+  },
+  {
     path: 'empWelcome',
     component: EmpHomeComponent,
     canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'tour',
+        component: TourComponent
+      },
+      {
+        path: 'vehicleManagement',
+        component: VehicleManagementComponent
+      },
+      {
+        path: 'driverManagement',
+        component: DriverManagementComponent
+      }
+    ]
   },
   {
     path: 'custWelcome',
