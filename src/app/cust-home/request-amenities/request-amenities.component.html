@@ -51,4 +51,9 @@
                     (click)="requestAmenity(amenity.amenityId);">Request</button></td>
         </tr>
     </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <div *ngIf="amenitiesList.length==0">
+            No records found
+        </div>
+    </ng-template>
 </p-table>

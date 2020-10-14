@@ -52,4 +52,7 @@ export class RequestMappings {
     public static readonly DRIVER_UPDATE = environment.baseURL + '/updateDriver';
     public static readonly DRIVER_DELETE_TOGGLE = environment.baseURL + '/toggleDeleteDriver';
     public static readonly DRIVER_VIEW_ALL = environment.baseURL + '/viewAllDrivers';
+    public static readonly TOUR_BKNG_VIEW_ALL = environment.baseURL + '/viewAllTourBookings';
+    public static readonly FEASIBLE_VEHICLES_DRIVERS = environment.baseURL + '/viewFeasibleVehiclesDrivers';
+    public static readonly TOUR_BKNG_ASSIGN = environment.baseURL + '/assignVehDriTour';
 }

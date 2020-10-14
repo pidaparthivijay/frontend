@@ -9,6 +9,18 @@ import { RequestMappings } from 'src/app/common/model/RequestMappings';
 })
 export class TourService {
 
+  getFeasibleVehiclesAndDrivers(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.FEASIBLE_VEHICLES_DRIVERS, requestDTO);
+  }
+
+  assignVehiclesAndDrivers(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.TOUR_BKNG_ASSIGN, requestDTO);
+  }
+
+  getAllBookedTours() {
+    return this.httpClient.get(RequestMappings.TOUR_BKNG_VIEW_ALL);
+  }
+
   createTourPackage(requestDTO: RequestDTO) {
     return this.httpClient.post(RequestMappings.TOUR_PKG_CREATE, requestDTO);
   }

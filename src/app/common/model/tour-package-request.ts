@@ -12,5 +12,6 @@ export class TourPackageRequest {
     tourPackageName: string;
     tourPackageRequestId: number;
     userId: number;
+    userName: string;
     vehicleName: string;
 }

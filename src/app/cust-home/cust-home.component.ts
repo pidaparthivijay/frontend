@@ -176,6 +176,7 @@ export class CustHomeComponent implements OnInit {
   viewRewardPoints() {
     let user = new User();
     user.userId = this.userId;
+    user.userName = this.userName;
     let requestDTO = new RequestDTO();
     requestDTO.user = user;
     this.custService.viewRewardPoints(requestDTO).subscribe(

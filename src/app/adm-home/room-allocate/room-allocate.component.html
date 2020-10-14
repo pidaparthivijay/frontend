@@ -127,11 +127,13 @@
           (click)="viewFeasibleRooms(roomRequest.requestId)" value="Feasible Rooms"></td>
     </tr>
   </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <div *ngIf="roomRequestList.length==0">
+      No records found
+    </div>
+  </ng-template>
 </p-table>
 <br>
-
-
-
 <p-table #roomTable *ngIf="roomList?.length" [style]="{'width':'70%','margin-top':'8px'}" [value]="roomList"
   [globalFilterFields]="['roomNumber','floorNumber','roomCategory','roomModel','roomType']" [paginator]="true"
   [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -230,5 +232,10 @@
           (click)="assignRoomToRequest(room.roomNumber,actingRequestId)" value="Assign Room">
       </td>
     </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <div *ngIf="roomList.length==0">
+      No records found
+    </div>
   </ng-template>
 </p-table>

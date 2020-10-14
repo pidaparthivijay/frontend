@@ -1,1 +1,150 @@
-<p>tour works!</p>
+<p-table #tourPackageRequestTable *ngIf="tourPackageRequestList?.length" [style]="{'width':'70%','margin-top':'8px'}"
+    [value]="tourPackageRequestList"
+    [globalFilterFields]="['tourPackageRequestId','tourPackageName','guestCount','startDate']" [paginator]="true"
+    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
+    <ng-template pTemplate="caption">
+        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Global Filter"
+            (input)="tourPackageRequestTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="tourPackageRequestId">Request Id<p-sortIcon field="tourPackageRequestId"></p-sortIcon>
+            </th>
+            <th pSortableColumn="tourPackageName">Package Name<p-sortIcon field="tourPackageName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="guestCount">Guest Count<p-sortIcon field="guestCount"></p-sortIcon>
+            </th>
+            <th pSortableColumn="startDate">Start Date<p-sortIcon field="startDate"></p-sortIcon>
+            </th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <th>
+                <input pInputText type="text" pTooltip="Filter By Request Id"
+                    (input)="tourPackageRequestTable.filter($event.target.value, 'tourPackageRequestId', 'contains')"
+                    placeholder="Filter By Request Id" class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text" pTooltip="Filter By Tour Package Name"
+                    (input)="tourPackageRequestTable.filter($event.target.value, 'tourPackageName', 'contains')"
+                    placeholder="Filter By Tour Package Name" class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text" pTooltip="Filter By Guest Count"
+                    (input)="tourPackageRequestTable.filter($event.target.value, 'guestCount', 'contains')"
+                    placeholder="Guest Count" class="p-column-filter">
+            </th>
+            <th>
+                <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By Start Date" yearRange="2020:2027"
+                    [yearNavigator]="true" (onClearClick)="tourPackageRequestTable.filter('', 'date', 'startDate')"
+                    [showButtonBar]="true" styleClass="p-column-filter" placeholder="Start Date" [readonlyInput]="true">
+                </p-calendar>
+            </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tourPackageRequest let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="tourPackageRequest">
+            <td>{{tourPackageRequest.tourPackageRequestId}}</td>
+            <td>{{tourPackageRequest.tourPackageName}}</td>
+            <td>{{tourPackageRequest.guestCount}}</td>
+            <td>
+                {{tourPackageRequest.startDate === null ? "" : tourPackageRequest.startDate| date:'dd-MMM-yyyy'}}
+            </td>
+            <td><input type="submit" class="btn-primary" pTooltip="View Tour Packages that can accommodate the request"
+                    (click)="getFeasibleVehiclesAndDrivers(tourPackageRequest)" value="Feasible Driver and Vehicles">
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <div *ngIf="tourPackageRequestList.length==0">
+            No records found
+        </div>
+    </ng-template>
+</p-table>
+
+<p-table #driverTable *ngIf="driversList?.length" [style]="{'width':'35%','margin-top':'8px'}" [value]="driversList"
+    [globalFilterFields]="['driverName','driverLicense']" [paginator]="true" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[3,5,7]"
+    [rows]="3">
+    <ng-template pTemplate="caption">
+        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Use this to filter globally"
+            (input)="driverTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Action</th>
+            <th pSortableColumn="driverName">Driver Name<p-sortIcon field="driverName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="driverLicense">Driver License<p-sortIcon field="driverLicense"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-driver let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="driver">
+            <td>
+                <p-radioButton name="selectedDriver" inputId="driver.driverLicense" value="{{driver.driverLicense}}"
+                    [(ngModel)]="selectedDriver">
+                </p-radioButton>
+            </td>
+            <td pEditableColumn>
+                {{driver.driverName}}
+            </td>
+            <td pEditableColumn>
+                {{driver.driverLicense}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <div *ngIf="driversList.length==0">
+            No records found
+        </div>
+    </ng-template>
+</p-table>
+
+<p-table #vehicleTable *ngIf="vehiclesList?.length" [style]="{'width':'35%','margin-top':'8px'}" [value]="vehiclesList"
+    [globalFilterFields]="['regNum','vehicleName']" [paginator]="true" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[3, 5,7]"
+    [rows]="3">
+    <ng-template pTemplate="caption">
+        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Use this to filter globally"
+            (input)="vehicleTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Action</th>
+            <th pSortableColumn="vehicleName">Vehicle Name<p-sortIcon field="vehicleName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="regNum">Registration Number<p-sortIcon field="regNum"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-vehicle let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="vehicle">
+            <td>
+                <p-radioButton inputId="vehicle.regNum" name="selectedVehicle" value="{{vehicle.regNum}}"
+                    [(ngModel)]="selectedVehicle">
+                </p-radioButton>
+            </td>
+            <td pEditableColumn>
+                {{vehicle.vehicleName}}
+            </td>
+            <td pEditableColumn>
+                {{vehicle.regNum}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <div *ngIf="vehiclesList.length==0">
+            No records found
+        </div>
+    </ng-template>
+</p-table>
+
+<input type="submit" class="btn-primary" [disabled]="selectedDriver==null || selectedVehicle==null"
+    pTooltip="Assign the selected vehicle and driver" (click)="assignVehiclesAndDrivers(tourRequest)"
+    value="Assign Room">

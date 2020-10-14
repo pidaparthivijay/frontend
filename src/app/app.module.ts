@@ -11,6 +11,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { MenubarModule } from 'primeng/menubar';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
@@ -80,6 +81,7 @@ import { TourComponent } from './common/components/tour/tour.component';
     FormsModule,
     TableModule,
     TabMenuModule,
+    RadioButtonModule,
     MenubarModule,
     FileUploadModule,
     BreadcrumbModule,

@@ -12,4 +12,5 @@ export class RoomRequest {
     roomRequestStatus: string;
     roomType: string;
     userId: number;
+    userName: string;
 }

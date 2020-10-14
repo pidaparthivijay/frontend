@@ -20,13 +20,11 @@ export class TourBookingComponent implements OnInit {
   userId: any;
   actionStatus: boolean;
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private toastrService: ToastrService, private tourService: TourService) {
-    this.route.queryParams.subscribe(params => {
-      this.custName = params['custName'],
-        this.userName = params['userName'],
-        this.userId = params['userId']
-    });
+
   }
   ngOnInit() {
+    this.userName = sessionStorage.getItem('userName');
+    this.userId = sessionStorage.getItem('userId');
     this.tourService.getAllTourPackages().subscribe(resp => {
       console.log(resp);
       this.tourPackagesList = resp['tourPackageList'];
@@ -40,6 +38,7 @@ export class TourBookingComponent implements OnInit {
     var startDate = (<HTMLInputElement>document.getElementById('startDate' + tourPackageName)).value;
     let tourPackageRequest = new TourPackageRequest();
     tourPackageRequest.userId = this.userId;
+    tourPackageRequest.userName = this.userName;
     tourPackageRequest.guestCount = +guestCount;
     tourPackageRequest.tourPackageName = tourPackageName;
     tourPackageRequest.startDate = new Date(startDate);

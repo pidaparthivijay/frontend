@@ -173,4 +173,9 @@
             <td><button pTooltip="Update Lookup" class="btn-primary" (click)="updateLookup(lookup)">Update</button></td>
         </tr>
     </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <div *ngIf="lookupList.length==0">
+            No records found
+        </div>
+    </ng-template>
 </p-table>

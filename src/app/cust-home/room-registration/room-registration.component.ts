@@ -101,7 +101,8 @@ export class RoomRegistrationComponent implements OnInit {
       return;
     }
     let roomRequest = new RoomRequest();
-    roomRequest.userId = this.userId;
+    //roomRequest.userId = this.userId;
+    roomRequest.userName = this.userName;
     roomRequest.custName = this.custName;
     roomRequest.guestName = this.roomForm.value.guestName;
     roomRequest.guestGen = this.guestGen.lookupValue;

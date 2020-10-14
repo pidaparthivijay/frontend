@@ -85,5 +85,10 @@
       <button style="float: right;" pTooltip="Mail the bill to User" class="btn btn-primary"
         (click)="mailBillToUser();">Send to User</button>
     </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <div *ngIf="pendingBillList.length==0">
+        No records found
+      </div>
+    </ng-template>
   </p-table>
 </div>

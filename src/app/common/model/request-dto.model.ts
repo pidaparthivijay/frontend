@@ -8,6 +8,7 @@ import { TourPackageRequest } from './tour-package-request';
 import { TourPackage } from './tour-package.model';
 import { User } from './user.model';
 import { Vehicle } from './vehicle';
+import { VehicleDriverMapping } from './vehicle-driver-mapping';
 
 export class RequestDTO {
     actionStatus: string;
@@ -47,4 +48,5 @@ export class RequestDTO {
     tourPackageRequestList: any;
     user: User;
     userId: number;
+    vehicleDriverMapping: VehicleDriverMapping;
 }
