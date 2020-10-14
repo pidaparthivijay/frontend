@@ -19,7 +19,7 @@ export class RequestMappings {
     public static readonly EMPLOYEE_VIEW_DETAILS = environment.baseURL + '/viewEmployeeDetails';
     public static readonly LOGIN = environment.baseURL + '/login';
     public static readonly LOOKUP_CREATE = environment.baseURL + '/createLookup';
-    public static readonly LOOKUP_DELETE_TOGGLE = environment.baseURL + '/toggleDelete';
+    public static readonly LOOKUP_DELETE_TOGGLE = environment.baseURL + '/toggleDeleteLookup';
     public static readonly LOOKUP_EXCEL_UPLOAD = environment.baseURL + '/uploadLookupExcel';
     public static readonly LOOKUP_UPDATE = environment.baseURL + '/updateLookup';
     public static readonly LOOKUP_VIEW_ALL = environment.baseURL + '/viewLookupList';
@@ -44,4 +44,12 @@ export class RequestMappings {
     public static readonly TOUR_PKG_DELETE_TOGGLE = environment.baseURL + '/toggleDeleteTourPackage';
     public static readonly TOUR_PKG_UPDATE = environment.baseURL + '/updateTourPackage';
     public static readonly TOUR_PKG_VIEW_ALL = environment.baseURL + '/viewAllTourPackages';
+    public static readonly VEHICLE_CREATE = environment.baseURL + '/createVehicle';
+    public static readonly VEHICLE_UPDATE = environment.baseURL + '/updateVehicle';
+    public static readonly VEHICLE_DELETE_TOGGLE = environment.baseURL + '/toggleDeleteVehicle';
+    public static readonly VEHICLE_VIEW_ALL = environment.baseURL + '/viewAllVehicles';
+    public static readonly DRIVER_CREATE = environment.baseURL + '/createDriver';
+    public static readonly DRIVER_UPDATE = environment.baseURL + '/updateDriver';
+    public static readonly DRIVER_DELETE_TOGGLE = environment.baseURL + '/toggleDeleteDriver';
+    public static readonly DRIVER_VIEW_ALL = environment.baseURL + '/viewAllDrivers';
 }

@@ -1,5 +1,8 @@
 export class Constants {
-
+    public static readonly DRIVER_CRT_SXS = "Driver Creation Success";
+    public static readonly DRIVER_CRT_FAIL = "Driver Creation Failed";
+    public static readonly VEHICLE_CRT_SXS = "Vehicle Creation Success";
+    public static readonly VEHICLE_CRT_FAIL = "Vehicle Creation Failed";
     public static readonly AC = "AC";
     public static readonly ACROOMFARE = 0.25;
     public static readonly ACT_STS = "actionStatus";

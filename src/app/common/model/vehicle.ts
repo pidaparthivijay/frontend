@@ -1,10 +1,10 @@
 export class Vehicle {
-    vehicleId: number;
-    regNum: string;
-    vehicleName: string;
     assignedDriverLicense: string;
-    location: string;
-    vehicleType: string;
-    vehicleStatus: string;
     deleted: string;
+    location: string;
+    regNum: string;
+    vehicleId: number;
+    vehicleName: string;
+    vehicleStatus: string;
+    vehicleType: string;
 }

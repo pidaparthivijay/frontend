@@ -1,11 +1,13 @@
 import { Amenity } from './amenity.model';
 import { Customer } from './customer.model';
+import { Driver } from './driver.model';
 import { Employee } from './employee.model';
 import { RoomRequest } from './room-request';
 import { Room } from './room.model';
 import { TourPackageRequest } from './tour-package-request';
 import { TourPackage } from './tour-package.model';
 import { User } from './user.model';
+import { Vehicle } from './vehicle';
 
 export class RequestDTO {
     actionStatus: string;
@@ -16,6 +18,8 @@ export class RequestDTO {
     billStatus: string;
     countOfRooms: number;
     customer: Customer;
+    driver: Driver;
+    vehicle: Vehicle;
     employee: Employee;
     employeesList: any;
     floorNumber: number;

@@ -1,8 +1,8 @@
 export class Driver {
+    deleted: string;
     driverId: number;
     driverLicense: string;
     driverName: string;
-    location: string;
-    deleted: string;
     driverStatus: string;
+    location: string;
 }

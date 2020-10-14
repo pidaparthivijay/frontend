@@ -1,1 +1,150 @@
-<p>vehicle-management works!</p>
+<div class="float-right">
+    <form [formGroup]="vehicleRegistrationForm" (ngSubmit)="createVehicle()">
+        <table class="table table-striped table-hover" style="width: 25rem;">
+            <tr>
+                <td colspan="2">
+                    <div class="form-group">
+                        <input type="text" formControlName="vehicleName" class="form-control" pTooltip="Name of Vehicle"
+                            [ngClass]="{ 'is-invalid': submitted && f.vehicleName.errors }" name="vehicleName"
+                            id="vehicleName" placeholder="Name of the Vehicle" style="width: 100%;">
+                        <div *ngIf="submitted && f.vehicleName.errors" class="invalid-feedback">
+                            <div *ngIf="f.vehicleName.errors.required">Name is required</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="form-group">
+                        <input type="text" class="form-control" pTooltip="Vehicle Registration Number"
+                            [ngClass]="{ 'is-invalid': submitted && f.regNum.errors }" formControlName="regNum"
+                            id="regNum" placeholder="Vehicle Registration Number" style="width: 100%;">
+                        <div *ngIf="submitted && f.regNum.errors" class="invalid-feedback">
+                            <div *ngIf="f.regNum.errors.required">Vehicle Registration is required</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <div class="form-group">
+                <p-dropdown [options]="vehicleTypes" (onChange)="onVehicleType($event)" class="form-control"
+                    placeholder="Select Vehicle Type" pTooltip="Type of the Vehicle" name="vehicleType"
+                    [(ngModel)]="location" [virtualScroll]="false" formControlName="vehicleType"
+                    [ngClass]="{ 'is-invalid': submitted && f.vehicleType.errors }" optionLabel="displayName"
+                    [style]="{'width':'150px', 'height':'auto'}">
+                </p-dropdown>
+                <div *ngIf="submitted && f.vehicleType.errors" class="invalid-feedback">
+                    <div *ngIf="f.vehicleType.errors.required">Please select Type of Vehicle</div>
+                </div>
+            </div>
+            <tr>
+                <div>
+                    <p-dropdown [options]="locations" class="form-control" placeholder="Select Vehicle Location"
+                        pTooltip="Location of the Vehicle" name="location" [(ngModel)]="location"
+                        (onChange)="onLocation($event)" [virtualScroll]="false" formControlName="location"
+                        [ngClass]="{ 'is-invalid': submitted && f.location.errors }" optionLabel="displayName"
+                        [style]="{'width':'150px', 'height':'auto'}">
+                    </p-dropdown>
+                    <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                        <div *ngIf="f.location.errors.required">Please select location of vehicle</div>
+                    </div>
+                </div>
+            <tr>
+                <td><input type="submit" pTooltip="Create the vehicle with given details" class="btn-primary"
+                        value="Create Vehicle"></td>
+                <td><input type="reset" pTooltip="Reset the form" class="btn-primary" value="Reset"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<p-table #vehicleTable *ngIf="vehiclesList?.length" [style]="{'width':'50%','margin-top':'8px'}" [value]="vehiclesList"
+    [globalFilterFields]="['vehicleId','vehicleName','price']" [paginator]="true" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10,15]"
+    [rows]="10">
+    <ng-template pTemplate="caption">
+        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Use this to filter globally"
+            (input)="vehicleTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="vehicleId">Vehicle Id<p-sortIcon field="vehicleId"></p-sortIcon>
+            </th>
+            <th pSortableColumn="vehicleName">Vehicle Name<p-sortIcon field="vehicleName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="regNum">Registration Number<p-sortIcon field="regNum"></p-sortIcon>
+            </th>
+            <th pSortableColumn="location">Location<p-sortIcon field="location"></p-sortIcon>
+            </th>
+            <th>Deleted</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <th>
+                <input pInputText type="text" placeholder="Vehicle Id" pTooltip="Filter by Vehicle Id"
+                    (input)="vehicleTable.filter($event.target.value, 'vehicleId', 'contains')" class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text" pTooltip="Filter by Vehicle name"
+                    (input)="vehicleTable.filter($event.target.value, 'vehicleName', 'contains')" placeholder="Name"
+                    class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text" (input)="vehicleTable.filter($event.target.value, 'regNum', 'contains')"
+                    pTooltip="Filter By Registration Number" placeholder="Registration Number" class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text" (input)="vehicleTable.filter($event.target.value, 'location', 'contains')"
+                    pTooltip="Filter By Location" placeholder="Location" class="p-column-filter">
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-vehicle let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="vehicle">
+            <td>{{vehicle.vehicleId}}</td>
+            <td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="vehicle.vehicleName"
+                            pTooltip="Editing the name of vehicle" vehicleName>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{vehicle.vehicleName}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText [(ngModel)]="vehicle.regNum"
+                            pTooltip="Editing the Registration Number of vehicle">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{vehicle.regNum}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText [(ngModel)]="vehicle.location" pTooltip="Editing the Location of vehicle">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{vehicle.location}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td>
+                <button class="btn-primary" (click)="toggleDelete(vehicle)"
+                    pTooltip="{{vehicle.deleted != 'Y'?'Delete the vehicle':'Undelete the vehicle'}}">
+                    <div *ngIf="vehicle.deleted != 'Y'">Delete</div>
+                    <div *ngIf="vehicle.deleted === 'Y'">Undelete</div>
+                </button>
+            </td>
+            <td><button class="btn-primary" (click)="updateVehicle(vehicle)" pTooltip="Save the updates made">
+                    Update</button></td>
+        </tr>
+    </ng-template>
+</p-table>
