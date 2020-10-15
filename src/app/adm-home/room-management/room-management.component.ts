@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Constants } from 'src/app/common/model/constants';
 import { RequestDTO } from 'src/app/common/model/request-dto.model';
 import { Room } from 'src/app/common/model/room.model';
@@ -15,7 +16,7 @@ export class RoomManagementComponent implements OnInit {
   submitted: boolean;
   createRoomMultipleFlag: boolean;
   roomsList: any = [];
-  constructor(private formBuilder: FormBuilder, private roomService: RoomService) { }
+  constructor(private formBuilder: FormBuilder, private toastrService: ToastrService, private roomService: RoomService) { }
   constants = Constants;
   ngOnInit() {
 
@@ -81,6 +82,17 @@ export class RoomManagementComponent implements OnInit {
     let requestDto = new RequestDTO();
     requestDto.roomStatus = roomStatus;
     this.roomService.getRoomsByStatus(requestDto).subscribe(resp => { console.log(resp), this.roomsList = resp['roomsList'] }, error => console.error(error));
+  }
+
+  cleanUpRooms() {
+    this.roomService.cleanUpRooms().subscribe(
+      resp => {
+        this.toastrService.info(resp[Constants.ACT_STS]);
+        this.getAllRooms();
+      },
+      error => { console.error(error); }
+
+    );
   }
 
   startCreateRoom() {

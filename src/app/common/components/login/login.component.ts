@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
             user.userType = Constants.EMPLOYEE;
             this.loginService.setLoggedIn(true);
             break;
-          case Constants.ADM_SXS:
+          case Constants.ADM_LOG_SUCCESS:
             user.name = resp['empName'];
             user.userType = Constants.ADMIN;
             this.loginService.setLoggedIn(true);
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
           case Constants.EMP_SXS:
             this.router.navigate(['/empWelcome']);
             break;
-          case Constants.ADM_SXS:
+          case Constants.ADM_LOG_SUCCESS:
             this.router.navigate(['/admWelcome']);
             break;
           default:

@@ -23,7 +23,7 @@ export class EmpHomeComponent implements OnInit {
   private genderLookup: any;
   private userName: string;
   private empName: string;
-  constructor(private activatedRoute: ActivatedRoute, private lookupService: LookupService, private toastrService: ToastrService, private employeeService: EmployeeService) {
+  constructor(private lookupService: LookupService, private toastrService: ToastrService, private employeeService: EmployeeService) {
 
   }
   onGender(event) {

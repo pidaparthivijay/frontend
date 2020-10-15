@@ -1,20 +1,14 @@
 export class Constants {
-    public static readonly DRIVER_CRT_SXS = "Driver Creation Success";
-    public static readonly DRIVER_CRT_FAIL = "Driver Creation Failed";
-    public static readonly VEHICLE_CRT_SXS = "Vehicle Creation Success";
-    public static readonly VEHICLE_CRT_FAIL = "Vehicle Creation Failed";
     public static readonly AC = "AC";
     public static readonly ACROOMFARE = 0.25;
     public static readonly ACT_STS = "actionStatus";
     public static readonly ADM_LOG_SUCCESS = "Admin Login Success";
-    public static readonly ADM_SXS = "Admin Login Success";
-    public static readonly ADMIN = "A";
+    public static readonly ADMIN = "Admin";
     public static readonly AGE_INSUFF = "Age is not sufficient";
     public static readonly ALLOCATED = "A";
     public static readonly ALLOCATION_MAIL = "allocationMail";
     public static readonly ALLOCATION_MAIL_SUCCESS = "Allocation mail has been sent";
     public static readonly ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
-    public static readonly AMENITY_REQ_SXS = "Amenity Request Success";
     public static readonly AMENITY_REQUEST = "Amenity Request";
     public static readonly AMNT_CRT_FAIL = "Amenity Creation Failure";
     public static readonly AMNT_CRT_SXS = "Amenity Creation Success";
@@ -36,6 +30,8 @@ export class Constants {
     public static readonly CANCEL_SUCCESS_MAIL = "cancellationSuccessMail";
     public static readonly CANCEL_SUCCESS_MAIL_FALIURE = "Cancellation Success mail is not sent";
     public static readonly CANCEL_SUCCESS_MAIL_SUCCESS = "Cancellation Success mail has been sent";
+    public static readonly CHOOSE_PWD = "The OTP has been validated. Please choose a new password.";
+    public static readonly CLEANUP_COMPLETE = "Room Cleanup Complete";
     public static readonly COMMA = ",";
     public static readonly CONTENT_DISPOSITION = "Content-Disposition";
     public static readonly CUST_LOG_SUCCESS = "Customer Login Success";
@@ -49,6 +45,8 @@ export class Constants {
     public static readonly DELUXEROOMFARE = 0.20;
     public static readonly DOUBLE = "DBL";
     public static readonly DOUBLE_BASE_FARE = 1500;
+    public static readonly DRIVER_CRT_FAIL = "Driver Creation Failed";
+    public static readonly DRIVER_CRT_SXS = "Driver Creation Success";
     public static readonly EMP_CRT_FAIL = "Employee Creation Failure";
     public static readonly EMP_CRT_SXS = "Employee Creation Success";
     public static readonly EMP_LOG_SUCCESS = "Employee Login Success";
@@ -89,9 +87,12 @@ export class Constants {
     public static readonly MEDIUM = "4D5N";
     public static readonly MIN = "MIN";
     public static readonly MIN_RAND = 100000;
+    public static readonly NEW_PWD_RESPONSE = "The password has been changed successfully.";
     public static readonly NO = "N";
+    public static readonly NO_OTP_GIVEN_USERNAME = "No valid OTPs found for given User Name";
     public static readonly NO_PENDING_BILLS = "No Pending Bills";
     public static readonly NO_REWARDS_FOUND = "No Reward Points found for you.. Perhaps you would like to earn some??";
+    public static readonly NO_USER_WITH_GIVEN_NAME = "There is no user with given User Name.";
     public static readonly NONAC = "NAC";
     public static readonly NONACROOMFARE = 0.20;
     public static readonly OCCUPIED = "occupied";
@@ -154,11 +155,9 @@ export class Constants {
     public static readonly USERNAME_TAKEN = "Username is already taken";
     public static readonly VACANT = "vacant";
     public static readonly VALID_OTP = "OTP is valid";
+    public static readonly VEHICLE_CRT_FAIL = "Vehicle Creation Failed";
+    public static readonly VEHICLE_CRT_SXS = "Vehicle Creation Success";
     public static readonly XL_UPLOAD_FAILED = "Excel Upload Failed";
     public static readonly XLSX_EXTN = ".xlsx";
     public static readonly YES = "Y";
-    public static readonly CHOOSE_PWD = "The OTP has been validated. Please choose a new password.";
-    public static readonly NO_USER_WITH_GIVEN_NAME = "There is no user with given User Name.";
-    public static readonly NO_OTP_GIVEN_USERNAME = "No valid OTPs found for given User Name";
-    public static readonly NEW_PWD_RESPONSE = "The password has been changed successfully.";
 }

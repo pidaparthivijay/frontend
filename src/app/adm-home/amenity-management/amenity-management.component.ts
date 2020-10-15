@@ -98,7 +98,11 @@ export class AmenityManagementComponent implements OnInit {
     requestDTO.amenity = amenity;
     this.amenityService.updateAmenity(requestDTO).subscribe(
       resp => {
-        console.log(resp);
+        if (Constants.AMNT_UPDATE_SXS === resp[Constants.ACT_STS]) {
+          this.toastrService.success(Constants.AMNT_UPDATE_SXS, resp[Constants.ACT_STS]);
+        } else {
+          this.toastrService.error(Constants.AMNT_UPDATE_FAIL, resp[Constants.ACT_STS]);
+        }
         this.amenitiesList = resp['amenityList'];
       },
       error => console.error(error)

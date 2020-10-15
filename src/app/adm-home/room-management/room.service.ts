@@ -7,6 +7,11 @@ import { RequestMappings } from 'src/app/common/model/RequestMappings';
   providedIn: 'root'
 })
 export class RoomService {
+
+  cleanUpRooms() {
+    return this.httpClient.get(RequestMappings.ROOM_CLEANUP);
+  }
+
   updateRoom(requestDto: RequestDTO) {
     return this.httpClient.post(RequestMappings.ROOM_UPDATE, requestDto);
   }
