@@ -39,6 +39,9 @@
               <p-dropdown [options]="genderLookup" [(ngModel)]="customer.custGen" optionLabel="displayName"
                 optionValue="lookupValue" (onChange)="onGender($event)" pTooltip="Gender" pTooltip="Gender"
                 [style]="{'width':'auto', 'height':'auto'}">
+                <ng-template let-option pTemplate="item">
+                  <span>{{option.label}}</span>
+                </ng-template>
               </p-dropdown>
             </ng-template>
             <ng-template pTemplate="output">
@@ -293,7 +296,7 @@
   </p-table>
 </div>
 <div *ngIf="viewRewards">
-  <p-table #customerTable *ngIf="viewRewards" [style]="{'width':'70%','margin-top':'8px'}" [value]="[rewardPointList]">
+  <p-table #rewardsTable [style]="{'width':'70%','margin-top':'8px'}" [value]="[rewardPointsList]">
     <ng-template pTemplate="header">
       <tr>
         <th>Earned Through</th>
@@ -302,8 +305,8 @@
         <th>Use By Date</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rewardPoints>
-      <tr>
+    <ng-template pTemplate="body" let-rewardPoints let-editing="editing" let-ri="rowIndex">
+      <tr [pEditableRow]="rewardPoints">
         <td>
           {{rewardPoints.pointsTransactionName}}
         </td>
@@ -316,7 +319,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
-      <div *ngIf="rewardPointList.length==0">
+      <div *ngIf="rewardPointsList.length==0">
         No records found
       </div>
     </ng-template>
@@ -380,11 +383,13 @@
         <td>
           {{tourPackageRequest.startDate === null ? "" : tourPackageRequest.startDate| date:'dd-MMM-yyyy'}}
         </td>
-        <td><input type="submit" class="btn-primary" pTooltip="Cancel Tour" (click)="cancelTour(tourPackageRequest)"
-            value="Cancel Booking">
+        <td>
+          <input type="submit" *ngIf="tourPackageRequest.cancelled!='C'" class="btn-primary" pTooltip="Cancel Tour"
+            (click)="cancelTour(tourPackageRequest)" value="Cancel Booking">
         </td>
         <td><input type="submit" class="btn-primary" pTooltip="View Driver and Vehicle Details"
-            (click)="viewDriverNVehicle(tourPackageRequest)" value="View Details">
+            (click)="viewDriverNVehicle(tourPackageRequest)" *ngIf="tourPackageRequest.cancelled!='C'"
+            value="View Details">
         </td>
       </tr>
     </ng-template>
@@ -395,12 +400,13 @@
     </ng-template>
   </p-table>
 
-  <p-table [style]="{'width':'70%','margin-top':'8px'}" [value]="[vehicleDriverMapping]">
+  <p-table *ngIf="viewVDM" [style]="{'width':'70%','margin-top':'8px'}" [value]="[vehicleDriverMapping]">
     <ng-template pTemplate="header">
       <tr>
         <th>Vehicle Registration Number</th>
         <th>Tour Package Request Id</th>
         <th>Driver License</th>
+        <th>Driver Contact</th>
         <th>Assigned Date</th>
       </tr>
     </ng-template>
@@ -414,6 +420,7 @@
           {{vehicleDriverMapping.tourPackageRequestId}}
         </td>
         <td>{{vehicleDriverMapping.driverLicense}}</td>
+        <td>{{vehicleDriverMapping.driverContact}}</td>
       </tr>
     </ng-template>
   </p-table>

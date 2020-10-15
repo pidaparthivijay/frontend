@@ -37,11 +37,9 @@ export class RoomRegistrationComponent implements OnInit {
   roomType;
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private toastrService: ToastrService, private roomReqService: RoomReqService,
     private lookupService: LookupService) {
-    this.route.queryParams.subscribe(params => {
-      this.custName = params['custName'],
-        this.userName = params['userName'],
-        this.userId = params['userId']
-    });
+    this.custName = sessionStorage.getItem('custName');
+    this.userName = sessionStorage.getItem('userName');
+    //this.userId = sessionStorage.getItem('userId');
   }
 
   ngOnInit() {
@@ -117,12 +115,14 @@ export class RoomRegistrationComponent implements OnInit {
     this.roomReqService.requestRoom(requestDto).subscribe(
       resp => {
         console.log(resp);
-        if (resp[Constants.ACT_STS]) {
+        if (Constants.ROOM_BOOK_SXS === resp[Constants.ACT_STS]) {
           this.actionStatus = true;
-          this.customer = resp['customer'];
-          this.toastrService.success(Constants.ROM_REG_SXS, 'Your request id is: ' + this.roomRequest.requestId);
+          this.roomRequest = resp['roomRequest'];
+          this.toastrService.success(Constants.ROOM_BOOK_SXS, 'Your request id is: ' + this.roomRequest.requestId);
           this.roomForm.reset();
           this.submitted = false;
+        } else {
+          this.toastrService.error(Constants.ROOM_BOOK_FAIL, resp[Constants.ACT_STS]);
         }
       },
       error => {

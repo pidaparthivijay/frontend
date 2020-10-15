@@ -97,6 +97,7 @@ export class Constants {
     public static readonly NONACROOMFARE = 0.20;
     public static readonly OCCUPIED = "occupied";
     public static readonly OTP_MAIL_SENT = "An OTP has been sent to your registered mail Id.";
+    public static readonly OTP_SENT = "OTP_MAILMail sent successfully";
     public static readonly OTPMAIL = "otpMail";
     public static readonly PASSWORD_LENGTH = 8;
     public static readonly PDF_EXTENSION = ".pdf";
@@ -116,6 +117,8 @@ export class Constants {
     public static readonly ROOM_ALLOCATED = "Room has been Allocated";
     public static readonly ROOM_BOOK_FAIL = "Room Booking Failed";
     public static readonly ROOM_BOOK_SXS = "Room Booking Success";
+    public static readonly ROOM_RQST_UPDATE_SXS = "Room Request Updated Successfully!";
+    public static readonly ROOM_RQST_UPDATE_FAIL = "Room Request Update Failed!";
     public static readonly ROOM_BOOKING = "RoomBooking";
     public static readonly ROOM_BOOKING_REWARD = 300;
     public static readonly ROOM_CATEGORY = "ROOM_CATEGORY";

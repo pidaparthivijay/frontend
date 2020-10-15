@@ -53,7 +53,8 @@
             <td>
                 {{tourPackageRequest.startDate === null ? "" : tourPackageRequest.startDate| date:'dd-MMM-yyyy'}}
             </td>
-            <td><input type="submit" class="btn-primary" pTooltip="View Tour Packages that can accommodate the request"
+            <td><input *ngIf="tourPackageRequest.vehicleDriverMappingId===0" type="submit" class="btn-primary"
+                    pTooltip="View Tour Packages that can accommodate the request"
                     (click)="getFeasibleVehiclesAndDrivers(tourPackageRequest)" value="Feasible Driver and Vehicles">
             </td>
         </tr>
@@ -146,5 +147,4 @@
 </p-table>
 
 <input type="submit" class="btn-primary" [disabled]="selectedDriver==null || selectedVehicle==null"
-    pTooltip="Assign the selected vehicle and driver" (click)="assignVehiclesAndDrivers(tourRequest)"
-    value="Assign Room">
+    pTooltip="Assign the selected vehicle and driver" (click)="assignVehiclesAndDrivers(tourRequest)" value="Assign">

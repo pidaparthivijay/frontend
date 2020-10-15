@@ -142,7 +142,7 @@ export class EmpHomeComponent implements OnInit {
     requestDTO.customer = customer;
     this.employeeService.getPendingBill(requestDTO).subscribe(
       resp => {
-        if (resp['actionStatus'] === Constants.INVALID_MAIL) {
+        if (resp[Constants.ACT_STS] === Constants.INVALID_MAIL) {
           this.toastrService.error(Constants.INVALID_MAIL);
         }
         this.pendingBillList = resp['pendingBillRequests'];
@@ -164,7 +164,7 @@ export class EmpHomeComponent implements OnInit {
     requestDTO.customer = customer;
     this.employeeService.generatePDF(requestDTO).subscribe((responseMessage) => {
       console.log(responseMessage);
-      if (responseMessage['actionStatus'] === Constants.INVALID_MAIL || responseMessage['size'] == 20) {
+      if (responseMessage[Constants.ACT_STS] === Constants.INVALID_MAIL || responseMessage['size'] == 20) {
         this.toastrService.error(Constants.INVALID_MAIL);
         return;
       }
@@ -193,7 +193,7 @@ export class EmpHomeComponent implements OnInit {
     customer.custEmail = custEmail;
     requestDTO.customer = customer;
     this.employeeService.mailBillToUser(requestDTO).subscribe((responseMessage) => {
-      if (responseMessage['actionStatus'] === Constants.INVALID_MAIL) {
+      if (responseMessage[Constants.ACT_STS] === Constants.INVALID_MAIL) {
         this.toastrService.error(Constants.INVALID_MAIL);
       } else {
         this.toastrService.success(responseMessage[Constants.ACT_STS]);

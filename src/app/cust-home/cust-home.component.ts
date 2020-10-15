@@ -20,13 +20,14 @@ import { CustomerService } from './customer.service';
 export class CustHomeComponent implements OnInit {
   custName: string;
   customer: Customer;
-  rewardPointList: any = [];
+  rewardPointsList: any = [];
   roomRequestList: any = [];
   userId: number;
   userName: string;
   viewProf: boolean;
   viewRewards: boolean;
   viewRoomReq: boolean;
+  viewVDM = false;
   items: MenuItem[];
   viewTourRegistrations: boolean;
   tourPackageRequestList: any;
@@ -182,10 +183,10 @@ export class CustHomeComponent implements OnInit {
     this.custService.updateDetails(requestDTO).subscribe(
       resp => {
         console.log(resp);
-        if (Constants.EXCEPTION_OCCURED != resp['actionStatus']) {
+        if (Constants.EXCEPTION_OCCURED != resp[Constants.ACT_STS]) {
           this.toastrService.success("Update Success");
         } else {
-          this.toastrService.warning(resp['actionStatus']);
+          this.toastrService.warning(resp[Constants.ACT_STS]);
         }
         this.viewProf = true;
         this.customer = resp['customer'];
@@ -194,6 +195,7 @@ export class CustHomeComponent implements OnInit {
       error => console.error(error)
     );
   }
+
   viewRequests() {
     let customer = new Customer();
     customer.custName = this.custName;
@@ -211,6 +213,17 @@ export class CustHomeComponent implements OnInit {
     );
   }
 
+  updateRoomRequest(roomRequest) {
+    let requestDTO = new RequestDTO();
+    requestDTO.roomRequest = roomRequest;
+    this.custService.updateRoomRequest(requestDTO).subscribe(
+      resp => {
+        this.toastrService.info(resp[Constants.ACT_STS]);
+      },
+      error => console.error(error)
+    );
+  }
+
   cancelRequest(roomRequestId) {
     let roomRequest = new RoomRequest();
     roomRequest.requestId = roomRequestId;
@@ -218,7 +231,7 @@ export class CustHomeComponent implements OnInit {
     requestDTO.roomRequest = roomRequest;
     this.custService.cancelRequest(requestDTO).subscribe(
       resp => {
-        this.toastrService.info(resp['actionStatus']);
+        this.toastrService.info(resp[Constants.ACT_STS]);
       },
       error => console.error(error)
     );
@@ -233,8 +246,8 @@ export class CustHomeComponent implements OnInit {
     this.custService.viewRewardPoints(requestDTO).subscribe(
       resp => {
         console.log(resp);
+        this.rewardPointsList = resp['rewardPointsList'];
         this.viewRewards = true;
-        this.rewardPointList = resp['rewardPointsList'];
       },
       error => console.error(error)
     );
@@ -258,6 +271,7 @@ export class CustHomeComponent implements OnInit {
   }
 
   viewDriverNVehicle(tourPackageRequest: TourPackageRequest) {
+    this.viewVDM = true;
     let requestDTO = new RequestDTO();
     requestDTO.tourPackageRequest = tourPackageRequest;
     this.custService.getVDMDetails(requestDTO).subscribe(
@@ -277,7 +291,8 @@ export class CustHomeComponent implements OnInit {
       resp => {
         console.log(resp);
         this.viewTourRegistrations = true;
-        this.toastrService.info(resp['actionStatus']);
+        this.toastrService.info(resp[Constants.ACT_STS]);
+        this.viewTourRequests();
       },
       error => console.error(error)
     );

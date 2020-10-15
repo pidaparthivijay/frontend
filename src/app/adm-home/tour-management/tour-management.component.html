@@ -36,6 +36,9 @@
                             placeholder="Select Duration of Tour" name="duration" [(ngModel)]="duration"
                             [virtualScroll]="false" optionLabel="displayName"
                             [style]="{'width':'200px', 'height':'auto'}">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
                         </p-dropdown>
                         <div *ngIf="submitted && f.duration.errors" class="invalid-feedback">
                             <div *ngIf="f.duration.errors.required">Please select duration of Package</div>
@@ -96,6 +99,9 @@
                     (input)="tourPackageTable.filter($event.target.value, 'duration', 'contains')"
                     class="p-column-filter" pTooltip="Filter By Duration" name="duration" [virtualScroll]="false"
                     optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
+                    <ng-template let-option pTemplate="item">
+                        <span>{{option.label}}</span>
+                    </ng-template>
                 </p-dropdown>
             </th>
             <th>
@@ -131,6 +137,9 @@
                             [(ngModel)]="tourPackage.duration" placeholder="Select Duration of Tour" name="duration"
                             [virtualScroll]="false" optionLabel="displayName"
                             [style]="{'width':'200px', 'height':'auto'}">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
                         </p-dropdown>
                     </ng-template>
                     <ng-template pTemplate="output">

@@ -16,7 +16,7 @@
       <tr>
         <td>
           <div class="form-group">
-            <p-calendar class="form-control" dateFormat="yy-mm-dd" [showIcon]="true" yearRange="1950:2002"
+            <p-calendar class="form-control" dateFormat="yy-mm-dd" [showIcon]="true" yearRange="2020:2022"
               [yearNavigator]="true" [ngClass]="{ 'is-invalid': submitted && f.checkInDate.errors }"
               [showButtonBar]="true" pTooltip="CheckIn Date" formControlName="checkInDate" placeholder="Checkin In Date"
               [readonlyInput]="true">
@@ -32,6 +32,9 @@
               name="gender" [(ngModel)]="guestGen" [virtualScroll]="false"
               [ngClass]="{ 'is-invalid': submitted && f.guestGen.errors }" formControlName="guestGen"
               optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.label}}</span>
+              </ng-template>
             </p-dropdown>
             <div *ngIf="submitted && f.guestGen.errors" class="invalid-feedback">
               <div *ngIf="f.guestGen.errors.required">Gender is required</div>
@@ -42,7 +45,7 @@
       <tr>
         <td>
           <div class="form-group">
-            <p-calendar class="form-control" dateFormat="yy-mm-dd" [showIcon]="true" yearRange="1950:2002"
+            <p-calendar class="form-control" dateFormat="yy-mm-dd" [showIcon]="true" yearRange="2020:2022"
               [yearNavigator]="true" [ngClass]="{ 'is-invalid': submitted && f.checkOutDate.errors }"
               [showButtonBar]="true" pTooltip="CheckOut Date" formControlName="checkOutDate"
               placeholder="Checkin Out Date" [readonlyInput]="true">
@@ -58,6 +61,9 @@
               pTooltip="Number of guests" name="guestCount" [(ngModel)]="guestCount" [virtualScroll]="true"
               [ngClass]="{ 'is-invalid': submitted && f.guestCount.errors }" formControlName="guestCount"
               optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.label}}</span>
+              </ng-template>
             </p-dropdown>
             <div *ngIf="submitted && f.guestCount.errors" class="invalid-feedback">
               <div *ngIf="f.guestCount.errors.required">Guest Count is required</div>
@@ -72,6 +78,9 @@
               pTooltip="Room Model" name="roomModel" [(ngModel)]="roomModel" [virtualScroll]="false"
               [ngClass]="{ 'is-invalid': submitted && f.roomModel.errors }" formControlName="roomModel"
               optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.label}}</span>
+              </ng-template>
             </p-dropdown>
             <div *ngIf="submitted && f.roomModel.errors" class="invalid-feedback">
               <div *ngIf="f.roomModel.errors.required">Please select model of Rooms</div>
@@ -84,6 +93,9 @@
               pTooltip="Room Category" name="roomCategory" [(ngModel)]="roomCategory" [virtualScroll]="false"
               [ngClass]="{ 'is-invalid': submitted && f.roomCategory.errors }" formControlName="roomCategory"
               optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.label}}</span>
+              </ng-template>
             </p-dropdown>
             <div *ngIf="submitted && f.roomCategory.errors" class="invalid-feedback">
               <div *ngIf="f.roomCategory.errors.required">Room Category is required</div>
@@ -98,6 +110,9 @@
               name="roomType" [(ngModel)]="roomType" [virtualScroll]="false"
               [ngClass]="{ 'is-invalid': submitted && f.roomType.errors }" formControlName="roomType"
               optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.label}}</span>
+              </ng-template>
             </p-dropdown>
             <div *ngIf="submitted && f.roomType.errors" class="invalid-feedback">
               <div *ngIf="f.roomCategory.errors.required">Room Type is required</div>

@@ -3,6 +3,7 @@ export class Driver {
     driverId: number;
     driverLicense: string;
     driverName: string;
+    driverContact: string;
     driverStatus: string;
     location: string;
 }

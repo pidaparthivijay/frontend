@@ -15,6 +15,9 @@
               [ngClass]="{ 'is-invalid': submitted && f.typeOfRoom.errors }" class="form-control"
               placeholder="Select Room Type" name="typeOfRoom" [(ngModel)]="typeOfRoom" [virtualScroll]="false"
               optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.label}}</span>
+              </ng-template>
             </p-dropdown>
           </td>
         </tr>
@@ -25,6 +28,9 @@
               pTooltip="Room Model" name="modelOfRoom" [(ngModel)]="modelOfRoom" [virtualScroll]="false"
               [ngClass]="{ 'is-invalid': submitted && f.modelOfRoom.errors }" formControlName="modelOfRoom"
               optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.label}}</span>
+              </ng-template>
             </p-dropdown>
           </td>
         </tr>
@@ -35,6 +41,9 @@
               pTooltip="Room Category" name="categoryOfRoom" [(ngModel)]="categoryOfRoom" [virtualScroll]="false"
               [ngClass]="{ 'is-invalid': submitted && f.categoryOfRoom.errors }" formControlName="categoryOfRoom"
               optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.label}}</span>
+              </ng-template>
             </p-dropdown>
           </td>
         </tr>

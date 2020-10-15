@@ -7,6 +7,10 @@ import { RequestMappings } from '../common/model/RequestMappings';
   providedIn: 'root'
 })
 export class CustomerService {
+
+  updateRoomRequest(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.UPDATE_ROOM_REQUEST, requestDTO);
+  }
   updateDetails(requestDTO: RequestDTO) {
     return this.httpClient.post(RequestMappings.UPDATE_PROFILE_CUST, requestDTO);
   }

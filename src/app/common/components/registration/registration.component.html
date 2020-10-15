@@ -43,6 +43,9 @@
             name="gender" [(ngModel)]="gender" [virtualScroll]="false"
             [ngClass]="{ 'is-invalid': submitted && f.custGen.errors }" formControlName="custGen"
             optionLabel="displayName" [style]="{'width':'auto', 'height':'auto'}">
+            <ng-template let-option pTemplate="item">
+              <span>{{option.label}}</span>
+            </ng-template>
           </p-dropdown>
           <div *ngIf="submitted && f.custGen.errors" class="invalid-feedback">
             <div *ngIf="f.custGen.errors.required">Gender is required</div>

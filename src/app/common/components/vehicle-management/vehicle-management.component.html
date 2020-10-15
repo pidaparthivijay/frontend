@@ -31,6 +31,9 @@
                     [(ngModel)]="location" [virtualScroll]="false" formControlName="vehicleType"
                     [ngClass]="{ 'is-invalid': submitted && f.vehicleType.errors }" optionLabel="displayName"
                     [style]="{'width':'150px', 'height':'auto'}">
+                    <ng-template let-option pTemplate="item">
+                        <span>{{option.label}}</span>
+                    </ng-template>
                 </p-dropdown>
                 <div *ngIf="submitted && f.vehicleType.errors" class="invalid-feedback">
                     <div *ngIf="f.vehicleType.errors.required">Please select Type of Vehicle</div>
@@ -43,6 +46,9 @@
                         (onChange)="onLocation($event)" [virtualScroll]="false" formControlName="location"
                         [ngClass]="{ 'is-invalid': submitted && f.location.errors }" optionLabel="displayName"
                         [style]="{'width':'150px', 'height':'auto'}">
+                        <ng-template let-option pTemplate="item">
+                            <span>{{option.label}}</span>
+                        </ng-template>
                     </p-dropdown>
                     <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
                         <div *ngIf="f.location.errors.required">Please select location of vehicle</div>

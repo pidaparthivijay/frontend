@@ -24,6 +24,7 @@ export class DriverManagementComponent implements OnInit {
     this.driverRegistrationForm = this.formBuilder.group({
       driverName: ['', Validators.required],
       driverLicense: ['', Validators.required],
+      driverContact: ['', Validators.required],
       location: ['', Validators.required]
     });
     this.getAllDrivers();
@@ -41,10 +42,12 @@ export class DriverManagementComponent implements OnInit {
       }
     );
   }
+
   createDriver() {
     let driver = new Driver();
     driver.driverName = this.driverRegistrationForm.get('driverName').value;
     driver.driverLicense = this.driverRegistrationForm.get('driverLicense').value;
+    driver.driverContact = this.driverRegistrationForm.get('driverContact').value;
     driver.location = this.location;
     let requestDTO = new RequestDTO();
     requestDTO.driver = driver;

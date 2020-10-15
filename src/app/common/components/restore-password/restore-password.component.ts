@@ -60,7 +60,6 @@ export class RestorePasswordComponent implements OnInit {
     user.userMail = this.requestOTPForm.value.userMail;
     this.restorePwdService.requestOTP(user).subscribe(
       resp => {
-        console.log(resp);
         if (resp) {
           this.toastrService.success(Constants.OTP_MAIL_SENT);
           this.submitReq = false;
@@ -109,7 +108,9 @@ export class RestorePasswordComponent implements OnInit {
         if (resp[Constants.ACT_STS] === Constants.PWD_RESET_SUCCESS) {
           this.toastrService.success(Constants.PWD_RESET_SUCCESS, Constants.NEW_PWD_RESPONSE)
           this.otpSubmit = false;
-          this.submitOTPForm.reset();
+          this.resetPwdForm.reset();
+        } else {
+          this.toastrService.error("Error Occured. Please retry");
         }
       }
     );

@@ -26,15 +26,31 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="form-group">
+                        <input type="text" class="form-control" pTooltip="Driver Contact Number"
+                            [ngClass]="{ 'is-invalid': submitted && f.driverContact.errors }"
+                            formControlName="driverContact" id="driverContact" placeholder="Phone Number"
+                            style="width: 100%;">
+                        <div *ngIf="submitted && f.driverContact.errors" class="invalid-feedback">
+                            <div *ngIf="f.driverContact.errors.required">Driver Contact is required</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
             <div class="form-group">
                 <p-dropdown [options]="locations" (onChange)="onLocation($event)" class="form-control"
                     placeholder="Select Driver Location" pTooltip="Location of the Driver" name="location"
                     [(ngModel)]="location" [virtualScroll]="false"
                     [ngClass]="{ 'is-invalid': submitted && f.location.errors }" formControlName="location"
                     optionLabel="displayName" [style]="{'width':'200px', 'height':'auto'}">
+                    <ng-template let-option pTemplate="item">
+                        <span>{{option.label}}</span>
+                    </ng-template>
                 </p-dropdown>
                 <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
-                    <div *ngIf="f.location.errors.required">Please select model of Rooms</div>
+                    <div *ngIf="f.location.errors.required">Please select Location of Driver</div>
                 </div>
             </div>
             <tr>
@@ -47,7 +63,7 @@
 </div>
 
 <p-table #driverTable *ngIf="driversList?.length" [style]="{'width':'70%','margin-top':'8px'}" [value]="driversList"
-    [globalFilterFields]="['driverId','driverName','driverLicense','location']" [paginator]="true"
+    [globalFilterFields]="['driverId','driverName','driverLicense','driverContact','location']" [paginator]="true"
     [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
     <ng-template pTemplate="caption">
@@ -60,6 +76,8 @@
             <th pSortableColumn="driverId">Driver Id<p-sortIcon field="driverId"></p-sortIcon>
             </th>
             <th pSortableColumn="driverName">Driver Name<p-sortIcon field="driverName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="driverContact">Driver Mobile<p-sortIcon field="driverContact"></p-sortIcon>
             </th>
             <th pSortableColumn="location">Driver Location<p-sortIcon field="location"></p-sortIcon>
             </th>
@@ -76,6 +94,11 @@
             <th>
                 <input pInputText type="text" pTooltip="Filter by Driver name"
                     (input)="driverTable.filter($event.target.value, 'driverName', 'contains')" placeholder="Name"
+                    class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text" pTooltip="Filter by Driver Mobile"
+                    (input)="driverTable.filter($event.target.value, 'driverContact', 'contains')" placeholder="Name"
                     class="p-column-filter">
             </th>
             <th>
@@ -102,6 +125,17 @@
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{driver.driverName}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="driver.driverContact"
+                            pTooltip="Editing the mobile of driver" driverContact>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{driver.driverContact}}
                     </ng-template>
                 </p-cellEditor>
             </td>

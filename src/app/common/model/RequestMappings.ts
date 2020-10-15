@@ -59,6 +59,7 @@ export class RequestMappings {
     public static readonly CANCEL_TOUR_BKNG = environment.baseURL + '/cancelTourBooking';
     public static readonly VIEW_VD_MAPPING = environment.baseURL + '/viewVDMapping';
     public static readonly UPDATE_PROFILE_CUST = environment.baseURL + '/updateCustomerDetails';
+    public static readonly UPDATE_ROOM_REQUEST = environment.baseURL + '/updateRoomRequest';
     public static readonly ROOM_CLEANUP = environment.baseURL + '/cleanupRooms';
 
 }

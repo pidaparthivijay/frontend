@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { TourService } from 'src/app/adm-home/tour-management/tour.service';
+import { Constants } from '../../model/constants';
 import { Driver } from '../../model/driver.model';
 import { RequestDTO } from '../../model/request-dto.model';
 import { TourPackageRequest } from '../../model/tour-package-request';
@@ -18,7 +20,7 @@ export class TourComponent implements OnInit {
   selectedDriver: string;
   selectedVehicle: string;
   tourRequest: TourPackageRequest;
-  constructor(private tourService: TourService) { }
+  constructor(private tourService: TourService, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getAllTourRequests();
@@ -60,11 +62,14 @@ export class TourComponent implements OnInit {
     vehDriMapping.driverLicense = this.selectedDriver;
     vehDriMapping.vehicleRegNum = this.selectedVehicle;
     requestDTO.vehicleDriverMapping = vehDriMapping;
-    console.log(vehDriMapping);
-    console.log(requestDTO);
     this.tourService.assignVehiclesAndDrivers(requestDTO).subscribe(
       resp => {
         console.log(resp);
+        if (Constants.EXCEPTION_OCCURED != resp[Constants.ACT_STS]) {
+          this.toastrService.info(resp[Constants.ACT_STS]);
+        } else {
+          this.toastrService.warning(resp[Constants.ACT_STS]);
+        }
       },
       error => {
         console.error(error);
