@@ -323,6 +323,102 @@
   </p-table>
 </div>
 <div *ngIf="viewTourRegistrations">
-  //Yet to be implemented
+  <p-table #tourPackageRequestTable *ngIf="tourPackageRequestList?.length" [style]="{'width':'70%','margin-top':'8px'}"
+    [value]="tourPackageRequestList"
+    [globalFilterFields]="['tourPackageRequestId','tourPackageName','guestCount','startDate']" [paginator]="true"
+    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
+    <ng-template pTemplate="caption">
+      <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+      <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Global Filter"
+        (input)="tourPackageRequestTable.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="tourPackageRequestId">Request Id<p-sortIcon field="tourPackageRequestId"></p-sortIcon>
+        </th>
+        <th pSortableColumn="tourPackageName">Package Name<p-sortIcon field="tourPackageName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="guestCount">Guest Count<p-sortIcon field="guestCount"></p-sortIcon>
+        </th>
+        <th pSortableColumn="startDate">Start Date<p-sortIcon field="startDate"></p-sortIcon>
+        </th>
+        <th>Action</th>
+        <th>View Details</th>
+      </tr>
+      <tr>
+        <th>
+          <input pInputText type="text" pTooltip="Filter By Request Id"
+            (input)="tourPackageRequestTable.filter($event.target.value, 'tourPackageRequestId', 'contains')"
+            placeholder="Filter By Request Id" class="p-column-filter">
+        </th>
+        <th>
+          <input pInputText type="text" pTooltip="Filter By Tour Package Name"
+            (input)="tourPackageRequestTable.filter($event.target.value, 'tourPackageName', 'contains')"
+            placeholder="Filter By Tour Package Name" class="p-column-filter">
+        </th>
+        <th>
+          <input pInputText type="text" pTooltip="Filter By Guest Count"
+            (input)="tourPackageRequestTable.filter($event.target.value, 'guestCount', 'contains')"
+            placeholder="Guest Count" class="p-column-filter">
+        </th>
+        <th>
+          <p-calendar (onSelect)="onDateSelect($event)" pTooltip="Filter By Start Date" yearRange="2020:2027"
+            [yearNavigator]="true" (onClearClick)="tourPackageRequestTable.filter('', 'date', 'startDate')"
+            [showButtonBar]="true" styleClass="p-column-filter" placeholder="Start Date" [readonlyInput]="true">
+          </p-calendar>
+        </th>
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tourPackageRequest let-editing="editing" let-ri="rowIndex">
+      <tr [pEditableRow]="tourPackageRequest">
+        <td>{{tourPackageRequest.tourPackageRequestId}}</td>
+        <td>{{tourPackageRequest.tourPackageName}}</td>
+        <td>{{tourPackageRequest.guestCount}}</td>
+        <td>
+          {{tourPackageRequest.startDate === null ? "" : tourPackageRequest.startDate| date:'dd-MMM-yyyy'}}
+        </td>
+        <td><input type="submit" class="btn-primary" pTooltip="Cancel Tour" (click)="cancelTour(tourPackageRequest)"
+            value="Cancel Booking">
+        </td>
+        <td><input type="submit" class="btn-primary" pTooltip="View Driver and Vehicle Details"
+            (click)="viewDriverNVehicle(tourPackageRequest)" value="View Details">
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <div *ngIf="tourPackageRequestList.length==0">
+        No records found
+      </div>
+    </ng-template>
+  </p-table>
+
+  <p-table [style]="{'width':'70%','margin-top':'8px'}" [value]="[vehicleDriverMapping]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Vehicle Registration Number</th>
+        <th>Tour Package Request Id</th>
+        <th>Driver License</th>
+        <th>Assigned Date</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body">
+      <tr>
+        <td>{{vehicleDriverMapping.assignedDate}}</td>
+        <td>
+          {{vehicleDriverMapping.vehicleRegNum}}
+        </td>
+        <td>
+          {{vehicleDriverMapping.tourPackageRequestId}}
+        </td>
+        <td>{{vehicleDriverMapping.driverLicense}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
-<router-outlet></router-outlet>
+
+<div *ngIf="!(viewTourRegistrations || viewRewards || viewRoomReq || viewProf)">
+  <router-outlet></router-outlet>
+</div>

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
 import { LoginService } from '../common/components/login/login.service';
+import { Constants } from '../common/model/constants';
 import { Customer } from '../common/model/customer.model';
 import { RequestDTO } from '../common/model/request-dto.model';
 import { RoomRequest } from '../common/model/room-request';
+import { TourPackageRequest } from '../common/model/tour-package-request';
 import { User } from '../common/model/user.model';
 import { CustomerService } from './customer.service';
 
@@ -26,8 +29,10 @@ export class CustHomeComponent implements OnInit {
   viewRoomReq: boolean;
   items: MenuItem[];
   viewTourRegistrations: boolean;
+  tourPackageRequestList: any;
+  vehicleDriverMapping: any;
 
-  constructor(private custService: CustomerService, private loginService: LoginService, private router: Router) {
+  constructor(private custService: CustomerService, private toastrService: ToastrService, private loginService: LoginService, private router: Router) {
   }
 
   ngOnInit() {
@@ -39,19 +44,46 @@ export class CustHomeComponent implements OnInit {
         title: 'Register for Room',
         routerLink: 'roomReg',
         icon: 'pi pi-fw pi-home',
-        label: 'Room Registration'
+        label: 'Room Registration',
+        command: (event) => {
+          if (event.originalEvent.type === 'click') {
+            this.viewProf = false;
+            this.viewTourRegistrations = false;
+            this.viewRewards = false;
+            this.viewRoomReq = false;
+
+          }
+        }
       },
       {
         title: 'Request Amenities',
         icon: 'pi pi-fw pi-th-large',
         routerLink: 'requestAmenities',
-        label: 'Request Amenities '
+        label: 'Request Amenities ',
+        command: (event) => {
+          if (event.originalEvent.type === 'click') {
+            this.viewProf = false;
+            this.viewTourRegistrations = false;
+            this.viewRewards = false;
+            this.viewRoomReq = false;
+
+          }
+        }
       },
       {
         title: 'Book a Tour Package',
         icon: 'pi pi-fw pi-briefcase',
         routerLink: 'tourBooking',
-        label: 'Book Tour Packages'
+        label: 'Book Tour Packages',
+        command: (event) => {
+          if (event.originalEvent.type === 'click') {
+            this.viewProf = false;
+            this.viewTourRegistrations = false;
+            this.viewRewards = false;
+            this.viewRoomReq = false;
+
+          }
+        }
       },
       {
         label: this.custName,
@@ -69,6 +101,7 @@ export class CustHomeComponent implements OnInit {
                 this.viewTourRegistrations = false;
                 this.viewRewards = false;
                 this.viewRoomReq = false;
+
               }
             }
           },
@@ -106,6 +139,7 @@ export class CustHomeComponent implements OnInit {
             label: 'View My Tour Registrations',
             command: (event) => {
               if (event.originalEvent.type === 'click') {
+                this.viewTourRequests();
                 this.viewTourRegistrations = true;
                 this.viewProf = false;
                 this.viewRewards = false;
@@ -142,6 +176,24 @@ export class CustHomeComponent implements OnInit {
     );
   }
 
+  updateDetails(customer: Customer) {
+    let requestDTO = new RequestDTO();
+    requestDTO.customer = customer;
+    this.custService.updateDetails(requestDTO).subscribe(
+      resp => {
+        console.log(resp);
+        if (Constants.EXCEPTION_OCCURED != resp['actionStatus']) {
+          this.toastrService.success("Update Success");
+        } else {
+          this.toastrService.warning(resp['actionStatus']);
+        }
+        this.viewProf = true;
+        this.customer = resp['customer'];
+        this.customer.custDob = new Date(resp['customer']['custDob'])
+      },
+      error => console.error(error)
+    );
+  }
   viewRequests() {
     let customer = new Customer();
     customer.custName = this.custName;
@@ -166,8 +218,7 @@ export class CustHomeComponent implements OnInit {
     requestDTO.roomRequest = roomRequest;
     this.custService.cancelRequest(requestDTO).subscribe(
       resp => {
-        console.log(resp);
-        alert(resp);
+        this.toastrService.info(resp['actionStatus']);
       },
       error => console.error(error)
     );
@@ -184,6 +235,49 @@ export class CustHomeComponent implements OnInit {
         console.log(resp);
         this.viewRewards = true;
         this.rewardPointList = resp['rewardPointsList'];
+      },
+      error => console.error(error)
+    );
+  }
+
+  viewTourRequests() {
+    let customer = new Customer();
+    customer.custName = this.custName;
+    customer.userName = this.userName;
+    customer.userId = this.userId;
+    let requestDTO = new RequestDTO();
+    requestDTO.customer = customer;
+    this.custService.getCustomerTourBookings(requestDTO).subscribe(
+      resp => {
+        console.log(resp);
+        this.viewTourRegistrations = true;
+        this.tourPackageRequestList = resp['tourPackageRequestList'];
+      },
+      error => console.error(error)
+    );
+  }
+
+  viewDriverNVehicle(tourPackageRequest: TourPackageRequest) {
+    let requestDTO = new RequestDTO();
+    requestDTO.tourPackageRequest = tourPackageRequest;
+    this.custService.getVDMDetails(requestDTO).subscribe(
+      resp => {
+        console.log(resp);
+        this.viewTourRegistrations = true;
+        this.vehicleDriverMapping = resp['vehicleDriverMapping'];
+      },
+      error => console.error(error)
+    );
+  }
+
+  cancelTour(tourPackageRequest: TourPackageRequest) {
+    let requestDTO = new RequestDTO();
+    requestDTO.tourPackageRequest = tourPackageRequest;
+    this.custService.cancelTour(requestDTO).subscribe(
+      resp => {
+        console.log(resp);
+        this.viewTourRegistrations = true;
+        this.toastrService.info(resp['actionStatus']);
       },
       error => console.error(error)
     );

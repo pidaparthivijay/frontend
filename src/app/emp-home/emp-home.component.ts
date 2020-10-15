@@ -30,6 +30,23 @@ export class EmpHomeComponent implements OnInit {
     this.employee.empGen = event.value.lookupValue;
     console.log(event.value.lookupValue);
   }
+
+  updateDetails(employee: Employee) {
+    let requestDTO = new RequestDTO();
+    requestDTO.employee = employee;
+    this.employeeService.updateEmployee(requestDTO).subscribe(
+      resp => {
+        if (Constants.EMP_UPDATE_SXS === resp[Constants.ACT_STS]) {
+          this.toastrService.success(Constants.EMP_UPDATE_SXS)
+        } else {
+          this.toastrService.error(resp[Constants.ACT_STS]);
+        }
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
   ngOnInit() {
     this.empName = sessionStorage.getItem('name');
     this.menuList = [

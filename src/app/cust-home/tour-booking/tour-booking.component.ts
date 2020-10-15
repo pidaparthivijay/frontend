@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TourService } from 'src/app/adm-home/tour-management/tour.service';
 import { Constants } from 'src/app/common/model/constants';
@@ -19,7 +17,8 @@ export class TourBookingComponent implements OnInit {
   userName: any;
   userId: any;
   actionStatus: boolean;
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private toastrService: ToastrService, private tourService: TourService) {
+  startDate: Date;
+  constructor(private toastrService: ToastrService, private tourService: TourService) {
 
   }
   ngOnInit() {
@@ -33,15 +32,18 @@ export class TourBookingComponent implements OnInit {
     );
   }
 
+  onDateSelect(event) {
+    this.startDate = new Date(event);
+  }
+
   bookTour(tourPackageName) {
     var guestCount = (<HTMLInputElement>document.getElementById('guestCount' + tourPackageName)).value;
-    var startDate = (<HTMLInputElement>document.getElementById('startDate' + tourPackageName)).value;
     let tourPackageRequest = new TourPackageRequest();
     tourPackageRequest.userId = this.userId;
     tourPackageRequest.userName = this.userName;
     tourPackageRequest.guestCount = +guestCount;
     tourPackageRequest.tourPackageName = tourPackageName;
-    tourPackageRequest.startDate = new Date(startDate);
+    tourPackageRequest.startDate = new Date(this.startDate);
     let requestDTO = new RequestDTO();
     requestDTO.tourPackageRequest = tourPackageRequest;
     this.tourService.bookTourPackage(requestDTO).subscribe(resp => {
@@ -49,6 +51,9 @@ export class TourBookingComponent implements OnInit {
       if (resp[Constants.ACT_STS]) {
         this.actionStatus = true;
         this.toastrService.success(Constants.TOUR_BOOK_SXS);
+      } else {
+        this.toastrService.error;
+        (Constants.TOUR_PKG_BOOK_FAIL, resp[Constants.ACT_STS]);
       }
     },
       error => {

@@ -44,6 +44,8 @@ export class RequestAmenitiesComponent implements OnInit {
       if (resp[Constants.ACT_STS]) {
         this.actionStatus = true;
         this.toastrService.success(Constants.AMENITY_REQ_SXS);
+      } else {
+        this.toastrService.error(Constants.AMNT_RQST_FAIL, resp[Constants.ACT_STS]);
       }
     });
   }

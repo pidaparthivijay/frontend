@@ -55,4 +55,9 @@ export class RequestMappings {
     public static readonly TOUR_BKNG_VIEW_ALL = environment.baseURL + '/viewAllTourBookings';
     public static readonly FEASIBLE_VEHICLES_DRIVERS = environment.baseURL + '/viewFeasibleVehiclesDrivers';
     public static readonly TOUR_BKNG_ASSIGN = environment.baseURL + '/assignVehDriTour';
+    public static readonly CUSTOMER_GET_TOUR_BKNGS = environment.baseURL + '/getMyTourBkngs';
+    public static readonly CANCEL_TOUR_BKNG = environment.baseURL + '/cancelTourBooking';
+    public static readonly VIEW_VD_MAPPING = environment.baseURL + '/viewVDMapping';
+    public static readonly UPDATE_PROFILE_CUST = environment.baseURL + '/updateCustomerDetails';
+
 }

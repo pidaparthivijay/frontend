@@ -7,6 +7,20 @@ import { RequestMappings } from '../common/model/RequestMappings';
   providedIn: 'root'
 })
 export class CustomerService {
+  updateDetails(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.UPDATE_PROFILE_CUST, requestDTO);
+  }
+  getVDMDetails(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.VIEW_VD_MAPPING, requestDTO);
+  }
+
+  cancelTour(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.CANCEL_TOUR_BKNG, requestDTO);
+  }
+
+  getCustomerTourBookings(requestDTO: RequestDTO) {
+    return this.httpClient.post(RequestMappings.CUSTOMER_GET_TOUR_BKNGS, requestDTO);
+  }
 
   viewRewardPoints(requestDTO: RequestDTO) {
     return this.httpClient.post(RequestMappings.CUSTOMER_VIEW_RWD_POINTS, requestDTO);
