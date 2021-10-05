@@ -4,6 +4,7 @@ export class RewardPoints {
     pointsEarned: number;
     pointsEarnedDate: Date;
     pointsExpiryDate: Date;
+    userName: string;
     pointsStatus: string;
     pointsTransactionName: string;
     userId: number;

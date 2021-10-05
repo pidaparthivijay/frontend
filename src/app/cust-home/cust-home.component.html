@@ -295,8 +295,12 @@
     </ng-template>
   </p-table>
 </div>
+
 <div *ngIf="viewRewards">
-  <p-table #rewardsTable [style]="{'width':'70%','margin-top':'8px'}" [value]="[rewardPointsList]">
+  {{rewardPointsList?.length}}
+  <p-table #rewardsTable [style]="{'width':'70%','margin-top':'8px'}" [value]="rewardPointsList" [paginator]="true"
+    [rowsPerPageOptions]="[3,5,7]" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     <ng-template pTemplate="header">
       <tr>
         <th>Earned Through</th>
@@ -307,14 +311,11 @@
     </ng-template>
     <ng-template pTemplate="body" let-rewardPoints let-editing="editing" let-ri="rowIndex">
       <tr [pEditableRow]="rewardPoints">
+        <td>{{rewardPoints.pointsTransactionName}}</td>
+        <td>{{rewardPoints.pointsEarned}}</td>
+        <td>{{rewardPoints.pointsEarnedDate === null ? '' : rewardPoints.pointsEarnedDate| date:'dd MMM, yyyy'}}</td>
         <td>
-          {{rewardPoints.pointsTransactionName}}
-        </td>
-        <td>{{rewardPoints.pointsEarned}}
-        </td>
-        <td>{{rewardPoints.pointsEarnedDate === null ? "" : rewardPoints.pointsEarnedDate| date:'dd MMM, yyyy'}}
-        </td>
-        <td>{{rewardPoints.pointsExpiryDate === null ? "" : rewardPoints.pointsExpiryDate| date:'dd MMM, yyyy'}}
+          {{rewardPoints.pointsExpiryDate === null ? '' : rewardPoints.pointsExpiryDate| date:'dd MMM, yyyy'}}
         </td>
       </tr>
     </ng-template>
@@ -325,12 +326,12 @@
     </ng-template>
   </p-table>
 </div>
+
 <div *ngIf="viewTourRegistrations">
   <p-table #tourPackageRequestTable *ngIf="tourPackageRequestList?.length" [style]="{'width':'70%','margin-top':'8px'}"
-    [value]="tourPackageRequestList"
-    [globalFilterFields]="['tourPackageRequestId','tourPackageName','guestCount','startDate']" [paginator]="true"
-    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [rowsPerPageOptions]="[5, 10,15]" [rows]="10">
+    [value]="tourPackageRequestList" [paginator]="true" [rowsPerPageOptions]="[5, 10,15]" [rows]="10"
+    [globalFilterFields]="['tourPackageRequestId','tourPackageName','guestCount','startDate']"
+    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     <ng-template pTemplate="caption">
       <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
       <input type="text" pInputText size="50" placeholder="Global Filter" pTooltip="Global Filter"

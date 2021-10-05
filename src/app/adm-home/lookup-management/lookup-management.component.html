@@ -168,7 +168,7 @@
             </td>
             <td pEditableColumn>{{lookup.updateDate === null ? "" : lookup.updateDate| date:'dd-MMM-yyyy'}}</td>
             <td style="text-align:center">
-                <button class="btn-primary" (click)="toggleDelete(lookup.lookupId)">
+                <button class="btn-primary" (click)="toggleDelete(lookup)">
                     <div pTooltip="Delete Lookup" *ngIf="lookup.deleted != 'Y'">Delete</div>
                     <div pTooltip="Undelete Lookup" *ngIf="lookup.deleted === 'Y'">Undelete</div>
                 </button>

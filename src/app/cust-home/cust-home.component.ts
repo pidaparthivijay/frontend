@@ -20,7 +20,7 @@ import { CustomerService } from './customer.service';
 export class CustHomeComponent implements OnInit {
   custName: string;
   customer: Customer;
-  rewardPointsList: any = [];
+  rewardPointsList: any[] = [];
   roomRequestList: any = [];
   userId: number;
   userName: string;
